@@ -1,0 +1,35 @@
+.login-logo{
+    width: 200px;
+    height: auto;
+}
+
+.login-description{
+    width:300px;
+    text-align:center;
+    color:#cbd5e1;
+}
+
+.login-left{
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+
+.login-card{
+    width: 600px;
+    padding: 60px;
+}
+
+
+.forgot_password{
+    text-decoration: none;
+    color: #0f172a;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.forgot_password:hover{
+    color: #598bff;
+    font-weight: 500;
+}
+
+

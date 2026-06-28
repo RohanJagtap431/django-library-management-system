@@ -1,0 +1,83 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %}Admin Login{% endblock %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="row g-0 vh-100">
+    <div
+      class="col-6 login-left text-white d-flex justify-content-center align-items-center flex-column"
+    >
+      <img class="login-logo mb-1" src="{% static 'images/logo.png' %}" />
+      <h1 class="display-3 fw-bold mb-2">LMS</h1>
+      <h4 class="fw-semibold">Library Management System</h4>
+      <p class="login-description">
+        Manage Books, Members, Issues and Returns Efficiently.
+      </p>
+    </div>
+
+    <div class="col-6 d-flex justify-content-center align-items-center">
+      <div class="login-card bg-white rounded-3 shadow-sm">
+        <h2 class="fw-bold text-center">Welcome Back!</h2>
+        <p class="text-secondary text-center mb-4">
+          Sign in to continue to your account
+        </p>
+
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              class="form-control"
+              id="username"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+
+            <div class="input-group">
+              <input
+                type="password"
+                placeholder="Enter Password"
+                class="form-control"
+                id="password"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="toggle-password"
+              >
+                <i class="fa-solid fa-eye" aria-hidden="true" id="eye-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="remember_me"
+              />
+
+              <label class="form-check-label" for="remember_me"
+                >Remember Me</label
+              >
+            </div>
+            <a href="#" class="forgot_password mb-3">Forgot Password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 py-3 mt-3">
+            Login
+          </button>
+          <p class="text-center text-secondary mt-3 small">Only authorized administrators can access this system.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
