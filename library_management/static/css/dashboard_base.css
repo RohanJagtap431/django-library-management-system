@@ -1,0 +1,31 @@
+.sidebar-logo{
+    width: 50px;
+    height: 50px;
+}
+
+.lm{
+    color: #E6E6FA;
+}
+
+.manage{
+    color: #B0C4DE;
+}
+
+.menu-item{
+    cursor: pointer;
+    color: #E6E6FA;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover{
+    background-color:  #2563eb;
+}
+
+.active-menu{
+    background-color: #2563eb;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border-color: #ced4da;
+}

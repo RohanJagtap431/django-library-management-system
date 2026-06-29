@@ -1,0 +1,159 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %}Admin Dashboard{% endblock %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/dashboard_base.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<div class="container-fluid p-0">
+    
+  <div class="row vh-100 gx-0">
+    <div class="col-2 bg-dark p-4">
+      <div class="brand d-flex align-items-center">
+        <img class="sidebar-logo mb-1 bg-white rounded p-2" src="{% static 'images/logo.png' %}" />
+        <div class="d-flex flex-column justify-content-center ms-3">
+            <h4 class="text-white fw-bold mb-1">LMS</h4>
+            <small class="lm">Library Management</small>
+        </div>
+      </div>
+      <hr class="border border-secondary opacity-100" />
+
+      <div class="menu-item active-menu d-flex align-items-center py-2 px-3 rounded mt-3 mb-2">
+        <i class="bi bi-house-door ps-3"></i>
+        <span class="ps-1">Dashboard</span>
+      </div>
+
+      <small class="manage mt-2 mb-2">MANAGE</small>
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-book ps-3"></i>
+        <span class="ps-1">Books</span>
+        </div>
+        <div class="right">
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-people ps-3"></i>
+        <span class="ps-1">Members</span>
+        </div>
+        <div class="right">
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-arrow-left-right ps-3"></i>
+        <span class="ps-1">Issue/Return</span>
+        </div>
+        <div class="right">
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-currency-rupee ps-3"></i>
+        <span class="ps-1">Fines</span>
+        </div>
+        <div class="right">
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-bar-chart-line ps-3"></i>
+        <span class="ps-1">Reports</span>
+        </div>
+        <div class="right">
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+
+
+      <small class="manage mt-2 mb-2">ACCOUNT</small>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-3 mb-2">
+        <div class="left">
+          <i class="bi bi-person ps-3"></i>
+        <span class="ps-1">Profile</span>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-key ps-3"></i>
+        <span class="ps-1">Change Password</span>
+        </div>
+      </div>
+
+
+      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
+        <div class="left">
+          <i class="bi bi-box-arrow-right ps-3"></i>
+        <span class="ps-1">Logout</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-10 bg-light">
+
+      <div class="top_navbar bg-white p-1 shadow-sm d-flex align-items-center justify-content-between">
+
+        <div class="navbar-left d-flex align-items-center">
+          
+          <i class="bi bi-list fs-3 ms-2"></i>
+
+          <div class="input-group ms-4" style="width: 450px;">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Search books, members..."
+            >
+            <button class="btn btn-outline-secondary">
+                <i class="bi bi-search"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="navbar-right d-flex align-items-center">
+          <i class="bi bi-bell"></i>
+
+          <div class="Profile_Section d-flex align-items-center ms-4 me-3">
+            <i class="bi bi-person-circle me-2"></i>
+
+            <small class="me-2">Admin</small>
+            <i class="bi bi-chevron-down"></i>
+          </div>
+
+        </div>
+
+      </div>
+
+      {% block dashboard_content %}
+      {% endblock %}
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}

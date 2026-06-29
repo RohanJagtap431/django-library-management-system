@@ -1,0 +1,189 @@
+.card-link{
+    text-decoration: none;
+    color: initial;
+}
+
+.dashboard-card{
+    height: 150px;
+    border-radius: 10px;
+    border: none;
+}
+
+.dashboard-card:hover{
+    background-color: #fcfcfd;
+}
+
+.icon-box{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.icon-blue{
+    background-color: blue;
+}
+
+
+.card-icon{
+    font-size: 28px;
+}
+
+
+.link-box span,
+.link-box i{
+    
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.link-blue span,
+.link-blue i{
+    color: #0d6efd;
+}
+
+
+.link-blue:hover i{
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+.icon-green{
+    background-color: rgb(26, 197, 26);
+}
+
+.link-green span,
+.link-green i{
+    color: rgb(26, 197, 26);
+}
+
+
+.link-green:hover i{
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+
+.icon-orange{
+    background-color: rgb(244, 155, 38);
+}
+
+.link-orange span,
+.link-orange i{
+    color: rgb(244, 155, 38);
+}
+
+
+.link-orange:hover i{
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+
+.icon-red{
+    background-color: rgb(240, 89, 89);
+}
+
+.link-red span,
+.link-red i{
+    color: rgb(240, 89, 89);
+}
+
+
+.link-red:hover i{
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+.book-img{
+    width: 18px;
+    height: 26px;
+    border-radius: 2px;
+    object-fit: cover;
+    background-color: #FFFFFF;
+}
+
+.status-badge{
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.issued-badge{
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.returned-badge{
+    background-color: #DBEAFE;
+    color: #1D4ED8;
+}
+
+.overdue-badge{
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+
+.pending-badge{
+    background-color: #FEF3C7;
+    color: #D97706;
+}
+
+
+.dashboard-table-header{
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 5px;
+}
+
+.dashboard-table-head th{
+    background-color: #F8FAFC;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+
+
+tbody tr{
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.table tbody tr:hover td{
+    background-color: #F8FAFC;
+}
+
+.table tbody td{
+    font-size: 14px;
+}
+
+.book-info span{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+.chart-header{
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 12px;
+}
+
+.chart-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px;
+
+}
+
+#categoryChart{
+    width:100% !important;
+    height:100% !important;
+}
