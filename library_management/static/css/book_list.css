@@ -1,0 +1,67 @@
+.page-icon{
+    font-size: 40px;
+}
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.book-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.book-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.filter-select{
+    width: 180px;
+}
+
+.table-responsive{
+    min-height: 410px;
+}
+
+.Categories:focus{
+    box-shadow: none;
+}
+
+.status:focus{
+    box-shadow: none;
+}
+
+.book-image{
+    width: 30px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.table thead th{
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.table tbody td{
+    font-size: 0.92rem;
+}
+
+.table > :not(caption) > * > *{
+    border-color:#edf2f7;
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
