@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Book, CATEGORY_CHOICES
 from django.db.models import Q
@@ -36,3 +36,7 @@ def books_list(request):
         'status': status
     })
 
+
+def book_detail(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    return render(request, 'books/book_details.html', {'book': book})
