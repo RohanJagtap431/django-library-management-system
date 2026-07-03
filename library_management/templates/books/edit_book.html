@@ -1,0 +1,187 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    All Books
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/edit_book.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+
+    <div class="container-fluid px-4 py-1 mt-0">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="left_side d-flex align-items-center mt-2">
+                <i class="bi bi-book page-icon"></i>
+                <h2 class="ms-3 mb-0 fw-bold">Edit Book</h2>
+            </div>
+
+        </div>
+
+        <nav aria-label="breadcrumb" class="book-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="#">Books</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Edit Book
+                </li>
+            </ol>
+        </nav>
+
+        <div class="card px-4">
+            <div class="card-body d-flex">
+                <div class="section-header d-flex align-item-center justify-content-between">
+                    <h5 class="book_info_text mt-1">Book Information</h5>
+                    <a href="{% url 'books_list' %}" class="btn btn-outline-secondary m-0 pt-2 back_button"> ← Back to Book List</a>
+                </div>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <label class="fw-bold book_title">Book Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="title" value="{{ book.title }}">
+                        {% if errors.title %}
+                            <small class="text-danger m-2">{{ errors.title }}</small>
+                        {% endif %}
+                        <br>
+
+                        <label class="fw-bold book_title">Select Category <span class="text-danger">*</span></label>
+                        <select class="form-select form-select-sm filter-select Categories" name="category">
+                            <option value="">Select Category</option>
+                            {% for cat in categories %}
+                                <option value="{{ cat.0 }}" {% if cat.0 == book.category %}selected{% endif %}>
+                                    {{ cat.1 }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        {% if errors.category %}
+                            <small class="text-danger m-2">{{ errors.category }}</small>
+                        {% endif %}
+                        <br>
+
+
+                        <label class="fw-bold book_title">Total Copies <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="total_copies" value="{{ book.total_copies }}">
+                        {% if errors.total_copies %}
+                            <small class="text-danger m-2">{{ errors.total_copies }}</small>
+                        {% endif %}
+                        <br>
+
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="fw-bold book_title">Author <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="author" value="{{ book.author }}">
+                        {% if errors.author %}
+                            <small class="text-danger m-2">{{ errors.author }}</small>
+                        {% endif %}
+                        <br>
+
+
+                        <label class="fw-bold book_title">Publisher <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="publisher" value="{{ book.publisher }}">
+                        {% if errors.publisher %}
+                            <small class="text-danger m-2">{{ errors.publisher }}</small>
+                        {% endif %}
+                        <br>
+
+                        <label class="fw-bold book_title">Available Copies <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="available_copies" value="{{ book.available_copies }}">
+                        {% if errors.available_copies %}
+                            <small class="text-danger m-2">{{ errors.available_copies }}</small>
+                        {% endif %}
+                        <br>
+
+
+
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label class="fw-bold book_title">ISBN <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="isbn" value="{{ book.isbn }}">
+                        {% if errors.isbn %}
+                            <small class="text-danger m-2">{{ errors.isbn }}</small>
+                        {% endif %}
+                        <br>
+
+
+                        <label class="fw-bold book_title">Publication Year <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-0" name="publication_year" value="{{ book.publication_year }}">
+                        {% if errors.publication_year %}
+                            <small class="text-danger m-2">{{ errors.publication_year }}</small>
+                        {% endif %}
+                        <br>
+
+
+                        <label class="fw-bold book_title">Shelf Location</label>
+                        <input type="text" class="form-control mb-0" name="shelf_location" value="{{ book.shelf_location }}">
+
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        
+                        <label class="fw-bold book_title">Book Cover</label>
+                        <div class="image_cover d-flex">
+                            {% if book.book_cover %}
+                                
+                                <img src="{{ book.book_cover.url }}"
+                                    class="img-thumbnail mb-3"
+                                    width="100" height="150">
+                            {% endif %}
+
+                            <input type="file" id="id_book_cover" name="book_cover" accept="image/*" hidden>
+                            <label for="id_book_cover" class="upload-box">
+                                <i class="bi bi-cloud-upload fs-1"></i>
+
+                                <h6>Change Cover</h6>
+
+                                <small>
+                                    PNG, JPG or JPEG <br>
+                                    (Max. 2MB)
+                                </small>
+                            </label>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label class="fw-bold book_title">Description / Notes</label>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ book.description }}</textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-3 mt-1 mb-2 d-flex ">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
+                        Reset
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-file-earmark-post-fill"></i>
+                        Update Book
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

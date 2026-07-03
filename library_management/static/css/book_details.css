@@ -21,6 +21,16 @@
     color: #0d6efd;
 }
 
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+
 .book-image{
     width: 163px;
     height: 245px;
