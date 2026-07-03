@@ -1,0 +1,93 @@
+.page-icon{
+    font-size: 40px;
+    color: #0d6efd;
+}
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.book-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.book-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.section-header{
+    width: 100%;
+}
+
+.book_info_text{
+    color: #0d6efd;
+    font-size: 13px;
+    border-bottom: 2px solid #0d6efd;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    padding-bottom: 5px;
+    
+}
+
+.back_button{
+    font-size: 10px;
+    width: 118px;
+}
+
+.book_title{
+    font-size: 15px;
+}
+
+.Categories{
+    padding: 8px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.Categories:focus{
+    box-shadow: none;
+}
+
+
+
+.upload-box{
+    width:370px;
+    height:150px;
+    border:2px dashed #d0d0d0;
+    border-radius:10px;
+    background-color: #f7f5f5;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+}
+
+.upload-box:hover{
+    border-color:#0d6efd;
+
+}
+
+#exampleFormControlTextarea1{
+    height: 150px;
+    font-size: 13px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form-control::placeholder {
+    font-size: 13px;
+}
+

@@ -75,7 +75,7 @@
 
 
                         <label class="fw-bold book_title">Total Copies <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="total_copies" value="{{ book.total_copies }}">
+                        <input type="number" class="form-control mb-0" name="total_copies" value="{{ book.total_copies }}">
                         {% if errors.total_copies %}
                             <small class="text-danger m-2">{{ errors.total_copies }}</small>
                         {% endif %}
@@ -101,7 +101,7 @@
                         <br>
 
                         <label class="fw-bold book_title">Available Copies <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="available_copies" value="{{ book.available_copies }}">
+                        <input type="number" class="form-control mb-0" name="available_copies" value="{{ book.available_copies }}">
                         {% if errors.available_copies %}
                             <small class="text-danger m-2">{{ errors.available_copies }}</small>
                         {% endif %}
