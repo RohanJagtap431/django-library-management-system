@@ -1,0 +1,80 @@
+.page-icon{
+    color: red;
+    font-size: 40px;
+}
+
+.back_button{
+    font-size: 15px;
+}
+
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.book-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.book-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #fd0d0d;
+    cursor: pointer;
+}
+
+.confirm_body{
+    background-color: #ffe0e0;
+    border: 1px solid rgb(255, 0, 0);
+}
+
+.denger-icon{
+    font-size: 50px;
+}
+
+.confirm_deletion{
+    margin-left: 20px;
+}
+
+.confirm_text{
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 9px;
+}
+
+.confirm_massage{
+    font-size: 15px;
+}
+
+.detail-icon{
+    color: #fd0d0d;
+    font-size: 20px;
+    margin-left: 18px;
+}
+
+.book_deteils{
+    color: #fd0d0d;
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+.book-image{
+    width: 163px;
+    height: 245px;
+    object-fit: cover;
+    border: 1px solid rgb(208, 203, 203);
+    border-radius: 3px;
+}
+
+.book_information{
+    font-size: 14px;
+    margin-left: 15px;
+}

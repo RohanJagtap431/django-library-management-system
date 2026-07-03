@@ -145,6 +145,31 @@ def book_edit(request, book_id):
         'categories': CATEGORY_CHOICES
     })
 
+
+def book_delete(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    
+    if request.method == 'POST':
+        if book.available_copies != book.total_copies:
+            messages.error(
+                request,
+                "This book cannot be deleted because it is currently issued to a member"
+            )
+            return redirect("book_delete", book_id)
+        
+        if book.book_cover:
+            book.book_cover.delete(save=False)
+            
+        title = book.title
+        book.delete()
+        
+        messages.success(
+            request,
+            f'"{title}" has been deleted successfully.'
+        )
+        
+        return redirect("books_list")
+    return render(request, "books/delete_book.html", {"book": book})
   
 
         
