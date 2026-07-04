@@ -24,7 +24,7 @@
 
 
       <a href="{% url 'dashboard' %}" class="text-decoration-none">
-        <div class="menu-item active-menu d-flex align-items-center py-2 px-3 rounded mt-3 mb-2">
+        <div class="menu-item d-flex align-items-center py-2 px-3 rounded mt-3 mb-2 nav-link {% if request.resolver_match.url_name == 'dashboard' %}active-menu{% endif %}">
           <i class="bi bi-house-door ps-3"></i>
           <span class="ps-1">Dashboard</span>
         </div>
@@ -32,15 +32,17 @@
 
       <small class="manage mt-2 mb-2">MANAGE</small>
 
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-book ps-3"></i>
-          <span class="ps-1">Books</span>
+      <a href="{% url 'books_list' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2  nav-link {% if '/books/' in request.path %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-book ps-3"></i>
+            <span class="ps-1">Books</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
         </div>
-        <div class="right">
-          <i class="bi bi-chevron-down"></i>
-        </div>
-      </div>
+      </a>
 
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
@@ -49,7 +51,7 @@
         <span class="ps-1">Members</span>
         </div>
         <div class="right">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-arrow-right-short"></i>
         </div>
       </div>
 
@@ -60,7 +62,7 @@
         <span class="ps-1">Issue/Return</span>
         </div>
         <div class="right">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-arrow-right-short"></i>
         </div>
       </div>
 
@@ -71,7 +73,7 @@
         <span class="ps-1">Fines</span>
         </div>
         <div class="right">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-arrow-right-short"></i>
         </div>
       </div>
 
@@ -82,7 +84,7 @@
         <span class="ps-1">Reports</span>
         </div>
         <div class="right">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-arrow-right-short"></i>
         </div>
       </div>
 
