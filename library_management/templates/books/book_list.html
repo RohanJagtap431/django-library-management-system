@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="breadcrumb-item">
-                     <a href="#">Books</a>
+                     <a href="{% url 'books_list' %}">Books</a>
                 </li>
                     
                 <li class="breadcrumb-item active" aria-current="page">
@@ -119,13 +119,33 @@
                                 <td>{{ forloop.counter }}</td>
 
                                 <td>
-                                    <img src="{{ book.book_cover.url }}" class="book-image">
+                                    {% if book.book_cover %}
+                                        <img src="{{ book.book_cover.url }}" class="book-image">
+                                    {% else %}
+                                        <span class="text-muted">No Cover</span>
+                                    {% endif %}
                                 </td>
 
-                                <td>{{ book.title }}</td>
-                                <td>{{ book.author }}</td>
-                                <td>{{ book.category }}</td>
-                                <td>{{ book.isbn }}</td>
+                                <td>
+                                    <span class="book-title" title="{{ book.title }}">
+                                        {{ book.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-author" title="{{ book.author }}">
+                                        {{ book.author }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-category" title="{{ book.category }}">
+                                        {{ book.category }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ book.isbn }}">
+                                        {{ book.isbn }}
+                                    </span>
+                                </td>
                                 <td>{{ book.available_copies }}</td>
                                 <td>{{ book.total_copies }}</td>
                                 <td>

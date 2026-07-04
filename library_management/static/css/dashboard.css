@@ -136,23 +136,23 @@
     padding-bottom: 5px;
 }
 
-.dashboard-table-head th{
+.dashboard-table-card .dashboard-table-head th{
     background-color: #F8FAFC;
     font-weight: 600;
     padding: 6px 12px;
 }
 
 
-tbody tr{
+.dashboard-table-card tbody tr {
     transition: 0.2s ease;
     cursor: pointer;
 }
 
-.table tbody tr:hover td{
+.dashboard-table-card .table tbody tr:hover td {
     background-color: #F8FAFC;
 }
 
-.table tbody td{
+.dashboard-table-card .table tbody td {
     font-size: 14px;
 }
 

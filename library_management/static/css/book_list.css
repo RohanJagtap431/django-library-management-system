@@ -15,9 +15,8 @@
 .book-breadcrumb a:hover{
     color: #0d6efd;
 }
-
-.active{
-    font-weight: bold;
+.breadcrumb .active{
+    font-weight:bold;
 }
 
 .active:hover{
@@ -32,6 +31,10 @@
 .table-responsive{
     min-height: 410px;
 }
+
+
+
+
 
 .Categories:focus{
     box-shadow: none;
@@ -64,4 +67,41 @@
 
 .pagination .page-link:focus {
     box-shadow: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.book-title {
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.book-author{
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+
+.book-isbn{
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+.book-category{
+    max-width:80px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
 }

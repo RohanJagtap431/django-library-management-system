@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container-fluid p-0">
     
-  <div class="row vh-100 gx-0">
+  <div class="row min-vh-100 gx-0">
     <div class="col-2 bg-dark p-4">
       <div class="brand d-flex align-items-center">
         <img class="sidebar-logo mb-1 bg-white rounded p-2" src="{% static 'images/logo.png' %}" />
@@ -22,17 +22,20 @@
       </div>
       <hr class="border border-secondary opacity-100" />
 
-      <div class="menu-item active-menu d-flex align-items-center py-2 px-3 rounded mt-3 mb-2">
-        <i class="bi bi-house-door ps-3"></i>
-        <span class="ps-1">Dashboard</span>
-      </div>
+
+      <a href="{% url 'dashboard' %}" class="text-decoration-none">
+        <div class="menu-item active-menu d-flex align-items-center py-2 px-3 rounded mt-3 mb-2">
+          <i class="bi bi-house-door ps-3"></i>
+          <span class="ps-1">Dashboard</span>
+        </div>
+      </a>
 
       <small class="manage mt-2 mb-2">MANAGE</small>
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
         <div class="left">
           <i class="bi bi-book ps-3"></i>
-        <span class="ps-1">Books</span>
+          <span class="ps-1">Books</span>
         </div>
         <div class="right">
           <i class="bi bi-chevron-down"></i>
@@ -121,17 +124,21 @@
           
           <i class="bi bi-list fs-3 ms-2"></i>
 
-          <div class="input-group ms-4" style="width: 450px;">
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Search books, members..."
-            >
-            <button class="btn btn-outline-secondary">
-                <i class="bi bi-search"></i>
-            </button>
+          <form method="GET" action="{% url 'global_search' %}">
+            <div class="input-group ms-4" style="width: 450px;">
+              <input
+                  type="text"
+                  name="q"
+                  class="form-control"
+                  placeholder="Search books, members..."
+                  
+              >
+              <button class="btn btn-outline-secondary">
+                  <i class="bi bi-search"></i>
+              </button>
 
-          </div>
+            </div>
+          </form>
 
         </div>
 
