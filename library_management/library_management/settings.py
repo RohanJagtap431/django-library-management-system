@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'library',
     'books',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'PORT': '3306',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'DB_PASSWORD',
+        'PASSWORD': 'PASSWORD',
     }
 }
 

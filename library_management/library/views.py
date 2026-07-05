@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from books.models import Book
+from members.models import Member
 from django.db.models import Count
 from django.utils import timezone
 
@@ -13,6 +14,7 @@ def dashboard(request):
 def dashboard(request):
     today = timezone.localtime()
     total_books = Book.objects.count()
+    total_member = Member.objects.count()
 
     category_data = (
         Book.objects
@@ -29,6 +31,7 @@ def dashboard(request):
 
     context = {
         "total_books": total_books,
+        "total_member": total_member,
         "labels": labels,
         "counts": counts,
         "today": today,
@@ -49,6 +52,9 @@ def global_search(request):
 
     elif q == "add book" or q == "book add" or q == "books add" or q == "add books":
         return redirect("book_add")
+    
+    elif q in ["member", "members", "member list"]:
+        return redirect("/members/")
     
     else:
         return redirect("dashboard")

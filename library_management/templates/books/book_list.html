@@ -116,7 +116,7 @@
                         <tbody>
                             {% for book in page_obj %}
                             <tr>
-                                <td>{{ forloop.counter }}</td>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
 
                                 <td>
                                     {% if book.book_cover %}

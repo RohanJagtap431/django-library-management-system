@@ -1,0 +1,110 @@
+.back_button{
+    font-size: 15px;
+}
+
+
+.left_side{
+    font-size: 30px;
+}
+
+.member-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.member-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.member-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.member-image{
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 0 3px #0d6efd,
+                0 8px 20px rgba(0,0,0,.15);
+}
+
+.image_status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d4d0d0;
+}
+
+
+.member_stu{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.member_id_section{
+    margin-top: 6px;
+    font-size: 18px;
+}
+
+.member_id_lebal{
+    font-size: 12px;
+}
+
+
+.per_info{
+    font-size: 16px;
+}
+
+.per_icon{
+    -webkit-text-stroke: 1px;
+}
+
+.per_icons{
+    -webkit-text-stroke: 0.8px;
+    color: #0d6efd;
+}
+
+
+.info_fount{
+    font-size: 15px;
+}
+
+.details_info{
+    border-right: 1px solid #d4d0d0;
+}
+
+.address_member{
+    height: 50px;
+}
+
+.overdue_icons{
+    color: rgb(253, 4, 4);
+}
+
+.pending_icons{
+    -webkit-text-stroke: 0.8px;
+    color: #ffbf00;
+}
+
+footer{
+    margin-top: 25px;
+    margin-bottom: 0px;
+    padding-top: 25px;
+    padding-bottom: 3px;
+    font-size: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+}

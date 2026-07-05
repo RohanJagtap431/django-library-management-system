@@ -45,15 +45,17 @@
       </a>
 
 
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-people ps-3"></i>
-        <span class="ps-1">Members</span>
+      <a href="{% url 'members_list' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/members/' in request.path %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-people ps-3"></i>
+          <span class="ps-1">Members</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
         </div>
-        <div class="right">
-          <i class="bi bi-arrow-right-short"></i>
-        </div>
-      </div>
+      </a>
 
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
@@ -107,13 +109,14 @@
         </div>
       </div>
 
-
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-box-arrow-right ps-3"></i>
-        <span class="ps-1">Logout</span>
+      <a href="{% url 'login' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
+          <div class="left">
+            <i class="bi bi-box-arrow-right ps-3"></i>
+          <span class="ps-1">Logout</span>
+          </div>
         </div>
-      </div>
+      </a>
 
     </div>
 

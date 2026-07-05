@@ -1,0 +1,238 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    All Members
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/member_list.css' %}">
+{% endblock %}
+    
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="left_side d-flex align-items-center mt-2">
+                <i class="bi bi-people-fill text-primary page-icon"></i>
+                <h2 class="ms-3 mb-0 fw-bold">Members</h2>
+            </div>
+
+            <div class="right_side mt-4">
+                <a href="#" class="btn btn-primary">+ Add Member</a>
+            </div>
+
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'members_list' %}">Members</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    All Members
+                </li>
+            </ol>
+        </nav>
+
+        <div class="card mt-2">
+            <div class="card-body p-2">
+
+                <form method="GET">
+                    <div class="row gx-4">
+                        <div class="col-5">
+                            
+                            
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text" name="search" value="{{ search }}" placeholder="Search by name, email, phone, member ID...">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <div class="d-flex justify-content-end gap-3">
+
+                                <select class="form-select form-select-sm filter-select Categories" name="category">
+                                    <option value="">All Membership Types</option>
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.0 }}" {% if cat.0 == category %}selected{% endif %}>{{ cat.1 }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select status" name="status">
+                                    <option value="" {% if not status %}selected{% endif %}>All Status</option>
+                                    <option value="active" {% if status == "active" %}selected{% endif %}>Active</option>
+                                    <option value="inactive" {% if status == "inactive" %}selected{% endif %}>Inactive</option>
+                                </select>
+
+                                <a href="{% url 'members_list' %}" class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat me-2"></i>
+                                    Reset
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Photo</th>
+                                <th>Member ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Membership Type</th>
+                                <th>Join Date</th>
+                                <th>Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for member in page_obj %}
+                            <tr>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+
+                                <td>
+                                    {% if member.profile_photo %}
+                                        <img src="{{ member.profile_photo.url }}" class="member-image">
+                                    {% else %}
+                                        <span class="text-muted">No Cover</span>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <span class="member-member_id" title="{{ member.member_id }}">
+                                        {{ member.member_id }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-full_name" title="{{ member.full_name }}">
+                                        {{ member.full_name }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-email" title="{{ member.email }}">
+                                        {{ member.email }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-phone" title="{{ member.phone }}">
+                                        {{ member.phone }}
+                                    </span>
+                                </td>
+                                <td class="text-center">{{ member.get_member_type_display }}</td>
+                                <td>
+                                    <span class="member-join_date" title="{{ member.join_date }}">
+                                        {{ member.join_date }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if member.status == "active" %}
+
+                                        <span class="badge bg-success">
+                                            {{ member.get_status_display }}
+                                        </span>
+
+                                    {% else %}
+                                    
+                                        <span class="badge bg-danger">
+                                            {{ member.get_status_display }}
+                                        </span>
+
+                                    {% endif %}
+                                </td>
+
+                                <td class="text-center">
+                                    <a href="{% url 'member_detail' member.id %}" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></a>
+                                    <a href="#" class="btn btn-outline-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <nav class="mt-3 mb-0">
+                    <ul class="pagination justify-content-end gap-2">
+                        {% if page_obj.has_previous %}
+
+                        <li class="page-item">
+                             <a class="page-link px-3 py-2" href="?page={{ page_obj.previous_page_number }}">
+                                Previous
+                            </a>
+                        </li>
+
+                        {% else %}
+
+                        <li class="page-item disabled">
+                            <span class="page-link px-3 py-2">Previous</span>
+                        </li>
+
+                        {% endif %}
+
+                        
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if num == page_obj.number %}
+                                <li class="page-item active">
+                                    <span class="page-link px-3 py-2">{{ num }}</span>
+                                </li>
+
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link px-3 py-2" href=?page={{num}}>{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+
+
+                        {% if page_obj.has_next %}
+
+                        <li class="page-item">
+                             <a class="page-link px-3 py-2" href="?page={{ page_obj.next_page_number }}">
+                                Next
+                            </a>
+                        </li>
+
+                        {% else %}
+
+                        <li class="page-item disabled">
+                            <span class="page-link px-3 py-2">Next</span>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
