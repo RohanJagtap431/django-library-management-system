@@ -67,7 +67,11 @@
             </div>
             <div class="card-body d-flex border-top border-bottom">
                 <div class="col-3">
-                    <img src="{{ book.book_cover.url }}" class="book-image m-2">
+                    {% if book.book_cover %}
+                        <img src="{{ book.book_cover.url }}" class="book-image m-2">
+                    {% else %}
+                        <img src="{% static 'images/books/default-book.png' %}" class="book-image m-2">
+                    {% endif %}
                 </div>
 
                 <div class="col-3">

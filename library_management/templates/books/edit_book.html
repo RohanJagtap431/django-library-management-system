@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    All Books
+    Edit Book
 {% endblock %}
 
 {% block css %}
@@ -144,6 +144,12 @@
                                 
                                 <img src="{{ book.book_cover.url }}"
                                     class="img-thumbnail mb-3"
+                                    id="coverPreview"
+                                    width="100" height="150">
+                            {% else %}
+                                <img src="{% static 'images/books/default-book.png' %}"
+                                    class="img-thumbnail mb-3"
+                                    id="coverPreview"
                                     width="100" height="150">
                             {% endif %}
 

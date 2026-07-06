@@ -122,7 +122,7 @@
                                     {% if book.book_cover %}
                                         <img src="{{ book.book_cover.url }}" class="book-image">
                                     {% else %}
-                                        <span class="text-muted">No Cover</span>
+                                        <img src="{% static 'images/books/default-book.png' %}" class="book-image">
                                     {% endif %}
                                 </td>
 

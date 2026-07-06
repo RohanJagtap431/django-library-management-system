@@ -135,6 +135,8 @@ def book_edit(request, book_id):
         
         book_cover = request.FILES.get("book_cover")
         if book_cover:
+            if book.book_cover:
+                book.book_cover.delete(save=False)
             book.book_cover = book_cover
         
         book.save()
