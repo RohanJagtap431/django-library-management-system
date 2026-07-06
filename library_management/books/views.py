@@ -96,8 +96,7 @@ def book_edit(request, book_id):
         
         
         if Book.objects.exclude(id=book.id).filter(isbn=isbn).exists():
-            messages.error(request, "ISBN already exists.")
-            return render(request, "books/edit_book.html", {"book": book})
+            errors["isbn"] = "ISBN already exists."
         
         current_year = timezone.now().year
         
@@ -106,20 +105,32 @@ def book_edit(request, book_id):
             total_copies = int(total_copies)
             available_copies = int(available_copies)
         except ValueError:
-            messages.error(request, "Please enter valid numbers.")
-            return render(request, "books/edit_book.html", {"book": book})
+            errors["publication_year"] = "Please enter a valid publication year."
+            errors["total_copies"] = "Please enter a valid total copies."
+            errors["available_copies"] = "Please enter a valid available copies."
+            
+        if errors:
+            return render(request, "books/add_book.html", {
+                "book": book,
+                "errors": errors,
+                "categories": CATEGORY_CHOICES,
+            })
         
         if publication_year > current_year:
-            messages.error(request, "Publication year cannot be in the future.")
-            return render(request, "books/edit_book.html", {"book": book})
+            errors["publication_year"] = "Publication year cannot be in the future."
         
         if total_copies < 0 or available_copies < 0:
-            messages.error(request, "Copies cannot be negative.")
-            return render(request, "books/edit_book.html", {"book": book})
+            errors["total_copies"] = "Copies cannot be negative."
 
         if available_copies > total_copies:
-            messages.error(request, "Available copies cannot be greater than total copies.")
-            return render(request, "books/edit_book.html", {"book": book})
+            errors["available_copies"] = "Available copies cannot be greater than total copies."
+        
+        if errors:
+            return render(request, "books/edit_book.html", {
+                "book": book,
+                "errors": errors,
+                "categories": CATEGORY_CHOICES,
+            })
         
         book.title = title
         book.author = author
@@ -222,10 +233,8 @@ def book_add(request):
 
         
         if Book.objects.filter(isbn=isbn).exists():
-            messages.error(request, "ISBN already exists.")
-            return render(request, "books/add_book.html", {
-                "categories": CATEGORY_CHOICES,
-            })
+            errors["isbn"] = "ISBN already exists."
+            
 
         current_year = timezone.now().year
 
@@ -234,26 +243,31 @@ def book_add(request):
             total_copies = int(total_copies)
             available_copies = int(available_copies)
         except ValueError:
-            messages.error(request, "Please enter valid numbers.")
+            errors["publication_year"] = "Please enter a valid publication year."
+            errors["total_copies"] = "Please enter a valid total copies."
+            errors["available_copies"] = "Please enter a valid available copies."
+            
+        if errors:
             return render(request, "books/add_book.html", {
+                "errors": errors,
                 "categories": CATEGORY_CHOICES,
             })
+            
 
         if publication_year > current_year:
-            messages.error(request, "Publication year cannot be in the future.")
-            return render(request, "books/add_book.html", {
-                "categories": CATEGORY_CHOICES,
-            })
+            errors["publication_year"] = "Publication year cannot be in the future."
+            
 
         if total_copies < 0 or available_copies < 0:
-            messages.error(request, "Copies cannot be negative.")
-            return render(request, "books/add_book.html", {
-                "categories": CATEGORY_CHOICES,
-            })
+            errors["total_copies"] = "Copies cannot be negative."
+            
 
         if available_copies > total_copies:
-            messages.error(request, "Available copies cannot be greater than total copies.")
+            errors["available_copies"] = "Available copies cannot be greater than total copies."
+            
+        if errors:
             return render(request, "books/add_book.html", {
+                "errors": errors,
                 "categories": CATEGORY_CHOICES,
             })
 
@@ -277,3 +291,5 @@ def book_add(request):
     return render(request, "books/add_book.html", {
         "categories": CATEGORY_CHOICES,
     })
+    
+    

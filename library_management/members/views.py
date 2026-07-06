@@ -63,6 +63,7 @@ def member_edit(request, member_id):
         phone = request.POST.get("phone", "").strip()
         address = request.POST.get("address", "").strip()
         date_of_birth = request.POST.get("date_of_birth")
+        dob = None
         gender = request.POST.get("gender")
         member_type = request.POST.get("member_type")
         status = request.POST.get("status")
@@ -115,42 +116,27 @@ def member_edit(request, member_id):
         
         
         if Member.objects.exclude(id=member.id).filter(email=email).exists():
-            messages.error(request, "Email already exists.")
-            return render(request, "members/edit_member.html", {
-                "member": member,
-                "member_choices": MEMBER_TYPE_CHOICES,
-                "status_choices": STATUS_CHOICES,
-                "gender_choices": GENDER_CHOICES,
-                "state_choices": STATE_CHOICES,
-            })
+            errors["email"] = "Email already exists."
+            
         
         if date_of_birth:
             dob = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
             
             if dob > date.today():
-                messages.error(request, "Birth Date cannot be in the future.")
-                return render(request, "members/edit_member.html", {
-                    "member": member,
-                    "member_choices": MEMBER_TYPE_CHOICES,
-                    "status_choices": STATUS_CHOICES,
-                    "gender_choices": GENDER_CHOICES,
-                    "state_choices": STATE_CHOICES,
-                })
+                errors["date_of_birth"] = "Birth Date cannot be in the future."
+                
         
         if not phone.isdigit() or len(phone) != 10:
-            messages.error(request, "Please enter a valid 10-digit phone number.")
-            return render(request, "members/edit_member.html", {
-                "member": member,
-                "member_choices": MEMBER_TYPE_CHOICES,
-                "status_choices": STATUS_CHOICES,
-                "gender_choices": GENDER_CHOICES,
-                "state_choices": STATE_CHOICES,
-            })
+            errors["phone"] = "Please enter a valid 10-digit phone number."
+           
             
         if not pincode.isdigit() or len(pincode) != 6:
-            messages.error(request, "Please enter a valid 6-digit Pincode.")
+            errors["pincode"] = "Please enter a valid 6-digit Pincode."
+        
+        if errors:
             return render(request, "members/edit_member.html", {
                 "member": member,
+                "errors": errors,
                 "member_choices": MEMBER_TYPE_CHOICES,
                 "status_choices": STATUS_CHOICES,
                 "gender_choices": GENDER_CHOICES,
@@ -185,4 +171,118 @@ def member_edit(request, member_id):
         "gender_choices": GENDER_CHOICES,
         "state_choices": STATE_CHOICES,
     })
-    
+
+
+
+def member_add(request):
+    if request.method == "POST":
+        full_name = request.POST.get("full_name", "").strip()
+        email = request.POST.get("email", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        address = request.POST.get("address", "").strip()
+        date_of_birth = request.POST.get("date_of_birth")
+        dob = None
+        gender = request.POST.get("gender")
+        member_type = request.POST.get("member_type")
+        status = request.POST.get("status")
+        city = request.POST.get("city", "").strip()
+        state = request.POST.get("state")
+        pincode = request.POST.get("pincode", "").strip()
+        profile_photo = request.FILES.get("profile_photo")
+        
+        errors = {}
+        
+        if not full_name:
+            errors["full_name"] = "Full Name is required."
+            
+        if not email:
+            errors["email"] = "Email is required."
+            
+        if not phone:
+            errors["phone"] = "Phone Number is required."
+            
+        if not address:
+            errors["address"] = "Address is required."
+            
+        if not gender:
+            errors["gender"] = "Gender is required."
+            
+        if not member_type:
+            errors["member_type"] = "Member Type is required."
+            
+        if not status:
+            errors["status"] = "Status is required."
+            
+        if not city:
+            errors["city"] = "City is required."
+            
+        if not state:
+            errors["state"] = "State is required."
+            
+        if not pincode:
+            errors["pincode"] = "Pincode is required."
+            
+        if errors:
+            return render(request, "members/add_member.html", {
+                "errors": errors,
+                "member_choices": MEMBER_TYPE_CHOICES,
+                "status_choices": STATUS_CHOICES,
+                "gender_choices": GENDER_CHOICES,
+                "state_choices": STATE_CHOICES,
+            })
+        
+        
+        
+        if Member.objects.filter(email=email).exists():
+            errors["email"] = "Email already exists."
+            
+        
+        if date_of_birth:
+            dob = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
+            
+            if dob > date.today():
+                errors["date_of_birth"] = "Birth Date cannot be in the future."
+            
+                
+        if not phone.isdigit() or len(phone) != 10:
+            errors["phone"] = "Please enter a valid 10-digit phone number."
+            
+            
+        if not pincode.isdigit() or len(pincode) != 6:
+            errors["pincode"] = "Please enter a valid 6-digit Pincode."
+            
+        if errors:
+                return render(request, "members/add_member.html", {
+                    "errors": errors,
+                    "member_choices": MEMBER_TYPE_CHOICES,
+                    "status_choices": STATUS_CHOICES,
+                    "gender_choices": GENDER_CHOICES,
+                    "state_choices": STATE_CHOICES,
+                })
+            
+        Member.objects.create(
+            full_name = full_name,
+            email =  email,
+            phone = phone,
+            address =address,
+            date_of_birth = dob if date_of_birth else None,
+            gender = gender,
+            member_type = member_type,
+            status = status,
+            city = city,
+            state = state,
+            pincode =pincode,
+            profile_photo = profile_photo
+        )
+        
+        messages.success(request, "Member added successfully.")
+        return redirect("members_list")
+
+    return render(request, "members/add_member.html", {
+        "member_choices": MEMBER_TYPE_CHOICES,
+        "status_choices": STATUS_CHOICES,
+        "gender_choices": GENDER_CHOICES,
+        "state_choices": STATE_CHOICES,
+    })
+
+

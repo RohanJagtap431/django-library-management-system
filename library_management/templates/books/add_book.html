@@ -53,7 +53,7 @@
                 <div class="row g-4">
                     <div class="col-md-4">
                         <label class="fw-bold book_title">Book Title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="title" value="{{ book.title }}" placeholder="Enter book title">
+                        <input type="text" class="form-control mb-0" name="title" value="{{ request.POST.title }}" placeholder="Enter book title">
                         {% if errors.title %}
                             <small class="text-danger m-2">{{ errors.title }}</small>
                         {% endif %}
@@ -63,7 +63,7 @@
                         <select class="form-select form-select-sm filter-select Categories" name="category">
                             <option value="">Select Category</option>
                             {% for cat in categories %}
-                                <option value="{{ cat.0 }}" {% if cat.0 == book.category %}selected{% endif %}>
+                                <option value="{{ cat.0 }}" {% if cat.0 == request.POST.category %}selected{% endif %}>
                                     {{ cat.1 }}
                                 </option>
                             {% endfor %}
@@ -75,7 +75,7 @@
 
 
                         <label class="fw-bold book_title">Total Copies <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control mb-0" name="total_copies" value="{{ book.total_copies }}" placeholder="Enter total copies">
+                        <input type="number" class="form-control mb-0" name="total_copies" value="{{ request.POST.total_copies }}" placeholder="Enter total copies">
                         {% if errors.total_copies %}
                             <small class="text-danger m-2">{{ errors.total_copies }}</small>
                         {% endif %}
@@ -86,7 +86,7 @@
 
                     <div class="col-md-4">
                         <label class="fw-bold book_title">Author <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="author" value="{{ book.author }}" placeholder="Enter author name">
+                        <input type="text" class="form-control mb-0" name="author" value="{{ request.POST.author }}" placeholder="Enter author name">
                         {% if errors.author %}
                             <small class="text-danger m-2">{{ errors.author }}</small>
                         {% endif %}
@@ -94,14 +94,14 @@
 
 
                         <label class="fw-bold book_title">Publisher <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="publisher" value="{{ book.publisher }}" placeholder="Enter publisher name">
+                        <input type="text" class="form-control mb-0" name="publisher" value="{{ request.POST.publisher }}" placeholder="Enter publisher name">
                         {% if errors.publisher %}
                             <small class="text-danger m-2">{{ errors.publisher }}</small>
                         {% endif %}
                         <br>
 
                         <label class="fw-bold book_title">Available Copies <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control mb-0" name="available_copies" value="{{ book.available_copies }}" placeholder="Enter available copies">
+                        <input type="number" class="form-control mb-0" name="available_copies" value="{{ request.POST.available_copies }}" placeholder="Enter available copies">
                         {% if errors.available_copies %}
                             <small class="text-danger m-2">{{ errors.available_copies }}</small>
                         {% endif %}
@@ -114,7 +114,7 @@
 
                     <div class="col-md-4">
                         <label class="fw-bold book_title">ISBN <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="isbn" value="{{ book.isbn }}" placeholder="Enter ISBN number">
+                        <input type="text" class="form-control mb-0" name="isbn" value="{{ request.POST.isbn }}" placeholder="Enter ISBN number">
                         {% if errors.isbn %}
                             <small class="text-danger m-2">{{ errors.isbn }}</small>
                         {% endif %}
@@ -122,7 +122,7 @@
 
 
                         <label class="fw-bold book_title">Publication Year <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control mb-0" name="publication_year" value="{{ book.publication_year }}" placeholder="Enter publication year">
+                        <input type="text" class="form-control mb-0" name="publication_year" value="{{ request.POST.publication_year }}" placeholder="Enter publication year">
                         {% if errors.publication_year %}
                             <small class="text-danger m-2">{{ errors.publication_year }}</small>
                         {% endif %}
@@ -130,7 +130,7 @@
 
 
                         <label class="fw-bold book_title">Shelf Location</label>
-                        <input type="text" class="form-control mb-0" name="shelf_location" value="{{ book.shelf_location }}" placeholder="Enter shelf location (e.g. A1-O3)">
+                        <input type="text" class="form-control mb-0" name="shelf_location" value="{{ request.POST.shelf_location }}" placeholder="Enter shelf location (e.g. A1-O3)">
 
                     </div>
                 </div>
@@ -159,7 +159,7 @@
 
                     <div class="col-md-8">
                         <label class="fw-bold book_title">Description / Notes</label>
-                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Enter book description or any additional notes...">{{ book.description }}</textarea>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Enter book description or any additional notes...">{{ request.POST.description }}</textarea>
                     </div>
                 </div>
 
