@@ -94,12 +94,11 @@
     cursor: pointer;
 }
 
-.book-img{
-    width: 18px;
-    height: 26px;
-    border-radius: 2px;
+.book-image{
+    width: 30px;
+    height: 45px;
     object-fit: cover;
-    background-color: #FFFFFF;
+    border-radius: 3px;
 }
 
 .status-badge{
@@ -122,12 +121,6 @@
 .overdue-badge{
     background-color: #FEE2E2;
     color: #DC2626;
-}
-
-
-.pending-badge{
-    background-color: #FEF3C7;
-    color: #D97706;
 }
 
 
@@ -161,7 +154,39 @@
     font-weight: 500;
 }
 
+.member-member_id {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
 
+.member-full_name{
+    max-width:100px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+.member-email{
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+
+
+.member-join_date{
+    max-width:100px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
 
 
 

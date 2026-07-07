@@ -57,16 +57,17 @@
         </div>
       </a>
 
-
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-arrow-left-right ps-3"></i>
-        <span class="ps-1">Issue/Return</span>
+      <a href="{% url 'transaction_list' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/transactions/' in request.path %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-arrow-left-right ps-3"></i>
+          <span class="ps-1">Issue/Return</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
         </div>
-        <div class="right">
-          <i class="bi bi-arrow-right-short"></i>
-        </div>
-      </div>
+      </a>
 
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">

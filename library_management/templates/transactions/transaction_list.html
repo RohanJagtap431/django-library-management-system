@@ -1,0 +1,264 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    All Transactions
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/transaction_list.css' %}">
+{% endblock %}
+    
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="left_side d-flex align-items-center mt-2">
+                <i class="bi bi-arrow-left-right text-primary page-icon"></i>
+                <h2 class="ms-3 mb-0 fw-bold">Transactions / Issue Records</h2>
+            </div>
+
+            <div class="right_side mt-4">
+                <a href="{% url 'member_add' %}" class="btn btn-primary">+ Issue Book</a>
+            </div>
+
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'transaction_list' %}">Transaction</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    All Transactions
+                </li>
+            </ol>
+        </nav>
+
+        <div class="card mt-2">
+            <div class="card-body p-2">
+
+                <form method="GET">
+                    <div class="row gx-4">
+                        <div class="col-5">
+                            
+                            
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text" name="search" value="{{ search }}" placeholder="Search by Issue ID, Book Title, Member Name...">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <div class="d-flex justify-content-end gap-3">
+
+                                <select class="form-select form-select-sm filter-select status" name="status">
+                                    <option value="" {% if not status %}selected{% endif %}>All Status</option>
+                                    <option value="issued" {% if status == "issued" %}selected{% endif %}>Issued</option>
+                                    <option value="returned" {% if status == "returned" %}selected{% endif %}>Returned</option>
+                                    <option value="overdue" {% if status == "overdue" %}selected{% endif %}>Overdue</option>
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select Categories" name="member">
+                                    <option value="">All Members</option>
+                                    {% for mem in all_members %}
+                                        <option value="{{ mem.id }}" {% if member == mem.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ mem.full_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select Categories" name="book">
+                                    <option value="">All Books</option>
+                                    {% for boo in all_books %}
+                                        <option value="{{ boo.id }}" {% if book == boo.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ boo.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <a href="{% url 'transaction_list' %}" class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat me-2"></i>
+                                    Reset
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Issue ID</th>
+                                <th>Book Title</th>
+                                <th>Member</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                                <th>Fine(₹)</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for transactions in page_obj %}
+                            <tr>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+
+                                <td>
+                                    <span class="member-member_id text-primary" title="{{ transactions.issue_id }}">
+                                        {{ transactions.issue_id }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="member-member_id" title="{{ transactions.book.title }}">
+                                        {{ transactions.book.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-full_name" title="{{ transactions.member.full_name }}">
+                                        {{ transactions.member.full_name }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-email" title="{{ transactions.issue_date }}">
+                                        {{ transactions.issue_date }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-phone" title="{{ transactions.due_date }}">
+                                        {{ transactions.due_date }}
+                                    </span>
+                                </td>
+                                <td class="text-center" title="{{ transactions.return_date }}">
+                                    {% if transactions.return_date %}
+                                        {{ transactions.return_date }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="member-join_date" title="{{ transactions.status }}">
+                                        {% if transactions.status == "issued" %}
+
+                                            <span class="status-badge issued-badge">Issued</span>
+
+                                        {% elif transactions.status == "returned" %}
+
+                                            <span class="status-badge returned-badge">Returned</span>
+                                            
+                                        {% elif transactions.status == "overdue" %}
+
+                                            <span class="status-badge overdue-badge">Overdue</span>
+                                            
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="member-join_date" title="{{ transactions.fine }}">
+                                        {% if transactions.fine == 0 %}
+                                            ₹0
+                                        {% else %}
+                                            <span class="text-danger">₹{{ transactions.fine }}</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></a>
+
+                                    {% if transactions.status == "issued" %}
+                                        <a href="#" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-return-left"></i></a>
+                                    {% else %}
+                                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-dash"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <nav class="mt-3 mb-0">
+                    <ul class="pagination justify-content-end gap-2">
+                        {% if page_obj.has_previous %}
+
+                        <li class="page-item">
+                             <a class="page-link px-3 py-2" href="?page={{ page_obj.previous_page_number }}">
+                                Previous
+                            </a>
+                        </li>
+
+                        {% else %}
+
+                        <li class="page-item disabled">
+                            <span class="page-link px-3 py-2">Previous</span>
+                        </li>
+
+                        {% endif %}
+
+                        
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if num == page_obj.number %}
+                                <li class="page-item active">
+                                    <span class="page-link px-3 py-2">{{ num }}</span>
+                                </li>
+
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link px-3 py-2" href=?page={{num}}>{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+
+
+                        {% if page_obj.has_next %}
+
+                        <li class="page-item">
+                             <a class="page-link px-3 py-2" href="?page={{ page_obj.next_page_number }}">
+                                Next
+                            </a>
+                        </li>
+
+                        {% else %}
+
+                        <li class="page-item disabled">
+                            <span class="page-link px-3 py-2">Next</span>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

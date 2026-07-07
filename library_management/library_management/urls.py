@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('library.urls')),
     path('books/', include('books.urls')),
     path('members/', include('members.urls')),
+    path('transactions/', include('transactions.urls')),
 ]
 
 if settings.DEBUG:

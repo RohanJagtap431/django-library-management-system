@@ -83,7 +83,7 @@
 
 
             <div class="col-lg-3">
-              <a href="#" class="card-link">
+              <a href="{% url 'transaction_list' %}" class="card-link">
                 <div class="card dashboard-card shadow-sm w-100">
                   <div class="card-body p-3">
                     <div class="info-box d-flex align-items-start">
@@ -94,7 +94,7 @@
 
                       <div class="text-box d-flex flex-column ms-4 mt-1">
                         <h6>Total Issued</h6>
-                        <h2 class="fw-bold mb-0">156</h2>
+                        <h2 class="fw-bold mb-0">{{ total_issued }}</h2>
 
                         <div class="link-box link-orange d-flex align-items-center mt-3">
                           <span>View issued books</span>
@@ -156,7 +156,7 @@
                     </div>
 
                     <div class="right">
-                      <button type="button" class="btn btn-outline-secondary btn-sm">View All</button>
+                      <a href="{% url 'transaction_list' %}" class="btn btn-outline-secondary btn-sm">View All</a>
                     </div>
                   </div>
 
@@ -174,115 +174,52 @@
                       </thead>
                       <tbody>
 
-                        <!--row1-->
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/reach_dad.png' %}" class="book-img">
-                              <span class="ms-3">Rich Dad Poor Dad</span>
-                            </div>
-                          </td>
-                          <td>Rohan Jagtap</td>
-                          <td>18 Jun 2026</td>
-                          <td>02 Jul 2026</td>
-                          <td>
-                            <span class="status-badge  issued-badge">
-                              Issued
-                            </span>
-                          </td>
-                        </tr>
+                        {% for transaction in recent_transactions %}
+                          <tr>
+                            <td>
+                              {% if transaction.book.book_cover %}
+                                  <img src="{{ transaction.book.book_cover.url }}" class="book-image">
+                              {% else %}
+                                  <img src="{% static 'images/books/default-book.png' %}" class="book-image">
+                              {% endif %}
+                              <span class="member-member_id" title="{{ transaction.book.title }}">
+                                  {{ transaction.book.title }}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="member-full_name" title="{{ transaction.member.full_name }}">
+                                  {{ transaction.member.full_name }}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="member-email" title="{{ transaction.issue_date }}">
+                                  {{ transaction.issue_date }}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="member-phone" title="{{ transaction.due_date }}">
+                                  {{ transaction.due_date }}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="member-join_date" title="{{ transaction.status }}">
+                                {% if transaction.status == "issued" %}
 
-                        <!--row2-->
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/think_and_grow.png' %}" class="book-img">
-                              <span class="ms-3">Think And Grow Rich</span>
-                            </div>
-                          </td>
-                          <td>Sanika Salunkhe</td>
-                          <td>17 Jun 2026</td>
-                          <td>01 Jun 2026</td>
-                          <td>
-                            <span class="status-badge issued-badge">
-                              Issued
-                            </span>
-                          </td>
-                        </tr>
+                                    <span class="status-badge issued-badge">Issued</span>
 
-                        <!--row3-->
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/python_programming.png' %}" class="book-img">
-                              <span class="ms-3">Python Programming</span>
-                            </div>
-                          </td>
-                          <td>Sumit Mane</td>
-                          <td>16 Jun 2026</td>
-                          <td>30 Jun 2026</td>
-                          <td>
-                            <span class="status-badge overdue-badge">
-                              Overdue
-                            </span>
-                          </td>
-                        </tr>
+                                {% elif transaction.status == "returned" %}
 
-                        <!--row4-->
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/zero_to_coder.png' %}" class="book-img">
-                              <span class="ms-3">Zero To Coder</span>
-                            </div>
-                          </td>
-                          <td>Vaishnvi Jagtap</td>
-                          <td>15 Jun 2026</td>
-                          <td>29 Jun 2026</td>
-                          <td>
-                            <span class="status-badge pending-badge">
-                              Pending
-                            </span>
-                          </td>
-                        </tr>
+                                    <span class="status-badge returned-badge">Returned</span>
+                                    
+                                {% elif transaction.status == "overdue" %}
 
-
-                        <!--row5-->
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/the_happy_developer.png' %}" class="book-img">
-                              <span class="ms-3">The Happy Developer</span>
-                            </div>
-                          </td>
-                          <td>Viraj Mate</td>
-                          <td>14 Jun 2026</td>
-                          <td>28 Jun 2026</td>
-                          <td>
-                            <span class="status-badge returned-badge">
-                              Returned
-                            </span>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>
-                            <div class="book-info d-flex align-items-center">
-                              <img src="{% static 'images/books/the_happy_developer.png' %}" class="book-img">
-                              <span class="ms-3">The Happy Developer</span>
-                            </div>
-                          </td>
-                          <td>Viraj Mate</td>
-                          <td>14 Jun 2026</td>
-                          <td>28 Jun 2026</td>
-                          <td>
-                            <span class="status-badge returned-badge">
-                              Returned
-                            </span>
-                          </td>
-                        </tr>
-
-                        
+                                    <span class="status-badge overdue-badge">Overdue</span>
+                                    
+                                {% endif %}
+                              </span>
+                            </td>
+                          </tr>
+                        {% endfor %}
 
                       </tbody>
                     </table>
