@@ -12,7 +12,7 @@ def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
 def dashboard(request):
-    today = timezone.localtime()
+    today = timezone.localdate()
     total_books = Book.objects.count()
     total_member = Member.objects.count()
     recent_transactions = Transaction.objects.order_by("-created_at")[:4]
@@ -31,6 +31,8 @@ def dashboard(request):
     for item in category_data:
         labels.append(item["category"])
         counts.append(item["total"])
+        
+    
 
     context = {
         "total_books": total_books,

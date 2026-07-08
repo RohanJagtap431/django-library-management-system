@@ -1,0 +1,459 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Issue Book
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/issue_book.css' %}">
+{% endblock %}
+    
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center mt-2">
+                <h2 class="mb-0 fw-bold left_side">Issue Book</h2>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'transaction_list' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Transaction List</a>
+
+            </div>
+
+        
+        </div>
+        
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'transaction_list' %}">Transaction</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Issue Book
+                </li>
+            </ol>
+        </nav>
+
+        <div class="row mt-0">
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="card">
+                            <div class="card-body p-3">
+
+                                <div class="select_member_info">
+                                    <div class="icon_class">
+                                        <i class="bi bi-person"></i>
+                                        <span class="m-0">1. Select Member</span>
+                                    </div>
+                                    <div class="search-wrapper">
+                                        <label for="member-search" class="fw-bold issue_title mt-2">Select Member<span class="text-danger">*</span></label>
+                                        <input type="text" id="member-search" class="form-control mb-0" autocomplete="off" placeholder="Search by Member ID or Name">
+
+                                        <div id="member-results">
+                                            <div class="member-item"></div>
+                                        </div>
+                                        <input type="hidden" id="selected-member-id" name="member">
+                                    </div>
+
+                                    {% if member_success %}
+                                    <div class="alert alert-success py-2 mt-2">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        {{ member_success }}
+                                    </div>
+
+                                    {% elif member_error %}
+                                    <div class="alert alert-danger py-2 mt-2">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                        {{ member_error }}
+                                    </div>
+
+                                    {% else %}
+                                    <div class="alert alert-info py-2 mt-2">
+                                        <i class="bi bi-info-circle-fill"></i>
+                                        Maximum <strong>3 books</strong> can be issued per member.
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="select_book_info mt-2">
+                                    <div class="icon_class">
+                                        <i class="bi bi bi-book"></i>
+                                        <span class="m-0">2. Select Book</span>
+                                    </div>
+                                    <div class="search-wrapper">
+                                        <label for="book-search" class="fw-bold issue_title mt-2">Select Book<span class="text-danger">*</span></label>
+                                        <input type="text" id="book-search" class="form-control mb-0" autocomplete="off" placeholder="Search by Book ID or Title">
+
+                                        <div id="book-results">
+                                            <div class="book-item"></div>
+                                        </div>
+                                        <input type="hidden" id="selected-book-id" name="book">
+                                    </div>
+
+                                    {% if book_error %}
+                                    <div class="alert alert-danger py-2 mt-2">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                        {{ book_error }}
+                                    </div>
+                                    {% else %}
+                                    <div class="alert alert-warning py-2 mt-2">
+                                        <i class="bi bi-info-circle-fill"></i>
+                                        Only books with available copies are shown.
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="issue_info_auto">
+                                    <div class="icon_class mb-2">
+                                        <i class="bi bi-calendar-week"></i>
+                                        <span class="m-0">3. Issue Information <span class="auto_genrated_text">(Auto Generated)</span></span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 info">
+                                            <div class="issue_date_text">
+                                                Issue Date
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-calendar me-1"></i>
+                                                <span class="fw-bold me-1" id="issue-date"></span><span class="today_text">(Today)</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 info">
+                                            <div class="issue_date_text">
+                                                Due Date
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-calendar me-1"></i>
+                                                <span class="fw-bold me-1" id="due-date"></span>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mt-3">
+                                        <div class="col-lg-6 info">
+                                            <div class="issue_date_text">
+                                                Loan Period
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-hourglass-split me-1"></i>
+                                                <span class="fw-bold me-1" id="loan-period"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 info">
+                                            <div class="issue_date_text">
+                                                Available Copies
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-stack me-1"></i>
+                                                <span class="fw-bold me-1" id="issue-available-copies"></span>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-3 d-flex mt-4">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
+                                        Reset
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-send"></i>
+                                        Issue Book
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card">
+                        <div class="card-body p-0 left_card_body">
+                            <div class="summary mb-1">
+                                <i class="bi bi-clipboard2-data icons_bold"></i>
+                                <span class="fw-bold">Issue Summary</span>
+                            </div>
+
+                            <span class="p-2 text-primary fw-bold">Member Information</span>
+
+                            <div class="row summary_row mem_book_info">
+                                <div class="col-lg-4">
+
+                                    <div class="fw-bold">
+                                        <span>Member ID</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Member Name</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Phone</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Member Type</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Status</span>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div>
+                                        <span id="summary-member-id"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-member-name" class="summary_member_name"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-phone"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-member-type"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-status"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="p-2 text-primary fw-bold">Book Information</span>
+
+                            <div class="row summary_row mem_book_info">
+                                <div class="col-lg-4">
+
+                                    <div class="fw-bold">
+                                        <span>Book ID / ISBN</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Book Title</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Category</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Author</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Avaliable Copies</span>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div>
+                                        <span id="summary-book-id"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-book-title" class="book-titles"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-category"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-author"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="summary-available-copies"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="p-2 text-primary fw-bold">Issue Information</span>
+
+                            <div class="row summary_row iss_info">
+                                <div class="col-lg-4">
+
+                                    <div class="fw-bold">
+                                        <span>Issue Date</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Due Date</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>Loan Period</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                    <div class="fw-bold">
+                                        <span>: -</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-7">
+
+                                    <div>
+                                        <span id="left-issue-date"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="left-due-date"></span>
+                                    </div>
+
+                                    <div>
+                                        <span id="left-loan-period"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="rule">
+                                <i class="bi bi-exclamation-circle icons_bold"></i>
+                                <span class="fw-bold">Rules & Information</span>
+                            </div>
+
+                            <div class="rules d-flex">
+                                <i class="bi bi-check-circle-fill text-success me-1"></i>
+                                <span>Maximum 3 books can be issued per member.</span>
+                            </div>
+
+                            <div class="rules d-flex">
+                                <i class="bi bi-check-circle-fill text-success me-1"></i>
+                                <span>Please issue the book within loan period.</span>
+                            </div>
+
+                            <div class="rules d-flex">
+                                <i class="bi bi-check-circle-fill text-success me-1"></i>
+                                <span>Fine will be applicable after due date.</span>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+    </div>
+
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="toast text-bg-{{ message.tags }}" role="alert" data-bs-delay="3000" data-bs-autohide="true">
+
+                    <div class="toast-header">
+                        <strong class="me-auto">
+                            {% if message.tags == "success" %}
+                                Success
+                            {% elif message.tags == "error" %}
+                                Error
+                            {% else %}
+                                Notification
+                            {% endif %}
+                        </strong>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+
+                    <div class="toast-body">
+                        {{ message }}
+                    </div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+    
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/transactions.js' %}"></script>
+{% endblock %}

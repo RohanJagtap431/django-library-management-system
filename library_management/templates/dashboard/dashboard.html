@@ -203,19 +203,19 @@
                             </td>
                             <td>
                               <span class="member-join_date" title="{{ transaction.status }}">
-                                {% if transaction.status == "issued" %}
+                                  {% if transaction.status == "returned" %}
 
-                                    <span class="status-badge issued-badge">Issued</span>
+                                      <span class="status-badge returned-badge">Returned</span>
 
-                                {% elif transaction.status == "returned" %}
+                                  {% elif transaction.status == "issued" and transaction.due_date < today %}
 
-                                    <span class="status-badge returned-badge">Returned</span>
-                                    
-                                {% elif transaction.status == "overdue" %}
+                                      <span class="status-badge overdue-badge">Overdue</span>
 
-                                    <span class="status-badge overdue-badge">Overdue</span>
-                                    
-                                {% endif %}
+                                  {% else %}
+
+                                      <span class="status-badge issued-badge">Issued</span>
+
+                                  {% endif %}
                               </span>
                             </td>
                           </tr>

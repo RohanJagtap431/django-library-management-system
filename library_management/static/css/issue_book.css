@@ -1,0 +1,176 @@
+.left_side{
+    font-size: 30px;
+}
+
+.member-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.member-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.member-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.icon_class{
+    -webkit-text-stroke: 0.5px;
+    color: #0d6efd;
+}
+
+.issue_title{
+    font-size: 15px;
+}
+
+.form-control::placeholder {
+    font-size: 13px;
+}
+
+.icons_bold{
+    -webkit-text-stroke: 0.5px;
+}
+
+.summary{
+    border-bottom: 1px solid beige;
+    background-color: rgb(196, 255, 244);
+    padding: 8px;
+}
+
+.summary_row{
+    margin: 0px;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 6px;
+}
+
+#member-results{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.search-wrapper{
+    position: relative;
+}
+
+.member-item{
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.member-item:hover{
+    background-color: #f8f9fa;
+}
+
+.select_member_info{
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.select_book_info{
+    border-bottom: 1px solid #e1e1e1;
+}
+
+#book-results{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.book-item{
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.issue_info_auto{
+    margin-top: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid  #e1e1e1;
+}
+.issue_date_text{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.today_text{
+    font-size: 14px;
+}
+
+.info{
+    background-color: #fcfcfc;
+    border: 1px solid rgb(234, 233, 233);
+    border-radius: 5px;
+    width: 330px;
+    margin-left: 14px;
+}
+
+.book-titles{
+    max-width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.summary_member_name{
+    max-width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.mem_book_info{
+    height: 130px;
+    padding-top: 5px;
+}
+
+.iss_info{
+    height: 84px;
+    padding-top: 5px;
+}
+
+.rule{
+    color: #fd750d;
+    margin: 8px 0px 3px 8px;
+}
+
+.rules{
+    margin: 0px 0px 0px 8px;
+    padding: 0px;
+}
+
+.left_card_body{
+    height: 594px;
+}

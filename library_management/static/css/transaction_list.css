@@ -133,3 +133,11 @@
     background-color: #FEE2E2;
     color: #DC2626;
 }
+
+.table_value{
+    height: 500px;
+}
+
+.paginatiom_margin{
+    margin-top: 12px;
+}

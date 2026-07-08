@@ -21,7 +21,7 @@
             </div>
 
             <div class="right_side mt-4">
-                <a href="{% url 'member_add' %}" class="btn btn-primary">+ Issue Book</a>
+                <a href="{% url 'issue_book' %}" class="btn btn-primary">+ Issue Book</a>
             </div>
 
         </div>
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card table_value">
             <div class="card-body">
 
                 <div class="table-responsive">
@@ -164,18 +164,18 @@
                                 </td>
                                 <td>
                                     <span class="member-join_date" title="{{ transactions.status }}">
-                                        {% if transactions.status == "issued" %}
+                                        {% if transactions.status == "returned" %}
+
+                                            <span class="status-badge returned-badge">Returned</span>
+
+                                        {% elif transactions.status == "issued" and transactions.due_date < today %}
+
+                                            <span class="status-badge overdue-badge">Overdue</span>
+
+                                        {% else %}
 
                                             <span class="status-badge issued-badge">Issued</span>
 
-                                        {% elif transactions.status == "returned" %}
-
-                                            <span class="status-badge returned-badge">Returned</span>
-                                            
-                                        {% elif transactions.status == "overdue" %}
-
-                                            <span class="status-badge overdue-badge">Overdue</span>
-                                            
                                         {% endif %}
                                     </span>
                                 </td>
@@ -205,7 +205,7 @@
                     </table>
 
                 </div>
-                <nav class="mt-3 mb-0">
+                <nav class="paginatiom_margin">
                     <ul class="pagination justify-content-end gap-2">
                         {% if page_obj.has_previous %}
 
