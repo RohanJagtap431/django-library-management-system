@@ -47,9 +47,12 @@ memberSearch.addEventListener("keyup", function () {
 
                     document.getElementById("summary-phone").textContent = member.phone;
 
-                    document.getElementById("summary-member-type").textContent = member.member_type;
+                    function capitalize(text) {
+                        return text.charAt(0).toUpperCase() + text.slice(1);
+                    }
 
-                    document.getElementById("summary-status").textContent = member.status;
+                    document.getElementById("summary-member-type").textContent = capitalize(member.member_type);
+                    document.getElementById("summary-status").textContent = capitalize(member.status);
 
                     memberResults.innerHTML = "";
                     memberResults.style.display = "none";

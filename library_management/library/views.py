@@ -5,6 +5,9 @@ from django.db.models import Count
 from django.utils import timezone
 from transactions.models import Transaction
 
+FINE_PER_DAY = 10
+
+
 def login_page(request):
     return render(request, 'auth/login.html')
 
@@ -17,6 +20,16 @@ def dashboard(request):
     total_member = Member.objects.count()
     recent_transactions = Transaction.objects.order_by("-created_at")[:4]
     total_issued = Transaction.objects.filter(status="issued").count()
+    
+    
+    today = timezone.localdate()
+
+    pending_fines = 0
+
+    for transaction in Transaction.objects.filter(status="issued"):
+        if today > transaction.due_date:
+            pending_fines += (today - transaction.due_date).days * FINE_PER_DAY
+    
     
 
     category_data = (
@@ -42,6 +55,7 @@ def dashboard(request):
         "today": today,
         "recent_transactions": recent_transactions,
         "total_issued": total_issued,
+        "pending_fines": pending_fines,
     }
 
     return render(request, "dashboard/dashboard.html", context)
@@ -63,8 +77,14 @@ def global_search(request):
     elif q in ["member", "members", "member list"]:
         return redirect("/members/")
     
-    elif q in ["return", "return history", "issue", "issue history", "transactions", "transaction"]:
+    elif q in ["add member", "add members"]:
+        return redirect("member_add")
+    
+    elif q in ["transactions", "transaction", "transaction list", "transaction list"]:
         return redirect("/transactions/")
+    
+    elif q in ["issue book", "issues book", "issue books", "issues books"]:
+        return redirect("issue_book")
     
     else:
         return redirect("dashboard")

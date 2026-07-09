@@ -1,0 +1,144 @@
+.back_button{
+    font-size: 15px;
+}
+
+.left_side{
+    font-size: 30px;
+}
+
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.breadcrumb-item a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.fist_card_body{
+    background-color: #ebf2ff;
+    border: 1px solid #b6caf1;
+    border-radius: 5px;
+}
+
+.issue_id_main{
+    border-right: 1px solid #d4d1d1;
+}
+
+.issue_icon{
+    border-radius: 50%;
+    background-color: #d0e1f9;
+    padding: 10px;
+    font-size: 30px;
+    color: #0d6efd;
+}
+
+.issue_id_details{
+    margin: 0px 0px 0px 30px;
+
+}
+
+.issue_real_id{
+    margin: 4px 0px 0px 30px;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+.issue_status_id{
+    margin: 4px 0px 0px 30px;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+
+.status-badge{
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.issued-badge{
+    background-color: #DCFCE7;
+    color: #15803D;
+    border: 1px solid #a5f7b2;
+    border-radius: 5px;
+}
+
+.overdue-badge{
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #f5cfcf;
+    border-radius: 5px;
+}
+
+.issue_date_id{
+    margin: 4px 0px 0px 30px;
+    font-weight: bold;
+}
+
+.icons{
+    -webkit-text-stroke: 1px;
+}
+
+.card_body_secound{
+    padding: 8px;
+    height: 300px;
+}
+
+.card_body_third{
+    padding: 8px;
+    height: 300px;
+}
+
+.book_information_table{
+    font-size: 13px;
+}
+
+.result_details_info{
+    font-size: 14px;
+}
+
+.issue_due_date_details{
+    border: 1px solid rgb(220, 220, 219);
+    border-radius: 5px;
+    background-color: #fbf9f9;
+}
+
+.return_date_details{
+    border: 1px solid rgb(204, 251, 194);
+    border-radius: 5px;
+    background-color: #e5fee3;
+}
+
+.late_day_fine_details_geter{
+    border: 1px solid rgb(203, 248, 191);
+    border-radius: 5px;
+    background-color: #e6fee3;
+}
+
+
+.late_day_fine_details{
+    border: 1px solid rgb(248, 191, 191);
+    border-radius: 5px;
+    background-color: #fee3e6;
+}
+
+.note_massage{
+    font-size: 15px;
+}

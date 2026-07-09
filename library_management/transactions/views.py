@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Transaction, STATUS_CHOICES
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -9,8 +9,10 @@ from django.http import JsonResponse
 from django.contrib import messages
 from datetime import date, timedelta
 
+FINE_PER_DAY = 10
 
 def transaction_list(request):
+    
     transactions = Transaction.objects.all()
     all_members = Member.objects.all()
     all_books = Book.objects.all()
@@ -43,6 +45,18 @@ def transaction_list(request):
         
     if book:
         transactions = transactions.filter(book_id=book)
+        
+    
+    today = timezone.localdate()
+
+    for transaction in transactions:
+        if transaction.status == "issued":
+            if today > transaction.due_date:
+                transaction.current_fine = (today - transaction.due_date).days * FINE_PER_DAY
+            else:
+                transaction.current_fine = 0
+        else:
+            transaction.current_fine = transaction.fine
 
     
         
@@ -154,6 +168,75 @@ def issue_book(request):
 
     return render(request, "transactions/issue_book.html", context)
 
+
+def return_book(request, issue_id):
+    transaction = get_object_or_404(
+        Transaction,
+        issue_id=issue_id
+    )
+    
+    if request.method == "POST":
+        if transaction.status == "returned":
+            return redirect("transaction_list")
+        
+        transaction.return_date = timezone.localdate()
+        
+        transaction.status = "returned"
+        
+        return_date = timezone.localdate()
+        
+        if return_date > transaction.due_date:
+            late_days = (return_date - transaction.due_date).days
+        else:
+            late_days = 0
+            
+        if late_days > 0:
+            fine =late_days * FINE_PER_DAY
+        else:
+            fine = 0
+        
+        transaction.fine = fine
+        
+        transaction.book.available_copies += 1
+        
+        transaction.book.save()
+        transaction.save()
+        
+        
+        
+        return redirect("transaction_list")
+        
+        
+            
+            
+    
+    if transaction.due_date < timezone.localdate():
+        status = "Overdue"
+    else:
+        status = "Issued"
+        
+    return_date = timezone.localdate()
+    
+    if return_date > transaction.due_date:
+        late_days = (return_date - transaction.due_date).days
+    else:
+        late_days = 0
+        
+    if late_days > 0:
+        fine =late_days * FINE_PER_DAY
+    else:
+        fine = 0
+    
+    context= {
+        "transaction": transaction,
+        "status": status,
+        "return_date": return_date,
+        "late_days": late_days,
+        "fine": fine,
+        "FINE_PER_DAY": FINE_PER_DAY,
+    }
+    
+    return render(request, "transactions/return_book.html", context)
 
 
 def search_member(request):

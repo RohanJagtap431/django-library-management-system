@@ -6,4 +6,5 @@ urlpatterns = [
     path('issue-book/', views.issue_book, name="issue_book"),
     path("search-member/", views.search_member, name="search_member"),
     path("search-book/", views.search_book, name="search_book"),
+    path("return-book/<str:issue_id>/", views.return_book, name="return_book"),
 ]

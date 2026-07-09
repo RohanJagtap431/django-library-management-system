@@ -1,0 +1,382 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Return Book
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/return_book.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center mt-2">
+                <h2 class="mb-0 fw-bold left_side">Return Book</h2>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'transaction_list' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Issue List</a>
+
+            </div>
+
+        
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'transaction_list' %}">Issue</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Return Book
+                </li>
+            </ol>
+        </nav>
+
+
+        <div class="card mt-2">
+            <div class="card-body p-3 fist_card_body">
+                <div class="row">
+                    <div class="col-lg-5 issue_id_main">
+
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <i class="bi bi-file-earmark-text issue_icon"></i>
+                            </div>
+                            
+                            <div class="col-lg-11">
+                                <div class="issue_id_details">
+                                    <span>Issue ID</span>
+                                    
+                                </div>
+
+                                <div class="issue_real_id">
+                                    <span>{{ transaction.issue_id }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-lg-3 issue_id_main">
+                        <div class="issue_id_details">
+                            <span>Status</span>
+                            
+                        </div>
+
+                        <div class="issue_status_id">
+                            {% if status == "Issued" %}
+                                <span class="status-badge issued-badge">Issued</span>
+                            {% else %}
+                                <span class="status-badge overdue-badge">Overdue</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        
+                        <div class="col-lg-11">
+                            <div class="issue_id_details">
+                                <span>Issue On</span>
+                                
+                            </div>
+
+                            <div class="issue_date_id">
+                                <span>{{ transaction.issue_date }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mt-2">
+                    <div class="card-body card_body_secound">
+
+                        <div class="member_information">
+                            <i class="bi bi-person icons text-primary"></i>
+                            <span class="text-primary fw-bold">Member Information</span>
+
+
+                            <table class="table mt-2">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-people-fill"></i>
+                                            Member ID
+                                        </th>
+                                        <td>{{ transaction.member.member_id }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-person-fill"></i>
+                                            Member Name
+                                        </th>
+                                        <td>{{ transaction.member.full_name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-telephone-fill"></i>
+                                            Phone
+                                        </th>
+                                        <td>{{ transaction.member.phone }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-envelope-fill"></i>
+                                            Email
+                                        </th>
+                                        <td>{{ transaction.member.email }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            {% if transaction.member.member_type == "teacher" %}
+                                                <i class="bi bi-person-video3"></i>
+                                            {% elif transaction.member.member_type == "staff" %}
+                                                <i class="bi bi-person-workspace"></i>
+                                            {% elif transaction.member.member_type == "student" %}
+                                                <i class="bi bi-mortarboard-fill"></i>
+                                            {% endif %}
+                                            Member Type
+                                        </th>
+                                        <td>
+                                            {% if transaction.member.member_type == "teacher" %}
+                                                <span>Teacher</span>
+                                            {% elif transaction.member.member_type == "staff" %}
+                                                <span>Staff</span>
+                                            {% elif transaction.member.member_type == "student" %}
+                                                <span>Student</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            {% if transaction.member.status == "active" %}
+                                                <i class="bi bi-patch-check-fill text-success"></i>
+                                            {% else %}
+                                                <i class="bi bi-slash-circle-fill text-danger"></i>
+                                            {% endif %}
+                                            Status
+                                        </th>
+                                        <td>
+                                            {% if transaction.member.status == "active" %}
+
+                                                <span class="badge bg-success">
+                                                    {{ transaction.member.get_status_display }}
+                                                </span>
+
+                                            {% else %}
+                                            
+                                                <span class="badge bg-danger">
+                                                    {{ transaction.member.get_status_display }}
+                                                </span>
+
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card mt-2">
+                    <div class="card-body card_body_third">
+                        <div class="member_information">
+                            <i class="bi bi-book icons text-primary"></i>
+                            <span class="text-primary fw-bold">Book Information</span>
+
+                            <table class="table mt-2">
+
+                                <tbody class="book_information_table">
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-bookmark"></i>
+                                            ISBN
+                                        </th>
+                                        <td>{{ transaction.book.isbn }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-people-fill"></i>
+                                            Book Title
+                                        </th>
+                                        <td>{{ transaction.book.title }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-folder"></i>
+                                            Category
+                                        </th>
+                                        <td>{{ transaction.book.category }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-pencil-fill"></i>
+                                            Author
+                                        </th>
+                                        <td>{{ transaction.book.author }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-building"></i>
+                                            Publisher
+                                        </th>
+                                        <td>{{ transaction.book.publisher }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-stack"></i>
+                                            Total Copies
+                                        </th>
+                                        <td>{{ transaction.book.total_copies }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <i class="bi bi-check-square"></i>
+                                            Available Copies
+                                        </th>
+                                        <td>{{ transaction.book.available_copies }}</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body card_body_fourth p-2">
+
+                <div class="return_information">
+                    <i class="bi bi-book icons text-primary"></i>
+                    <span class="text-primary fw-bold">Return Details</span>
+                </div>
+
+                <div class="row result_details_info mb-3">
+
+                    <div class="col">
+                        <span class="fw-bold">Issue Date</span>
+                        <div class="issue_due_date_details p-2">
+
+                            <i class="bi bi-calendar-week"></i>
+                            <span>{{ transaction.issue_date }}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <span class="fw-bold">Due Date</span>
+                        <div class="issue_due_date_details p-2">
+
+                            <i class="bi bi-calendar-week"></i>
+                            <span>{{ transaction.due_date }}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <span class="fw-bold">Return Date(Today)</span>
+                        <div class="return_date_details p-2">
+
+                            <i class="bi bi-calendar-week"></i>
+                            <span>{{ return_date }}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        {% if fine > 0 %}
+                            <span class="fw-bold">Late Days</span>
+                            <div class="late_day_fine_details p-2">
+                                <span class="text-danger">{{ late_days }} Day</span>
+
+                            </div>
+                        {% else %}
+                            <span class="fw-bold">Late Days</span>
+                            <div class="late_day_fine_details_geter p-2">
+                                <span>{{ late_days }} Day</span>
+
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col">
+                        {% if fine > 0 %}
+                            <span class="fw-bold">Fine (₹)</span>
+                            <div class="late_day_fine_details p-2">
+                                <span class="text-danger">₹{{ fine }}</span>
+
+                            </div>
+                        {% else %}
+                            <span class="fw-bold">Fine (₹)</span>
+                            <div class="late_day_fine_details_geter p-2">
+                                <span>₹{{ fine }}</span>
+
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                {% if fine > 0 %}
+                    <div class="text-danger note_massage">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <span>Fine is calculated as ₹{{ FINE_PER_DAY }} per day after the due date.</span> 
+                    </div>
+                {% endif %}
+
+
+                <form method="POST">
+                    {% csrf_token %}
+                        <div class="d-flex justify-content-end gap-3 mt-1 mb-0 d-flex ">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-arrow-90deg-left"></i>
+                                Return Book
+                            </button>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    
+{% endblock %}

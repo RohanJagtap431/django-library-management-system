@@ -111,7 +111,7 @@
 
 
             <div class="col-lg-3">
-              <a href="#" class="card-link">
+              <a href="{% url 'transaction_list' %}?status=overdue" class="card-link">
                 <div class="card dashboard-card shadow-sm w-100">
                   <div class="card-body p-3">
                     <div class="info-box d-flex align-items-start">
@@ -122,7 +122,7 @@
 
                       <div class="text-box d-flex flex-column ms-4 mt-1">
                         <h6>Pending Fines</h6>
-                        <h2 class="fw-bold mb-0">₹4350</h2>
+                        <h2 class="fw-bold mb-0">₹{{ pending_fines }}</h2>
 
                         <div class="link-box link-red d-flex align-items-center mt-3">
                           <span>View all fines</span>

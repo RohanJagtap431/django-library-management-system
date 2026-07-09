@@ -5,6 +5,8 @@ from .models import Member, MEMBER_TYPE_CHOICES, GENDER_CHOICES, STATUS_CHOICES,
 from django.db.models import Q
 from datetime import datetime, date
 from django.contrib import messages
+from transactions.models import Transaction
+from django.utils import timezone
 
 
 def members_list(request):
@@ -38,6 +40,25 @@ def members_list(request):
 
 def member_detail(request, member_id):
     member = get_object_or_404(Member, id=member_id)
+    total_issued = Transaction.objects.filter(
+        member_id=member_id
+        ).count()
+    
+    total_books_returned = Transaction.objects.filter(
+        member_id=member_id,
+        status="returned"
+    ).count()
+    
+    
+
+    today = timezone.localdate()
+
+    overdue_count = Transaction.objects.filter(
+        member_id=member_id,
+        status="issued",
+        due_date__lt=today
+    ).count()
+    
     today = date.today()
 
     age = (
@@ -51,6 +72,9 @@ def member_detail(request, member_id):
     return render(request, 'members/member_details.html', {
         "member": member,
         "age": age,
+        "total_issued": total_issued,
+        "total_books_returned": total_books_returned,
+        "overdue_count": overdue_count,
     })
     
 

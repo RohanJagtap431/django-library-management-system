@@ -102,6 +102,7 @@
 }
 
 .status-badge{
+    display: inline-block;
     padding: 5px 8px;
     border-radius: 6px;
     font-size: 11px;
@@ -111,16 +112,22 @@
 .issued-badge{
     background-color: #DCFCE7;
     color: #15803D;
+    border: 1px solid #a5f7b2;
+    border-radius: 5px;
 }
 
 .returned-badge{
     background-color: #DBEAFE;
     color: #1D4ED8;
+    border: 1px solid #a5c0f7;
+    border-radius: 5px;
 }
 
 .overdue-badge{
     background-color: #FEE2E2;
     color: #DC2626;
+    border: 1px solid #f5cfcf;
+    border-radius: 5px;
 }
 
 
