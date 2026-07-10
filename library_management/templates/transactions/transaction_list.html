@@ -190,7 +190,7 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></a>
+                                    <a href="{% url 'transaction_details' transactions.issue_id %}" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></a>
 
                                     {% if transactions.status == "issued" %}
                                         <a href="{% url 'return_book' transactions.issue_id %}" class="btn btn-outline-success btn-sm"><i class="bi bi-arrow-return-left"></i></a>

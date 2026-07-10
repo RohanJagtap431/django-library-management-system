@@ -27,17 +27,24 @@ def transaction_list(request):
             Q(issue_id__icontains=search) | Q(book__title__icontains=search) | Q(book__isbn__icontains=search) | Q(member__full_name__icontains=search) | Q(member__member_id__icontains=search)
         )
         
+    today = timezone.localdate()
+
     if status:
         if status == "issued":
-            transactions = transactions.filter(status="issued")
+            transactions = transactions.filter(
+                status="issued",
+                due_date__gte=today
+            )
 
         elif status == "returned":
-            transactions = transactions.filter(status="returned")
+            transactions = transactions.filter(
+                status="returned"
+            )
 
         elif status == "overdue":
             transactions = transactions.filter(
                 status="issued",
-                due_date__lt = timezone.localdate(),
+                due_date__lt=today
             )
             
     if member:
@@ -290,3 +297,61 @@ def search_book(request):
     return JsonResponse({
         "books": book_data
     })
+    
+def transaction_details(request, issue_id):
+    transaction = get_object_or_404(Transaction, issue_id=issue_id)
+    
+    
+    if transaction.status == "issued":
+        if transaction.due_date < timezone.localdate():
+            status = "Overdue"
+        else:
+            status = "Issued"
+
+    elif transaction.status == "returned":
+        status = "Returned"
+        
+    else:
+        status = "Unknown"
+        
+    return_date = timezone.localdate()
+    
+    if transaction.status == "issued":
+        if timezone.localdate() > transaction.due_date:
+            late_days = (return_date - transaction.due_date).days
+        else:
+            late_days = 0
+    
+    elif transaction.status == "returned":
+        if transaction.return_date > transaction.due_date:
+            late_days = (transaction.return_date - transaction.due_date).days
+        else:
+            late_days = 0
+            
+        
+
+    if transaction.status == "issued":
+        if late_days > 0:
+            fine =late_days * FINE_PER_DAY
+        else:
+            fine = 0
+            
+    elif transaction.status == "returned":
+        fine = transaction.fine
+        
+    
+    
+    
+        
+    context = {
+        "transaction":transaction,
+        "status": status,
+        "return_date": return_date,
+        "late_days": late_days,
+        "fine": fine,
+        
+    }
+        
+        
+    
+    return render(request, "transactions/transaction_details.html", context)

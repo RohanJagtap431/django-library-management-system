@@ -9,6 +9,8 @@ from transactions.models import Transaction
 from django.utils import timezone
 
 
+FINE_PER_DAY = 10
+
 def members_list(request):
     members = Member.objects.all()
     search = request.GET.get("search", "")
@@ -69,12 +71,35 @@ def member_detail(request, member_id):
             < (member.date_of_birth.month, member.date_of_birth.day)
         )
     )
+    
+    
+    today = timezone.localdate()
+
+    pending_fine = 0
+    collected_fine = 0
+
+    transactions = Transaction.objects.filter(member=member)
+
+    for transaction in transactions:
+        if transaction.status == "issued":
+            if today > transaction.due_date:
+                pending_fine += (today - transaction.due_date).days * FINE_PER_DAY
+        else:
+            collected_fine += transaction.fine
+
+    total_fine = pending_fine + collected_fine
+            
+    
+    
+    
     return render(request, 'members/member_details.html', {
         "member": member,
         "age": age,
         "total_issued": total_issued,
         "total_books_returned": total_books_returned,
         "overdue_count": overdue_count,
+        "pending_fines": pending_fine,
+        "total_fine": total_fine,
     })
     
 

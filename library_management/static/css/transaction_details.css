@@ -1,0 +1,138 @@
+.back_button{
+    font-size: 12px;
+}
+
+.left_side{
+    font-size: 30px;
+}
+
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.breadcrumb-item a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.fist_card_body{
+    height: 70px;
+}
+
+.right_border{
+    border-right: 1px solid #d6d4d4;
+}
+
+.main_icon{
+    font-size: 30px;
+    padding: 10px;
+    background-color: #02347f;
+    color: white;
+    border-radius: 50%;
+}
+
+.sizing_title{
+    font-size: 14px;
+}
+
+.sizing_value{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.status-badge{
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.issued-badge{
+    background-color: #DCFCE7;
+    color: #15803D;
+    border: 1px solid #a5f7b2;
+    border-radius: 5px;
+}
+
+.returned-badge{
+    background-color: #DBEAFE;
+    color: #1D4ED8;
+    border: 1px solid #a5c0f7;
+    border-radius: 5px;
+}
+
+.overdue-badge{
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #f5cfcf;
+    border-radius: 5px;
+}
+
+.mem_info_head{
+    background-color: #d8e5f9;
+    padding: 8px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #0d6efd;
+}
+
+.info-cards{
+    height: 255px;
+    border-radius: 5px;
+}
+
+.icons{
+    -webkit-text-stroke: 0.5px;
+}
+
+.table_body_fist{
+    font-size: 12px;
+}
+
+.body_row{
+    height: 12px;
+}
+
+.member-table td,
+.member-table th{
+    padding: 8px 10px;
+    vertical-align: middle;
+}
+
+.book-table td,
+.book-table th{
+    padding: 6px 10px;
+    vertical-align: middle;
+}
+
+
+.issue-table td,
+.issue-table th{
+    padding: 10px 10px;
+    vertical-align: middle;
+}
+
+.book-image{
+    width: 163px;
+    height: 215px;
+    object-fit: cover;
+    border: 1px solid rgb(208, 203, 203);
+    border-radius: 8px;
+}
