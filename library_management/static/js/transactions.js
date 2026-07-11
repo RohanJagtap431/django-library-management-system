@@ -1,6 +1,8 @@
 const memberSearch = document.getElementById("member-search");
 const memberResults = document.getElementById("member-results");
 
+let selectedLoanPeriod = 0;
+
 const bookSearch = document.getElementById("book-search");
 const bookResults = document.getElementById("book-results");
 
@@ -53,6 +55,49 @@ memberSearch.addEventListener("keyup", function () {
 
                     document.getElementById("summary-member-type").textContent = capitalize(member.member_type);
                     document.getElementById("summary-status").textContent = capitalize(member.status);
+
+
+                    document.getElementById("max-books-message").textContent = `Maximum ${member.max_books} books can be issued per member.`;
+
+
+                    document.getElementById("loan-period").textContent = `${member.loan_period} Days`;
+
+                    document.getElementById("left-loan-period").textContent = `${member.loan_period} Days`;
+
+
+                    selectedLoanPeriod = member.loan_period;
+
+
+                    const today = new Date();
+
+                    const issueDate = today.toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    });
+
+                    document.getElementById("issue-date").textContent = issueDate;
+                    document.getElementById("left-issue-date").textContent = issueDate;
+
+
+                    const loanPeriod = selectedLoanPeriod;
+
+                    document.getElementById("loan-period").textContent = `${loanPeriod} Days`;
+                    document.getElementById("left-loan-period").textContent = `${loanPeriod} Days`;
+
+                    const dueDate = new Date(today);
+
+                    dueDate.setDate(today.getDate() + loanPeriod);
+
+                    const dueDateText = dueDate.toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    });
+
+                    document.getElementById("due-date").textContent = dueDateText;
+                    document.getElementById("left-due-date").textContent = dueDateText;
+
 
                     memberResults.innerHTML = "";
                     memberResults.style.display = "none";
@@ -118,35 +163,7 @@ bookSearch.addEventListener("keyup", function () {
                     bookResults.style.display = "none";
 
 
-                    const today = new Date();
-
-                    const issueDate = today.toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric"
-                    });
-
-                    document.getElementById("issue-date").textContent = issueDate;
-                    document.getElementById("left-issue-date").textContent = issueDate;
-
-
-                    const loanPeriod = 3;
-
-                    document.getElementById("loan-period").textContent = `${loanPeriod} Days`;
-                    document.getElementById("left-loan-period").textContent = `${loanPeriod} Days`;
-
-                    const dueDate = new Date(today);
-
-                    dueDate.setDate(today.getDate() + loanPeriod);
-
-                    const dueDateText = dueDate.toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric"
-                    });
-
-                    document.getElementById("due-date").textContent = dueDateText;
-                    document.getElementById("left-due-date").textContent = dueDateText;
+                    
 
 
                 });

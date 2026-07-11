@@ -4,8 +4,8 @@ from members.models import Member
 from django.db.models import Count
 from django.utils import timezone
 from transactions.models import Transaction
+from settings_app.models import IssueSettings
 
-FINE_PER_DAY = 10
 
 
 def login_page(request):
@@ -22,13 +22,20 @@ def dashboard(request):
     total_issued = Transaction.objects.filter(status="issued").count()
     
     
+    
+    
     today = timezone.localdate()
 
     pending_fines = 0
 
     for transaction in Transaction.objects.filter(status="issued"):
+        
+        issue_settings = IssueSettings.objects.get(
+            member_type=transaction.member.member_type
+        )
+        
         if today > transaction.due_date:
-            pending_fines += (today - transaction.due_date).days * FINE_PER_DAY
+            pending_fines += (today - transaction.due_date).days * issue_settings.fine_per_day
     
     
 

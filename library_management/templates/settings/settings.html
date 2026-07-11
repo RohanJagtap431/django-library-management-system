@@ -1,0 +1,249 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    LMS Settings
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+    
+{% block dashboard_content %}
+    <div class="container-fluid px-3 py-1">
+
+        <div class="d-flex align-items-center">
+            <i class="bi bi-gear-fill setting_icon"></i>
+            <div class="d-flex align-items-center">
+                <h2 class="mb-0 fw-bold settings_text">Settings</h2>
+            </div>
+        </div>
+
+        <div class="note mb-2">
+            <span>Manage all system settings and preferences</span>
+        </div>
+
+
+        <div class="settings-tabs">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="issue-tab" data-bs-toggle="tab" data-bs-target="#issue" type="button" role="tab" aria-controls="issue" aria-selected="true">
+                        <i class="bi bi-bookmark-check-fill text-primary"></i>
+                        <span>Issue Settings</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab" aria-controls="book" aria-selected="false">
+                        <i class="bi bi-book-half text-warning"></i>
+                        <span>Book Settings</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button" role="tab" aria-controls="email" aria-selected="false">
+                        <i class="bi bi-envelope-fill text-success"></i>
+                        <span>Email Settings</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification" type="button" role="tab" aria-controls="notification" aria-selected="false">
+                        <i class="bi bi-bell-fill text-danger"></i>
+                        <span>Notification Settings</span>
+                    </button>
+                </li>
+            </ul>
+            
+        </div>
+
+        
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="card shadow-sm border-0 rounded-3 mt-2">
+                <div class="card-body card-hight">
+
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="issue" role="tabpanel" aria-labelledby="issue-tab">
+                            
+                            <div class="fw-bold fs-5">Issue Settings</div>
+                            <div class="fs-6">Configure loan policies for different member types.</div>
+
+                            <div class="card shadow-sm mt-2">
+                                <div class="card-body card_fist">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="fw-bold">Member Type</span>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="fw-bold">Maximum Books</div>
+                                            <span class="fw-bold">(At a time)</span>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="fw-bold">Loan Period</div>
+                                            <span class="fw-bold">(Days)</span>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="fw-bold">Fine Per Day</div>
+                                            <span class="fw-bold">(₹)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            <div class="card shadow-sm">
+                                <div class="card-body card_values">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex">
+                                                <i class="bi bi-mortarboard-fill student_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Student</div>
+                                                    <div class="sub_text">Regular students of</div>
+                                                    <div class="sub_text">the institute</div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="student_max_books" class="mt-2" min="1" value="{{ student_settings.max_books }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="student_loan_period" class="mt-2" min="1" value="{{ student_settings.loan_period }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="student_fine_per_day" class="mt-2" min="1" value="{{ student_settings.fine_per_day }}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="card shadow-sm">
+                                <div class="card-body card_values">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-person-workspace teacher_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Teacher</div>
+                                                    <div class="sub_text">Teaching faculty</div>
+                                                    <div class="sub_text">members</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="teacher_max_books" class="mt-2" min="1" value="{{ teacher_settings.max_books }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="teacher_loan_period" class="mt-2" min="1" value="{{ teacher_settings.loan_period }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="teacher_fine_per_day" class="mt-2" min="1" value="{{ teacher_settings.fine_per_day }}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="card shadow-sm">
+                                <div class="card-body card_values">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-people-fill staff_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Staff</div>
+                                                    <div class="sub_text">Administrative and</div>
+                                                    <div class="sub_text">other staff</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="staff_max_books" class="mt-2" min="1" value="{{ staff_settings.max_books }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="staff_loan_period" class="mt-2" min="1" value="{{ staff_settings.loan_period }}">
+                                        </div>
+
+                                        <div class="col">
+                                            <input type="number" name="staff_fine_per_day" class="mt-2" min="1" value="{{ staff_settings.fine_per_day }}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="card shadow-sm mt-3">
+                                <div class="card-body last_card p-0">
+
+                                    <div class="title_text">
+                                        <i class="bi bi-exclamation-circle m-2 text-primary"></i>
+                                        <span class="fw-bold">How it works ?</span>
+                                    </div>
+
+                                    <div class="sub_title_text">
+                                        <div>• System will apply the above policy based on member type during book issue.</div>
+                                        <div>• Fine will be calculated as: Fine Per Day ✕ Number of Overdue Days.</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="book-tab">Vaishnn</div>
+                        <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">Viraj</div>
+                        <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">Sumit</div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end gap-3 mt-3 mb-2 d-flex ">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
+                    <i class="bi bi-arrow-repeat"></i>
+                    Reset to Default
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-post-fill"></i>
+                    Save Changes
+                </button>
+            </div>
+        </form>
+        
+
+
+    </div>
+{% endblock %}

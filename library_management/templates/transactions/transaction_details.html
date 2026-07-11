@@ -105,7 +105,13 @@
 
                         <div class="sizing_value">
                             <i class="bi bi-calendar-week"></i>
-                            <span>{{ return_date }}</span>
+                            <span>
+                                {% if transaction.return_date %}
+                                    {{ transaction.return_date }}
+                                {% else %}
+                                    <span>Not Returned</span>
+                                {% endif %}
+                            </span>
 
                         </div>
                     </div>
@@ -119,7 +125,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body info-cards p-0">
-                        <div class="mem_info_head">
+                        <div class="mem_info_head rounded-top">
                             <i class="bi bi-person icons"></i>
                             <span>Member Information</span>
                         </div>
@@ -214,7 +220,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body info-cards p-0">
-                        <div class="mem_info_head">
+                        <div class="mem_info_head rounded-top">
                             <i class="bi bi-book icons"></i>
                             <span>Book Information</span>
                         </div>
@@ -295,7 +301,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body info-cards p-0">
-                        <div class="mem_info_head">
+                        <div class="mem_info_head rounded-top">
                             <i class="bi bi-clipboard2-check icons"></i>
                             <span>Transaction Details</span>
                         </div>
@@ -371,7 +377,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body info-cards p-0">
-                        <div class="mem_info_head">
+                        <div class="mem_info_head rounded-top">
                             <i class="bi bi-bookmark-star icons"></i>
                             <span>Book Cover</span>
                         </div>

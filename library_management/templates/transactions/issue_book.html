@@ -85,7 +85,7 @@
                                     {% else %}
                                     <div class="alert alert-info py-2 mt-2">
                                         <i class="bi bi-info-circle-fill"></i>
-                                        Maximum <strong>3 books</strong> can be issued per member.
+                                        <span  id="max-books-message">Maximum 3 books can be issued per member.</span>
                                     </div>
                                     {% endif %}
                                 </div>
@@ -399,7 +399,7 @@
 
                             <div class="rules d-flex">
                                 <i class="bi bi-check-circle-fill text-success me-1"></i>
-                                <span>Maximum 3 books can be issued per member.</span>
+                                <span id="max-books-message">Maximum 3 books can be issued per member.</span>
                             </div>
 
                             <div class="rules d-flex">

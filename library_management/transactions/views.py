@@ -8,8 +8,9 @@ from books.models import Book
 from django.http import JsonResponse
 from django.contrib import messages
 from datetime import date, timedelta
+from settings_app.models import IssueSettings
 
-FINE_PER_DAY = 10
+
 
 def transaction_list(request):
     
@@ -57,9 +58,15 @@ def transaction_list(request):
     today = timezone.localdate()
 
     for transaction in transactions:
+        
+        issue_settings = IssueSettings.objects.get(
+            member_type=transaction.member.member_type
+        )
+        
+        
         if transaction.status == "issued":
             if today > transaction.due_date:
-                transaction.current_fine = (today - transaction.due_date).days * FINE_PER_DAY
+                transaction.current_fine = (today - transaction.due_date).days * issue_settings.fine_per_day
             else:
                 transaction.current_fine = 0
         else:
@@ -113,6 +120,10 @@ def issue_book(request):
         member = Member.objects.get(id=member_id)
         book = Book.objects.get(id=book_id)
         
+        issue_settings = IssueSettings.objects.get(
+            member_type=member.member_type
+        )
+        
         issued_books = Transaction.objects.filter(
             member=member,
             status="issued"
@@ -132,8 +143,11 @@ def issue_book(request):
         if book.available_copies <= 0:
             book_error = "Selected book is currently unavailable."
             
-        if issued_books >= 3:
-            member_error = "This member has reached the maximum issue limit (3 books)."
+        if issued_books >= issue_settings.max_books:
+            member_error = (
+                f"This member has reached the maximum issue limit "
+                f"({issue_settings.max_books} books)."
+            )
             
         if same_book:
             book_error ="This book is already issued to this member."
@@ -149,7 +163,7 @@ def issue_book(request):
             return render(request, "transactions/issue_book.html", context)
         
         
-        loan_period = 7
+        loan_period = issue_settings.loan_period
 
         due_date = date.today() + timedelta(days=loan_period)
 
@@ -182,6 +196,13 @@ def return_book(request, issue_id):
         issue_id=issue_id
     )
     
+    
+    issue_settings = IssueSettings.objects.get(
+        member_type=transaction.member.member_type
+    )
+    
+    
+    
     if request.method == "POST":
         if transaction.status == "returned":
             return redirect("transaction_list")
@@ -198,7 +219,7 @@ def return_book(request, issue_id):
             late_days = 0
             
         if late_days > 0:
-            fine =late_days * FINE_PER_DAY
+            fine =late_days * issue_settings.fine_per_day
         else:
             fine = 0
         
@@ -230,7 +251,7 @@ def return_book(request, issue_id):
         late_days = 0
         
     if late_days > 0:
-        fine =late_days * FINE_PER_DAY
+        fine =late_days * issue_settings.fine_per_day
     else:
         fine = 0
     
@@ -240,7 +261,7 @@ def return_book(request, issue_id):
         "return_date": return_date,
         "late_days": late_days,
         "fine": fine,
-        "FINE_PER_DAY": FINE_PER_DAY,
+        "FINE_PER_DAY": issue_settings.fine_per_day,
     }
     
     return render(request, "transactions/return_book.html", context)
@@ -259,6 +280,11 @@ def search_member(request):
     member_data = []
 
     for member in members:
+        
+        issue_settings = IssueSettings.objects.get(
+            member_type=member.member_type
+        )
+        
         member_data.append({
             "member_id": member.member_id,
             "full_name": member.full_name,
@@ -266,6 +292,9 @@ def search_member(request):
             "member_type": member.member_type,
             "status": member.status,
             "id": member.id,
+            "max_books": issue_settings.max_books,
+            "loan_period": issue_settings.loan_period,
+            "fine_per_day": issue_settings.fine_per_day,
         })
         
     return JsonResponse({
@@ -301,6 +330,10 @@ def search_book(request):
 def transaction_details(request, issue_id):
     transaction = get_object_or_404(Transaction, issue_id=issue_id)
     
+    issue_settings = IssueSettings.objects.get(
+        member_type=transaction.member.member_type
+    )
+    
     
     if transaction.status == "issued":
         if transaction.due_date < timezone.localdate():
@@ -332,7 +365,7 @@ def transaction_details(request, issue_id):
 
     if transaction.status == "issued":
         if late_days > 0:
-            fine =late_days * FINE_PER_DAY
+            fine =late_days * issue_settings.fine_per_day
         else:
             fine = 0
             

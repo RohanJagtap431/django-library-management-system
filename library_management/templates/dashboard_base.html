@@ -72,17 +72,6 @@
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
         <div class="left">
-          <i class="bi bi-currency-rupee ps-3"></i>
-        <span class="ps-1">Fines</span>
-        </div>
-        <div class="right">
-          <i class="bi bi-arrow-right-short"></i>
-        </div>
-      </div>
-
-
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
-        <div class="left">
           <i class="bi bi-bar-chart-line ps-3"></i>
         <span class="ps-1">Reports</span>
         </div>
@@ -92,15 +81,50 @@
       </div>
 
 
-      <small class="manage mt-2 mb-2">ACCOUNT</small>
+      <small class="manage mt-2 mb-2">SYSTEM</small>
 
 
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-3 mb-2">
-        <div class="left">
-          <i class="bi bi-person ps-3"></i>
-        <span class="ps-1">Profile</span>
+      <a href="{% url 'settings_page' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/settings/' in request.path %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-gear-fill ps-3"></i>
+          <span class="ps-1">Settings</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
         </div>
-      </div>
+      </a>
+
+
+      <a href="#" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+          <div class="left">
+            <i class="bi bi-envelope-fill ps-3"></i>
+          <span class="ps-1">Email Management </span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="#" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+          <div class="left">
+            <i class="bi bi-bell-fill ps-3"></i>
+          <span class="ps-1">Notifications</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
+        </div>
+      </a>
+
+
+
+      <small class="manage mt-2 mb-2">ACCOUNT</small>
 
 
       <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">

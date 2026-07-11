@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'books',
     'members',
     'transactions',
+    'settings_app',
 ]
 
 MIDDLEWARE = [
