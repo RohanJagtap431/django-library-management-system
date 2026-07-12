@@ -220,9 +220,451 @@
                         </div>
 
 
-                        <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="book-tab">Vaishnn</div>
-                        <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">Viraj</div>
-                        <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">Sumit</div>
+                        <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="book-tab">
+                            
+                            <div class="fw-bold book_se_text">Book Settings</div>
+
+                            <div class="">Configure preferences related to books in the library.</div>
+
+                            <div class="card shadow-sm border-0 rounded-3 main_card_margin">
+                                <div class="card-body hight_book_fist_card">
+
+
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <div class="fw-bold low_book">Low Stock Alert Limit</div>
+                                            <div>Show alert when available copies are equal to or less than this limit.</div>
+                                        </div>
+
+                                        <div >
+                                            <input type="number" name="" id="" min="0" class="low_stock_input">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="card shadow-sm border-1 rounded-3 main_card_margin_sec">
+                                <div class="card-body hight_book_secound_card">
+
+                                    <div class="d-flex align-items-center stock_error">
+                                        <i class="bi bi-exclamation-circle-fill"></i>
+                                        <div class="m-1">An alert notification will be sent when available copies are equal to or less than the set limit.</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tab-pane fade" id="email" role="tabpanel" aria-labelledby="email-tab">
+
+                            <div>
+                                <div class="fw-bold email_settings_heding">Email Settings</div>
+                                <span class="email_setting_sub_heading">Configure email notification and alerts.</span>
+                            </div>
+
+                            <div class="mt-1 top_not_massege shadow-sm">
+                                <i class="bi bi-exclamation-circle-fill text-primary"></i>
+                                <span>These emails will be sent automatically to members based on their activities.</span>
+                            </div>
+
+                            <table class="table mt-3 shadow-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="py-3">Email Type</th>
+                                        <th scope="col" class="py-3">Description</th>
+                                        <th scope="col" class="py-3">Recipient</th>
+                                        <th scope="col" class="py-3">Status</th>
+                                        <th scope="col" class="py-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-envelope-fill welcome_email_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Welcome Email</div>
+                                                </div>
+                                            </div>
+
+                                        </th>
+                                        <td class="align-middle foun_size_secound_column">
+                                            <div>Sent to new members when they</div>
+                                            <div>register in the system.</div>
+                                        </td>
+                                        <td class="align-middle">New Members</td>
+                                        <td class="align-middle">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button type="button" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                                Preview
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-book issue_email_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Book Issue Email</div>
+                                                </div>
+                                            </div>
+
+                                        </th>
+                                        <td class="align-middle foun_size_secound_column">
+                                            <div>Sent when a book is issued</div>
+                                            <div>to a member.</div>
+                                        </td>
+                                        <td class="align-middle">Member</td>
+                                        <td class="align-middle">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button type="button" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                                Preview
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-arrow-return-left return_email_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Book Return Email</div>
+                                                </div>
+                                            </div>
+
+                                        </th>
+                                        <td class="align-middle foun_size_secound_column">
+                                            <div>Sent when a member returns</div>
+                                            <div>a book.</div>
+                                        </td>
+                                        <td class="align-middle">Member</td>
+                                        <td class="align-middle">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button type="button" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                                Preview
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th>
+                                            
+                                            <div class="d-flex">
+                                                <i class="bi bi-exclamation-circle overdue_email_icon"></i>
+
+                                                <div class="">
+                                                    <div class="fw-bold">Overdue Reminder Email</div>
+                                                </div>
+                                            </div>
+
+                                        </th>
+                                        <td class="align-middle foun_size_secound_column">
+                                            <div>Sent when a book is not returned</div>
+                                            <div>on or before the due date.</div>
+                                        </td>
+                                        <td class="align-middle">Member</td>
+                                        <td class="align-middle">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button type="button" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                                Preview
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+
+
+                            <div class="card shadow-sm border-1 rounded-3 email_card_margin_sec">
+                                <div class="card-body hight_email_secound_card">
+
+                                    <div class="d-flex align-items-center stock_error">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        <div class="aleart_ma">Make sure your SMTP settings are configured correctly to send emails.</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+                            
+                            <div>
+                                <div class="fw-bold">Notification Settings</div>
+                                <span class="email_setting_sub_heading">Configure in-app notification and alert preferences.</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-8 mb-3 mb-sm-0">
+                                    <div class="card left-body">
+                                    <div class="card-body left_card_body p-0">
+                                        
+                                        <div class="noti_heading rounded-top">
+                                            Notification preferences
+                                        </div>
+
+                                        <table class="table table_border">
+                                            <colgroup>
+                                                <col style="width:60%">
+                                                <col style="width:20%">
+                                                <col style="width:20%">
+                                            </colgroup>
+
+                                            <tbody>
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-menu-button-wide low_stock_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">Low Stock Alert</div>
+                                                                <div class="sub_text">Get notified when available copies are equal to or less than the set limit.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-clipboard2-pulse-fill book_issue_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">Book Issue Alert</div>
+                                                                <div class="sub_text">Get notified when a book is issued to a member.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-arrow-return-left book_return_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">Book Return Alert</div>
+                                                                <div class="sub_text">Get notified when a book is returned by a member.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-exclamation-circle-fill overdue_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">Overdue Alert</div>
+                                                                <div class="sub_text">Get notified when a book is overdue.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-currency-rupee fine_alert_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">Fine Alert</div>
+                                                                <div class="sub_text">Get notified when a fine is applied to a member.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr class="table-row-height">
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <i class="bi bi-person-fill-add new_member_icon"></i>
+
+                                                            <div class="">
+                                                                <div class="fw-bold">New Member Alert</div>
+                                                                <div class="sub_text">Get notified when a new member registers.</div>
+                                                            </div>
+                                                        </div>  
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bi bi-bell"></i>
+                                                        <span>Enable</span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <div class="card left-body">
+                                    <div class="card-body">
+                                        
+                                        <div class="fw-bold notification_main_tone">Notification Tone</div>
+                                        <div class="notification_tone_sub">Select a sound for in-app notification</div>
+
+                                        <select name="" id="" class="select_option shadow-sm">
+                                            <option value="">
+                                                🔔 Default Tone
+                                            </option>
+                                        </select>
+
+                                        <button type="button" class="btn btn-outline-dark shadow-sm text-primary test_tone fw-bold">
+                                            <i class="bi bi-caret-right test_botton_icon"></i>
+                                            Test Tone
+                                        </button>
+
+                                    </div>
+                                    </div>
+
+                                    <div class="card left_body_secound">
+                                        <div class="card-body p-2">
+                                            <div class="fw-bold">Additional Options</div>
+
+                                            <table class="table mt-2">
+                                                <tbody>
+                                                    <tr class="costum-row">
+                                                        <td class="align-middle">
+                                                            <div class="fw-bold notifi_main_size">Enable Notification Sound</div>
+                                                            <span class="notifi_secound_size">Play sound for notification</span>
+                                                        </td>
+                                                        <td class="align-middle text-end">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="costum-row">
+                                                        <td class="align-middle">
+                                                            <div class="fw-bold notifi_main_size">Enable Notification Sound</div>
+                                                            <span class="notifi_secound_size">Play sound for notification</span>
+                                                        </td>
+                                                        <td class="align-middle text-end">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="costum-row">
+                                                        <td class="align-middle">
+                                                            <div class="fw-bold notifi_main_size">Enable Notification Sound</div>
+                                                            <span class="notifi_secound_size">Play sound for notification</span>
+                                                        </td>
+                                                        <td class="align-middle text-end">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
 

@@ -104,6 +104,10 @@
     line-height: 1;
 }
 
+.table_border{
+    border: 1px solid #dee2e6;
+}
+
 .student_icon{
     background-color: #e9ecef;
     color: blue;
@@ -156,4 +160,290 @@
 .sub_title_text{
     font-size: 14px;
     padding-left: 30px;
+}
+
+.book_se_text{
+    font-size: 30px;
+}
+
+
+.main_card_margin{
+    margin-top: 40px;
+}
+
+.hight_book_fist_card{
+    height: 150px;
+    background-color: #d9e8fd;
+}
+
+.main_card_margin_sec{
+    margin-top: 40px;
+
+}
+
+.hight_book_secound_card{
+    height: 80px;
+    background-color: rgb(223, 251, 223);
+    border-radius: 8px;
+    
+}
+
+.low_book{
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.low_stock_input{
+    margin: 30px;
+    height: 50px;
+    width: 280px;
+    padding: 5px;
+}
+
+.stock_error{
+    color: rgb(3, 193, 44);
+    margin-top: 8px;
+}
+
+.email_settings_heding{
+    font-size: 16px;
+}
+
+.email_setting_sub_heading{
+    font-size: 12px;
+}
+
+.top_not_massege{
+    background-color: #e9eafe;
+    padding: 3px;
+    border: 1px solid rgb(229, 229, 255);
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.welcome_email_icon{
+    background-color: #dafed4;
+    color: rgb(3, 181, 29);
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+
+.issue_email_icon{
+    background-color: #e9ecef;
+    color: blue;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+
+.return_email_icon{
+    background-color: #f7e9d0;
+    color: rgb(231, 154, 0);
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+
+.overdue_email_icon{
+    background-color: #ffdbdb;
+    color: rgb(255, 0, 51);
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.foun_size_secound_column{
+    font-size: 14px;
+}
+
+.form-check-input:focus {
+    border-color: #ced4da !important;
+    box-shadow: none !important;
+}
+
+.hight_email_secound_card{
+    height: 40px;
+    background-color: rgb(223, 251, 223);
+    border-radius: 8px;
+    padding: 0px;
+    padding-left: 15px;
+}
+
+.email_card_margin_sec{
+    margin-top: 4px;
+}
+
+.aleart_ma{
+    padding-left: 8px;
+}
+
+
+.left_card_body{
+    padding: 5px;
+}
+
+.noti_heading{
+    background-color: rgb(247, 247, 255);
+    padding: 5px;
+    font-weight:  bold;
+}
+
+.table-row-height{
+    height: 60px;
+    vertical-align: middle;
+}
+
+.low_stock_icon{
+    background-color: #26ff4a;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.book_issue_icon{
+    background-color: #ffad1f;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.book_return_icon{
+    background-color: #2491ff;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.overdue_icon{
+    background-color: #ff3a3a;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.fine_alert_icon{
+    background-color: #e11eff;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.new_member_icon{
+    background-color: #00bb83;
+    color: white;
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+
+.left-body{
+    height: 150px;
+    background-color: #fdfbfb;
+}
+
+.left_body_secound{
+    margin-top: 5px;
+    height: 240px;
+    background-color: #fdfbfb;
+}
+
+.notification_main_tone{
+    font-size: 16px;
+}
+
+.notification_tone_sub{
+    font-size: 12px;
+}
+
+.select_option{
+    margin-top: 8px;
+    width: 355px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+}
+
+.test_tone{
+    margin-top: 10px;
+    height: 32px;
+    width: 355px;
+    padding: 0px;
+    background-color: #fff;
+    border: none;
+}
+
+.test_botton_icon{
+    -webkit-text-stroke: 0.8px;
+}
+
+.costum-row{
+    height: 65px;
+}
+
+.notifi_main_size{
+    font-size: 16px;
+}
+
+.notifi_secound_size{
+    font-size: 12px;
 }
