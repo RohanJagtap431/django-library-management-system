@@ -11,3 +11,9 @@ class IssueSettings(models.Model):
     
     def __str__(self):
         return self.member_type
+    
+class BookSettings(models.Model):
+    low_stock_alert_limit = models.PositiveIntegerField(default=5)
+    
+    def __str__(self):
+        return "Book Settings"
