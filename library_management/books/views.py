@@ -4,6 +4,8 @@ from .models import Book, CATEGORY_CHOICES
 from django.db.models import Q
 from django.contrib import messages
 from django.utils import timezone
+from notifications.models import Notification
+from settings_app.models import NotificationSettings
 
 
 
@@ -86,6 +88,9 @@ def book_edit(request, book_id):
 
 
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "books/edit_book.html", {
                 "book": book,
                 "errors": errors,
@@ -226,6 +231,9 @@ def book_add(request):
             errors["available_copies"] = "Available Copies is required."
 
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "books/add_book.html", {
                 "errors": errors,
                 "categories": CATEGORY_CHOICES,
@@ -248,6 +256,9 @@ def book_add(request):
             errors["available_copies"] = "Please enter a valid available copies."
             
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "books/add_book.html", {
                 "errors": errors,
                 "categories": CATEGORY_CHOICES,
@@ -266,6 +277,9 @@ def book_add(request):
             errors["available_copies"] = "Available copies cannot be greater than total copies."
             
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "books/add_book.html", {
                 "errors": errors,
                 "categories": CATEGORY_CHOICES,
@@ -284,6 +298,18 @@ def book_add(request):
             description=description,
             book_cover=book_cover,
         )
+        
+        message= f'A new book, "{title}", has been added to the library collection.'
+        
+        
+        notification_settings = NotificationSettings.objects.first()
+        
+        if notification_settings.new_book_alert:
+            Notification.objects.create(
+                title="New Book Added",
+                message=message,
+                notification_type="new_book",
+            )
 
         messages.success(request, "Book added successfully.")
         return redirect("books_list")

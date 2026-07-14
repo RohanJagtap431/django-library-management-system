@@ -462,7 +462,7 @@
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="low_stock_alert" {% if notification_settings.low_stock_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -484,7 +484,7 @@
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="book_issue_alert" {% if notification_settings.book_issue_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -507,7 +507,7 @@
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="book_return_alert"  {% if notification_settings.book_return_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -520,17 +520,17 @@
                                                 <tr class="table-row-height">
                                                     <td>
                                                         <div class="d-flex">
-                                                            <i class="bi bi-exclamation-circle-fill overdue_icon"></i>
+                                                            <i class="fa-solid fa-book-open overdue_icon"></i>
 
                                                             <div class="">
-                                                                <div class="fw-bold">Overdue Alert</div>
-                                                                <div class="sub_text">Get notified when a book is overdue.</div>
+                                                                <div class="fw-bold">New Book Alert</div>
+                                                                <div class="sub_text">Get notified whenever a new book is added to the library.</div>
                                                             </div>
                                                         </div>  
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="new_book_alert" {% if notification_settings.new_book_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -553,7 +553,7 @@
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="fine_alert" {% if notification_settings.fine_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -576,7 +576,7 @@
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="new_member_alert" {% if notification_settings.new_member_alert %}checked{% endif %}>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -625,7 +625,7 @@
                                                         </td>
                                                         <td class="align-middle text-end">
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="notification_sound" {% if notification_settings.notification_sound %}checked{% endif %}>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -637,7 +637,7 @@
                                                         </td>
                                                         <td class="align-middle text-end">
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="show_deskgtop_notification" {% if notification_settings.show_deskgtop_notification %}checked{% endif %}>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -649,7 +649,7 @@
                                                         </td>
                                                         <td class="align-middle text-end">
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="show_badge_count" {% if notification_settings.show_badge_count %}checked{% endif %}>
                                                             </div>
                                                         </td>
                                                     </tr>

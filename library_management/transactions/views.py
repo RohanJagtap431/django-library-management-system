@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from django.contrib import messages
 from datetime import date, timedelta
 from settings_app.models import IssueSettings
+from notifications.models import Notification
+from settings_app.models import BookSettings, NotificationSettings
 
 
 
@@ -107,7 +109,14 @@ def issue_book(request):
         if not book_id:
             book_error = "Please select a book."
             
+        if member_error:
+            messages.error(request, member_error)
+            
+        if book_error:
+            messages.error(request, book_error)
+            
         if member_error or book_error:
+            
             context = {
                 "members": members,
                 "books": books,
@@ -175,6 +184,39 @@ def issue_book(request):
 
         book.available_copies -= 1
         book.save()
+        
+        
+        notification_settings = NotificationSettings.objects.first()
+        
+        message=f'"{book.title}" has been issued to "{member.full_name}" successfully.'
+        
+        if notification_settings.book_issue_alert:
+            Notification.objects.create(
+                title="Book Issued",
+                message=message,
+                notification_type="book_issued",
+            )
+        
+        book_settings = BookSettings.objects.first()
+        
+        if notification_settings.low_stock_alert:
+            if book.available_copies == 0:
+                message=f'The book "{book.title}" is currently out of stock.'
+                
+                Notification.objects.create(
+                    title="Low Stock Alert",
+                    message=message,
+                    notification_type="low_stock",
+                )
+                
+            elif book.available_copies <= book_settings.low_stock_alert_limit:
+                message=f'"{book.title}" has only "{book.available_copies}" copies remaining in the library.'
+                
+                Notification.objects.create(
+                    title="Low Stock Alert",
+                    message=message,
+                    notification_type="low_stock",
+                )
 
         messages.success(request, "Book issued successfully.")
 
@@ -225,12 +267,35 @@ def return_book(request, issue_id):
         
         transaction.fine = fine
         
+        notification_settings = NotificationSettings.objects.first()
+        
+        if notification_settings.fine_alert:
+            if fine > 0:
+                message=f'A fine of ₹{fine} has been applied to {transaction.member.full_name} for the overdue book {transaction.book.title}.'
+            
+                Notification.objects.create(
+                    title="Fine Applied",
+                    message=message,
+                    notification_type="fine",
+                )
+        
         transaction.book.available_copies += 1
         
         transaction.book.save()
         transaction.save()
         
+        message=f'{transaction.member.full_name} has successfully returned {transaction.book.title}.'
         
+        notification_settings = NotificationSettings.objects.first()
+        
+        if notification_settings.book_return_alert:
+            Notification.objects.create(
+                title="Book Returned",
+                message=message,
+                notification_type="book_returned",
+            )
+
+        messages.success(request, "Book returned successfully.")
         
         return redirect("transaction_list")
         

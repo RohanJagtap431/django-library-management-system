@@ -1,0 +1,190 @@
+.main_card_noti{
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+
+.card_body_hight{
+    height: 80px;
+}
+
+.left_side{
+    font-size: 30px;
+    margin-left: 15px;
+}
+
+.noti_stay_sub_title{
+    font-size: 14px;
+    margin-left: 15px;
+    margin-bottom: 8px;
+}
+
+.filter_botton{
+    height: 37px;
+    padding-top: 8px;
+}
+
+.notification-container{
+    min-height: calc(100vh - 140px);
+}
+
+.page_num{
+    margin-right: 20px;
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.overdue_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: #ff0000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.low_stock_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(225, 225, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.book_issued_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: blue;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.book_returned_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: green;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.due_today_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(0, 6, 128);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.fine_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.new_member_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(0, 6, 128);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.new_book_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: green;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.general_icon{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    background-color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.noti_title{
+    font-size: 18px;
+}
+
+.noti_massage{
+    font-size: 12px;
+}
+
+.noto_type{
+    padding: 3px;
+}
+
+.unread{
+    padding: 4px;
+    background-color: rgb(247, 236, 236) ;
+    color: red;
+    border-radius: 5px;
+}
+
+.read{
+    padding: 4px;
+    background-color: rgb(236, 247, 236) ;
+    color: rgb(29, 192, 0);
+    border-radius: 5px;
+}

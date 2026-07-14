@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import IssueSettings, BookSettings
+from .models import IssueSettings, BookSettings, NotificationSettings
 from django.contrib import messages
 
 
@@ -9,6 +9,7 @@ def settings_page(request):
     staff_settings = IssueSettings.objects.get(member_type="staff")
     
     book_settings = BookSettings.objects.first()
+    notification_settings = NotificationSettings.objects.first()
     
     if request.method == "POST":
         student_max_books = int(
@@ -81,6 +82,10 @@ def settings_page(request):
             errors["low_stock_alert_limit"] = "Low stock alert limit must be greater than 0."
             
         if errors:
+            
+            for error in errors.values():
+                messages.error(request, error)
+            
             return render(request, 'settings/settings.html', {
                 "student_max_books": student_max_books,
                 "student_loan_period": student_loan_period,
@@ -107,6 +112,38 @@ def settings_page(request):
         staff_settings.fine_per_day = staff_fine_per_day
         
         book_settings.low_stock_alert_limit = low_stock_alert_limit
+        
+        low_stock_alert = "low_stock_alert" in request.POST
+        notification_settings.low_stock_alert = low_stock_alert
+        
+        book_issue_alert = "book_issue_alert" in request.POST
+        notification_settings.book_issue_alert = book_issue_alert
+        
+        book_return_alert = "book_return_alert" in request.POST
+        notification_settings.book_return_alert = book_return_alert
+        
+        overdue_alert = "overdue_alert" in request.POST
+        notification_settings.overdue_alert = overdue_alert
+
+        fine_alert = "fine_alert" in request.POST
+        notification_settings.fine_alert = fine_alert
+        
+        new_member_alert = "new_member_alert" in request.POST
+        notification_settings.new_member_alert = new_member_alert
+
+        notification_sound = "notification_sound" in request.POST
+        notification_settings.notification_sound = notification_sound
+        
+        show_badge_count = "show_badge_count" in request.POST
+        notification_settings.show_badge_count = show_badge_count
+
+        show_deskgtop_notification = "show_deskgtop_notification" in request.POST
+        notification_settings.show_deskgtop_notification = show_deskgtop_notification
+        
+        new_book_alert = "new_book_alert" in request.POST
+        notification_settings.new_book_alert = new_book_alert
+        
+        notification_settings.save()
 
         book_settings.save()
         
@@ -114,7 +151,7 @@ def settings_page(request):
         teacher_settings.save()
         staff_settings.save()
         
-        messages.success(request, "Issue settings updated successfully.")
+        messages.success(request, "Settings updated successfully.")
         return redirect("settings_page")
         
         
@@ -126,6 +163,7 @@ def settings_page(request):
         "teacher_settings": teacher_settings,
         "staff_settings": staff_settings,
         "book_settings": book_settings,
+        "notification_settings": notification_settings,
     }
     
     

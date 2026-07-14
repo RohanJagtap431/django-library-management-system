@@ -26,6 +26,7 @@ urlpatterns = [
     path('members/', include('members.urls')),
     path('transactions/', include('transactions.urls')),
     path('settings/', include('settings_app.urls')),
+    path("notifications/", include("notifications.urls")),
 ]
 
 if settings.DEBUG:

@@ -7,6 +7,8 @@ from datetime import datetime, date
 from django.contrib import messages
 from transactions.models import Transaction
 from django.utils import timezone
+from notifications.models import Notification
+from settings_app.models import NotificationSettings
 
 
 FINE_PER_DAY = 10
@@ -153,6 +155,9 @@ def member_edit(request, member_id):
             errors["pincode"] = "Pincode is required."
             
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "members/edit_member.html", {
                 "member": member,
                 "errors": errors,
@@ -183,6 +188,9 @@ def member_edit(request, member_id):
             errors["pincode"] = "Please enter a valid 6-digit Pincode."
         
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "members/edit_member.html", {
                 "member": member,
                 "errors": errors,
@@ -272,6 +280,9 @@ def member_add(request):
             errors["pincode"] = "Pincode is required."
             
         if errors:
+            for error in errors.values():
+                messages.error(request, error)
+                
             return render(request, "members/add_member.html", {
                 "errors": errors,
                 "member_choices": MEMBER_TYPE_CHOICES,
@@ -301,13 +312,16 @@ def member_add(request):
             errors["pincode"] = "Please enter a valid 6-digit Pincode."
             
         if errors:
-                return render(request, "members/add_member.html", {
-                    "errors": errors,
-                    "member_choices": MEMBER_TYPE_CHOICES,
-                    "status_choices": STATUS_CHOICES,
-                    "gender_choices": GENDER_CHOICES,
-                    "state_choices": STATE_CHOICES,
-                })
+            for error in errors.values():
+                messages.error(request, error)
+                
+            return render(request, "members/add_member.html", {
+                "errors": errors,
+                "member_choices": MEMBER_TYPE_CHOICES,
+                "status_choices": STATUS_CHOICES,
+                "gender_choices": GENDER_CHOICES,
+                "state_choices": STATE_CHOICES,
+            })
             
         Member.objects.create(
             full_name = full_name,
@@ -323,6 +337,18 @@ def member_add(request):
             pincode =pincode,
             profile_photo = profile_photo
         )
+        
+        message=f'"{full_name}" has been successfully registered as a new library member.'
+        
+        
+        notification_settings = NotificationSettings.objects.first()
+        
+        if notification_settings.new_member_alert:
+            Notification.objects.create(
+                title="New Member Registered",
+                message=message,
+                notification_type="new_member",
+            )
         
         messages.success(request, "Member added successfully.")
         return redirect("members_list")

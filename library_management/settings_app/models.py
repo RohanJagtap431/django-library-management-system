@@ -17,3 +17,23 @@ class BookSettings(models.Model):
     
     def __str__(self):
         return "Book Settings"
+    
+class NotificationSettings(models.Model):
+    low_stock_alert = models.BooleanField(default=True)
+    book_issue_alert = models.BooleanField(default=True)
+    book_return_alert = models.BooleanField(default=True)
+    overdue_alert = models.BooleanField(default=True)
+    fine_alert = models.BooleanField(default=True)
+    new_member_alert = models.BooleanField(default=True)
+    notification_sound = models.BooleanField(default=True)
+    show_badge_count = models.BooleanField(default=True)
+    show_deskgtop_notification = models.BooleanField(default=True)
+    new_book_alert = models.BooleanField(default=True)
+    
+    notification_tone = models.CharField(max_length=100, default="default")
+    
+    def __str__(self):
+        return "Notification Settings"
+    
+    
+    

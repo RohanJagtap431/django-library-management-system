@@ -1,0 +1,326 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Notifications
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/notification_list.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <div class="mt-2">
+            <h2 class="mb-0 fw-bold left_side">Notifications</h2>
+            <div class="noti_stay_sub_title">Stay updated with important alerts and activities.</div>
+        </div>
+
+        
+        
+        <div class="mt-2 d-flex align-item-center">
+            <form action="{% url 'mark_all_as_read' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success me-3">✓ Mark All as Read</button>
+            </form>
+            
+        </div>
+
+
+    </div>
+
+    <div class="notification-container d-flex flex-column">
+
+        {% for notification in page_obj %}
+            <div class="card shadow-sm mb-3 main_card_noti">
+                <div class="card-body card_body_hight">
+
+                    {% if notification.notification_type == "overdue" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-hourglass-split overdue_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    {% elif notification.notification_type == "low_stock" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-exclamation-triangle-fill low_stock_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        {% elif notification.notification_type == "book_issued" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-book book_issued_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        {% elif notification.notification_type == "book_returned" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-check-circle-fill book_returned_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% elif notification.notification_type == "due_today" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-calendar-check-fill due_today_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% elif notification.notification_type == "fine" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-cash-stack fine_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% elif notification.notification_type == "new_member" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-person-plus-fill new_member_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% elif notification.notification_type == "new_book" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-journal-plus new_book_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {% elif notification.notification_type == "general" %}
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <i class="bi bi-bell-fill general_icon"></i>
+                                <div>
+                                    <div class="fw-bold noti_title">{{ notification.title }}</div>
+                                    <div class="noti_massage">{{ notification.message }}</div>
+                                </div>
+                                
+                            </div>
+
+                            <div>
+                                <div>{{ notification.created_at|date:"d F Y g:i A" }}</div>
+                                <div class="noto_type ms-auto text-end">
+                                    {% if notification.is_read %}
+                                        <span class="read">Read</span>
+                                    {% else %}
+                                        <span class="unread">Unread</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="text-center mt-5">
+                <h5>No notifications found.</h5>
+            </div>
+        {% endfor %}
+        
+
+        
+
+        <nav class="mt-auto mb-0 page_num">
+            <ul class="pagination justify-content-end gap-2">
+
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link px-3 py-2" href="?page={{ page_obj.previous_page_number }}">
+                            Previous
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link px-3 py-2">
+                            Previous
+                        </span>
+                    </li>
+                {% endif %}
+
+               
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link px-3 py-2">
+                                {{ num }}
+                            </span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link px-3 py-2" href="?page={{ num }}">
+                                {{ num }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link px-3 py-2" href="?page={{ page_obj.next_page_number }}">
+                            Next
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link px-3 py-2">
+                            Next
+                        </span>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}

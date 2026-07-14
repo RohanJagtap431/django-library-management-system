@@ -110,8 +110,8 @@
       </a>
 
 
-      <a href="#" class="text-decoration-none">
-        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+      <a href="{% url 'notification_list' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/notifications/' in request.path %}active-menu{% endif %}">
           <div class="left">
             <i class="bi bi-bell-fill ps-3"></i>
           <span class="ps-1">Notifications</span>
@@ -173,7 +173,15 @@
         </div>
 
         <div class="navbar-right d-flex align-items-center">
-          <i class="bi bi-bell"></i>
+          <a href="{% url 'notification_list' %}" class="position-relative">
+
+            <i class="bi bi-bell fs-6"></i>
+
+            {% if unread_count > 0 %}
+              <span class="notification_badge">{{ unread_count }}</span>
+            {% endif %}
+
+          </a>
 
           <div class="Profile_Section d-flex align-items-center ms-4 me-3">
             <i class="bi bi-person-circle me-2"></i>
@@ -193,4 +201,42 @@
     </div>
   </div>
 </div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+
+  {% if messages %}
+      {% for message in messages %}
+          <div class="toast text-bg-success border-0" role="alert" data-bs-delay="3000" data-bs-authohide="true">
+
+            <div class="d-flex">
+              <div class="toast-body">
+                  {{ message }}
+              </div>
+
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast">
+
+              </button>
+
+            </div>
+
+          </div>
+      {% endfor %}
+  {% endif %}
+
+</div>
+{% endblock %}
+{% block js %}
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const toastElList = document.querySelectorAll(".toast");
+
+      toastElList.forEach(function (toastEl) {
+          const toast = new bootstrap.Toast(toastEl,{
+            delay: 3000,
+            authohide: true,
+          });
+          toast.show();
+      });
+  });
+  </script>
 {% endblock %}

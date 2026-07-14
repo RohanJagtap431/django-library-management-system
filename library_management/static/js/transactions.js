@@ -170,9 +170,3 @@ bookSearch.addEventListener("keyup", function () {
             });
         });
 });
-
-document.querySelectorAll('.toast').forEach(toastEl => {
-    new bootstrap.Toast(toastEl).show();
-});
-
-console.log(typeof bootstrap);

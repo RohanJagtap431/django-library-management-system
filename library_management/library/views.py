@@ -5,6 +5,8 @@ from django.db.models import Count
 from django.utils import timezone
 from transactions.models import Transaction
 from settings_app.models import IssueSettings
+from notifications.models import Notification
+
 
 
 
@@ -52,6 +54,7 @@ def dashboard(request):
         labels.append(item["category"])
         counts.append(item["total"])
         
+       
     
 
     context = {

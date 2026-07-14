@@ -421,39 +421,12 @@
     </div>
 
 
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-
-        {% if messages %}
-            {% for message in messages %}
-                <div class="toast text-bg-{{ message.tags }}" role="alert" data-bs-delay="3000" data-bs-autohide="true">
-
-                    <div class="toast-header">
-                        <strong class="me-auto">
-                            {% if message.tags == "success" %}
-                                Success
-                            {% elif message.tags == "error" %}
-                                Error
-                            {% else %}
-                                Notification
-                            {% endif %}
-                        </strong>
-
-                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-                    </div>
-
-                    <div class="toast-body">
-                        {{ message }}
-                    </div>
-
-                </div>
-            {% endfor %}
-        {% endif %}
-
-    </div>
+    
     
 
 {% endblock %}
 
 {% block js %}
+    {{ block.super }}
     <script src="{% static 'js/transactions.js' %}"></script>
 {% endblock %}
