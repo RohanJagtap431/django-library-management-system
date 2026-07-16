@@ -9,10 +9,11 @@ from transactions.models import Transaction
 from django.utils import timezone
 from notifications.models import Notification
 from settings_app.models import NotificationSettings
+from django.contrib.auth.decorators import login_required
 
 
 FINE_PER_DAY = 10
-
+@login_required(login_url="login")
 def members_list(request):
     members = Member.objects.all()
     search = request.GET.get("search", "")
@@ -41,7 +42,7 @@ def members_list(request):
         'status': status
     })
 
-
+@login_required(login_url="login")
 def member_detail(request, member_id):
     member = get_object_or_404(Member, id=member_id)
     total_issued = Transaction.objects.filter(
@@ -104,7 +105,7 @@ def member_detail(request, member_id):
         "total_fine": total_fine,
     })
     
-
+@login_required(login_url="login")
 def member_edit(request, member_id):
     member = get_object_or_404(Member, id=member_id)
     
@@ -230,7 +231,7 @@ def member_edit(request, member_id):
     })
 
 
-
+@login_required(login_url="login")
 def member_add(request):
     if request.method == "POST":
         full_name = request.POST.get("full_name", "").strip()

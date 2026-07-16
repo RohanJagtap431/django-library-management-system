@@ -6,16 +6,11 @@ from django.utils import timezone
 from transactions.models import Transaction
 from settings_app.models import IssueSettings
 from notifications.models import Notification
+from django.contrib.auth.decorators import login_required
 
 
 
-
-def login_page(request):
-    return render(request, 'auth/login.html')
-
-def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
-
+@login_required(login_url="login")
 def dashboard(request):
     today = timezone.localdate()
     total_books = Book.objects.count()

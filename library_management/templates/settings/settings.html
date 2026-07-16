@@ -598,13 +598,26 @@
                                         <div class="fw-bold notification_main_tone">Notification Tone</div>
                                         <div class="notification_tone_sub">Select a sound for in-app notification</div>
 
-                                        <select name="" id="" class="select_option shadow-sm">
-                                            <option value="">
-                                                🔔 Default Tone
-                                            </option>
+                                        <select name="notification_tone" id="notification-tone" class="select_option shadow-sm">
+                                            <option value="default" 
+                                            {% if notification_settings.notification_tone == "default" %}
+                                            Selected
+                                            {% endif %}>🔔 Default Tone</option>
+                                            <option value="bell"
+                                            {% if notification_settings.notification_tone == "bell" %}
+                                            Selected
+                                            {% endif %}>🔔 Bell Tone</option>
+                                            <option value="chime"
+                                            {% if notification_settings.notification_tone == "chime" %}
+                                            Selected
+                                            {% endif %}>🔔 Chime Tone</option>
+                                            <option value="success"
+                                            {% if notification_settings.notification_tone == "success" %}
+                                            Selected
+                                            {% endif %}>🔔 Success Tone</option>
                                         </select>
 
-                                        <button type="button" class="btn btn-outline-dark shadow-sm text-primary test_tone fw-bold">
+                                        <button type="button" id="test-tone-btn" class="btn btn-outline-dark shadow-sm text-primary test_tone fw-bold">
                                             <i class="bi bi-caret-right test_botton_icon"></i>
                                             Test Tone
                                         </button>
@@ -689,3 +702,10 @@
 
     </div>
 {% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/notification_settings.js' %}"></script>
+{% endblock %}
+
+

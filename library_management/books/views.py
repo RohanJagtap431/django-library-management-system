@@ -6,9 +6,11 @@ from django.contrib import messages
 from django.utils import timezone
 from notifications.models import Notification
 from settings_app.models import NotificationSettings
+from django.contrib.auth.decorators import login_required
 
 
 
+@login_required(login_url="login")
 def books_list(request):
     books = Book.objects.all()
     search = request.GET.get("search", "")
@@ -40,11 +42,12 @@ def books_list(request):
         'status': status
     })
 
-
+@login_required(login_url="login")
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     return render(request, 'books/book_details.html', {'book': book})
 
+@login_required(login_url="login")
 def book_edit(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     if request.method == 'POST':
@@ -163,7 +166,7 @@ def book_edit(request, book_id):
         'categories': CATEGORY_CHOICES
     })
 
-
+@login_required(login_url="login")
 def book_delete(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     
@@ -189,7 +192,7 @@ def book_delete(request, book_id):
         return redirect("books_list")
     return render(request, "books/delete_book.html", {"book": book})
   
-
+@login_required(login_url="login")
 def book_add(request):
     if request.method == "POST":
         title = request.POST.get("title", "").strip()

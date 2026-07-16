@@ -1,0 +1,100 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Delete All Notifications
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/delete_notifications.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <nav aria-label="breadcrumb" class="member-breadcrumb m-3">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+
+            <li class="breadcrumb-item">
+                <a href="{% url 'notification_list' %}">Notifications</a>
+            </li>
+                
+            <li class="breadcrumb-item active text-danger" aria-current="page">
+                Delete All Notifications
+            </li>
+        </ol>
+    </nav>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card m-3 shadow-sm main_card">
+            <div class="card-body d-flex flex-column align-items-center">
+                <i class="bi bi-trash3 mt-2 delete_icon_head"></i>
+                <div class="d-flex mt-2 fw-bold fs-4">
+                    <div class="text-danger me-1">Delete</div>
+                    <div>All Notifications?</div>
+                </div>
+                <div class="d-flex justify-content-center border-bottom confirm_delete_massage mt-1">
+                    <p class="me-1">Are you sure you want to delete all Notifications? This action</p>
+                    <p class="text-danger fw-bold">cannot be undone</p>.
+                </div>
+
+                <div class="card shadow-sm mt-3 secound_card">
+                    <div class="card-body">
+                        <div class="fw-bold text-danger fs-4 mb-4">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <span>This will :</span>
+                        </div>
+                        <div class="space">
+                            <i class="bi bi-check-circle-fill text-danger"></i>
+                            <span>Permanently delete all notifications from the system.</span>
+                        </div>
+
+                        <div class="space">
+                            <i class="bi bi-check-circle-fill text-danger"></i>
+                            <span>Remove all read and unread notifications.</span>
+                        </div>
+
+                        <div class="space">
+                            <i class="bi bi-check-circle-fill text-danger"></i>
+                            <span>This action</span>
+                            <span class="text-danger fw-bold"> cannot be undone.</span>
+                        </div>
+
+                        <div class="space">
+                            <i class="bi bi-check-circle-fill text-danger"></i>
+                            <span>Make sure you have reviewed important notifications before proceeding.</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="buttons border-top mt-3">
+                    <a href="{% url 'notification_list' %}" class="btn btn-outline-secondary fist_button">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-arrow-left fs-5 me-3"></i>
+
+                            <div class="text-start">
+                                <div class="fw-bold text_go_back">Go back to notifications</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    
+                    <button type="submit" class="btn btn-danger secound_button">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-trash fs-5 me-2"></i>
+
+                            <div class="text-start">
+                                <div class="fw-bold text_go_back">Yes, Delete All Notifications</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

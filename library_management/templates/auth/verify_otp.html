@@ -1,0 +1,131 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %}Forgot Password{% endblock %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/verify_otp.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <header class="header d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <img class="login-logo mb-1" src="{% static 'images/logo.png' %}" />
+            <div class="LMS_name">Library Management System</div>
+        </div>
+
+        <div class="d-flex align-items-center me-4">
+            <i class="bi bi-shield-fill-check me-2"></i>
+            <div>Secure <span class="text_dot_color">●</span> Simple <span class="text_dot_color">●</span> Smart</div>
+        </div>
+    </header>
+
+    <div class="card main_card shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-5 left_side">
+                    <img src="{% static 'images/forgot_password/verify_otp.png' %}" class="fist_img">
+
+                    <div class="d-flex justify-content-center">
+                        <i class="bi bi-shield-fill-check me-2 shield_icon"></i>
+                        <div>
+                            <div class="fw-bold">Your security is our priority</div>
+                            <div class="left_side_last_text">We never share your information with anyone.</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-7 secound_class">
+                    <div>
+                        <span class="page_no fw-bold">Step 2 of 4</span>
+                    </div>
+                    
+                    <div class="fw-bold mt-2 verify_otp_text">Verify OTP</div>
+
+                    <div class="mt-0 subtext">
+                        <div>We have sent a 6-digit OTP to your registered email.</div>
+                    </div>
+
+                    <div class="mt-3">
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            <div>
+                                <div class="row user_email_card p-1">
+                                    <div class="col-lg-10">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-envelope-open-heart-fill email_logo_card me-3"></i>
+                                            <div>
+                                                <div class="otp_send_text">OTP sent to:</div>
+                                                <div class="fw-bold">{{ email }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 change_email_btn">
+                                        <a href="{% url 'forgot_password' %}" class="email_change_button">Change Email</a>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <div class="mt-3 subtext">Enter the OTP below to verify email.</div>
+
+                                    <div class="d-flex justify-content-center gap-2 mt-3" id="otp-container">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp1">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp2">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp3">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp4">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp5">
+                                        <input type="text" maxlength="1" class="form-control otp-input" name="otp6">
+                                    </div>
+
+                                    <input type="hidden" name="otp" id="otp">
+
+                                    <div class="d-flex align-items-center justify-content-center mt-3">
+                                        <i class="bi bi-clock me-1 clock_icon"></i>
+                                        <span>OTP expires in: <span id="otpTimer" class="text-primary fw-bold" data-time="{{ remaining_time }}">03:00</span></span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button type="submit" class="btn btn-primary verify_otp_btn">
+                                            <i class="bi bi-shield-fill-check"></i>
+                                            Verify OTP
+                                        </button>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-center mt-3">
+                                        <span>Didn't receive the OTP? <span class="text-primary fw-bold">Resend OTP (00:45)</span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="or-divider">
+                                <span>OR</span>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="{% url 'forgot_password' %}" class="btn btn-outline back_btn fw-bold">← Back to Forgot Password</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3 d-flex justify-content-center">
+        <i class="bi bi-book me-2 bottom_icon"></i>
+        <div class="fw-bold bottom_fist">Library Management System</div>
+    </div>
+
+    <div class="d-flex justify-content-center bottom_last">
+        <div>© All rights reserved.</div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/verify_otp.js' %}"></script>
+{% endblock %}

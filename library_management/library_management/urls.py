@@ -27,6 +27,8 @@ urlpatterns = [
     path('transactions/', include('transactions.urls')),
     path('settings/', include('settings_app.urls')),
     path("notifications/", include("notifications.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("forgot-password/", include("password_reset_app.urls")),
 ]
 
 if settings.DEBUG:

@@ -28,6 +28,11 @@
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-success me-3">✓ Mark All as Read</button>
             </form>
+
+            <a href="{% url 'delete_all_notifications' %}" class="btn btn-outline-danger me-3">
+                <i class="bi bi-trash"></i>
+                Delete All Notifications
+            </a>
             
         </div>
 

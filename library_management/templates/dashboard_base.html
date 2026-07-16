@@ -134,7 +134,7 @@
         </div>
       </div>
 
-      <a href="{% url 'login' %}" class="text-decoration-none">
+      <a href="{% url 'logout' %}" class="text-decoration-none">
         <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
           <div class="left">
             <i class="bi bi-box-arrow-right ps-3"></i>
@@ -177,7 +177,7 @@
 
             <i class="bi bi-bell fs-6"></i>
 
-            {% if unread_count > 0 %}
+            {% if notification_settings.show_badge_count and unread_count > 0 %}
               <span class="notification_badge">{{ unread_count }}</span>
             {% endif %}
 
@@ -206,7 +206,7 @@
 
   {% if messages %}
       {% for message in messages %}
-          <div class="toast text-bg-success border-0" role="alert" data-bs-delay="3000" data-bs-authohide="true">
+          <div class="toast text-bg-success border-0" role="alert" data-bs-delay="3000" data-bs-authohide="true" data-notification="true">
 
             <div class="d-flex">
               <div class="toast-body">
@@ -226,17 +226,40 @@
 </div>
 {% endblock %}
 {% block js %}
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const toastElList = document.querySelectorAll(".toast");
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-      toastElList.forEach(function (toastEl) {
-          const toast = new bootstrap.Toast(toastEl,{
+
+    const toastElList = document.querySelectorAll(".toast");
+
+    toastElList.forEach(function (toastEl) {
+        const toast = new bootstrap.Toast(toastEl, {
             delay: 3000,
-            authohide: true,
-          });
-          toast.show();
-      });
-  });
-  </script>
+            autohide: true,
+        });
+
+        toast.show();
+    });
+
+    
+    {% if notification_settings.notification_sound %}
+        const audio = new Audio();
+
+        {% if notification_settings.notification_tone == "bell" %}
+            audio.src = "{% static 'sounds/bell.mp3' %}";
+        {% elif notification_settings.notification_tone == "chime" %}
+            audio.src = "{% static 'sounds/chime.mp3' %}";
+        {% elif notification_settings.notification_tone == "success" %}
+            audio.src = "{% static 'sounds/success.mp3' %}";
+        {% else %}
+            audio.src = "{% static 'sounds/default.mp3' %}";
+        {% endif %}
+
+        if (toastElList.length > 0) {
+            audio.play().catch(function(){});
+        }
+    {% endif %}
+
+});
+</script>
 {% endblock %}

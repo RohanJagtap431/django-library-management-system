@@ -11,9 +11,10 @@ from datetime import date, timedelta
 from settings_app.models import IssueSettings
 from notifications.models import Notification
 from settings_app.models import BookSettings, NotificationSettings
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required(login_url="login")
 def transaction_list(request):
     
     transactions = Transaction.objects.all()
@@ -91,6 +92,7 @@ def transaction_list(request):
         "today": timezone.localdate(),
     })
 
+@login_required(login_url="login")
 def issue_book(request):
     member_error = None
     book_error = None
@@ -231,7 +233,7 @@ def issue_book(request):
 
     return render(request, "transactions/issue_book.html", context)
 
-
+@login_required(login_url="login")
 def return_book(request, issue_id):
     transaction = get_object_or_404(
         Transaction,
@@ -331,7 +333,7 @@ def return_book(request, issue_id):
     
     return render(request, "transactions/return_book.html", context)
 
-
+@login_required(login_url="login")
 def search_member(request):
     query = request.GET.get("q", "").strip()
     
@@ -365,7 +367,8 @@ def search_member(request):
     return JsonResponse({
         "members": member_data
     })
-    
+
+@login_required(login_url="login")   
 def search_book(request):
     query = request.GET.get("q", "").strip()
     
@@ -392,6 +395,7 @@ def search_book(request):
         "books": book_data
     })
     
+@login_required(login_url="login")
 def transaction_details(request, issue_id):
     transaction = get_object_or_404(Transaction, issue_id=issue_id)
     

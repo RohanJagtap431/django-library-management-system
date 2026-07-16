@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import IssueSettings, BookSettings, NotificationSettings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url="login")
 def settings_page(request): 
     student_settings = IssueSettings.objects.get(member_type="student")
     teacher_settings = IssueSettings.objects.get(member_type="teacher")
@@ -46,6 +47,8 @@ def settings_page(request):
         low_stock_alert_limit = int(
             request.POST.get("low_stock_alert_limit") or book_settings.low_stock_alert_limit
         )
+        
+        notification_tone = request.POST.get("notification_tone")
         
         errors = {}
         
@@ -133,6 +136,7 @@ def settings_page(request):
 
         notification_sound = "notification_sound" in request.POST
         notification_settings.notification_sound = notification_sound
+        notification_settings.notification_tone = notification_tone
         
         show_badge_count = "show_badge_count" in request.POST
         notification_settings.show_badge_count = show_badge_count
