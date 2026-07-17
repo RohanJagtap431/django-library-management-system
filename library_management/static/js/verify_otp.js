@@ -64,3 +64,4 @@ const timer = setInterval(function () {
     timeLeft--;
 
 }, 1000);
+
