@@ -46,3 +46,20 @@
     justify-content: center;
     border: 2px solid #fff;
 }
+
+
+.logo_profile_image{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.user_name_admin{
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.a_tag_admin_name{
+    text-decoration: none;
+}

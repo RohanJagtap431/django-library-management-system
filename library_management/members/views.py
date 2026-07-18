@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 FINE_PER_DAY = 10
 @login_required(login_url="login")
 def members_list(request):
-    members = Member.objects.all()
+    members = Member.objects.all().order_by("-join_date")
     search = request.GET.get("search", "")
     category = request.GET.get("category")
     status = request.GET.get("status")
@@ -200,6 +200,29 @@ def member_edit(request, member_id):
                 "gender_choices": GENDER_CHOICES,
                 "state_choices": STATE_CHOICES,
             })
+            
+        if status == "inactive":
+            has_issued_books = Transaction.objects.filter(
+                member=member,
+                status="issued"
+            ).exists()
+
+            if has_issued_books:
+                messages.error(
+                    request,
+                    "This member has issued books. Please return all issued books before marking the member as inactive."
+                )
+
+                return render(request, "members/edit_member.html", {
+                    "member": member,
+                    "errors": errors,
+                    "member_choices": MEMBER_TYPE_CHOICES,
+                    "status_choices": STATUS_CHOICES,
+                    "gender_choices": GENDER_CHOICES,
+                    "state_choices": STATE_CHOICES,
+                })
+            
+        
             
         member.full_name = full_name
         member.email = email

@@ -111,7 +111,7 @@
 
 
       <a href="{% url 'notification_list' %}" class="text-decoration-none">
-        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/notifications/' in request.path %}active-menu{% endif %}">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-0 mb-2 nav-link {% if '/notifications/' in request.path %}active-menu{% endif %}">
           <div class="left">
             <i class="bi bi-bell-fill ps-3"></i>
           <span class="ps-1">Notifications</span>
@@ -126,16 +126,27 @@
 
       <small class="manage mt-2 mb-2">ACCOUNT</small>
 
-
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-key ps-3"></i>
-        <span class="ps-1">Change Password</span>
+      <a href="{% url 'profile' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-0 mb-1 {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'edit_profile' %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-person ps-3"></i>
+          <span class="ps-1">Profile</span>
+          </div>
         </div>
-      </div>
+      </a>
+
+
+      <a href="{% url 'change_password' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-0 mb-1 {% if request.resolver_match.url_name == 'change_password' %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-key ps-3"></i>
+          <span class="ps-1">Change Password</span>
+          </div>
+        </div>
+      </a>
 
       <a href="{% url 'logout' %}" class="text-decoration-none">
-        <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1 mb-2">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 rounded mt-1">
           <div class="left">
             <i class="bi bi-box-arrow-right ps-3"></i>
           <span class="ps-1">Logout</span>
@@ -143,6 +154,7 @@
         </div>
       </a>
 
+      
     </div>
 
 
@@ -183,12 +195,16 @@
 
           </a>
 
-          <div class="Profile_Section d-flex align-items-center ms-4 me-3">
-            <i class="bi bi-person-circle me-2"></i>
 
-            <small class="me-2">Admin</small>
-            <i class="bi bi-chevron-down"></i>
-          </div>
+          <a href="{% url 'profile' %}" class="a_tag_admin_name">
+            <div class="Profile_Section d-flex align-items-center ms-3 me-3">
+              <img src="{% static 'images/profile/defult-user.png' %}" class="rounded-circle logo_profile_image">
+
+              <small class="me-2 user_name_admin">
+                {{ request.user.username }}
+              </small>
+            </div>
+          </a>
 
         </div>
 

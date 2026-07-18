@@ -156,3 +156,4 @@ def back_to_login(request):
     request.session.pop("otp_verified", None)
 
     return redirect("login")
+

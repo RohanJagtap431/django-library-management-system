@@ -1,0 +1,206 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Admin Profile
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/admin_profile.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="mt-2">
+                <h2 class="mb-0 fw-bold left_side">Admin Profile</h2>
+                <div>View and manage your account information</div>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Dashboard</a>
+
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline-warning me-2 back_button"><i class="bi bi-pencil"></i> Edit Profile</a>
+
+            </div>
+
+        
+        </div>
+
+        <div class="card fist_card mt-2">
+            <div class="card-body shadow-sm">
+                
+                <div class="row">
+                    <div class="col-lg-4 fist_col">
+                        <div class="image_status">
+                            <div class="profile_photo mt-4">
+                                <img src="{% static 'images/profile/defult-user.png' %}" class="member-image">
+                            </div>
+
+
+                            <div class="member_stu mt-4" title="{{ request.user.username }}">
+                                {{ request.user.username }}
+                            </div>
+                            <div class="member_id_section fw-bold mb-2 mt-2">
+                                Administrator
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 details_info">
+                        <div class="personal_info fw-bold mt-0 profile_icon_text">
+                            <i class="bi bi-person me-0 per_icons"></i>
+                            <span>Personal Information</span>
+                        </div>
+
+                        <div>
+                            <div class="main_text mt-4">
+                                <i class="bi bi-person-check sub_icons"></i>
+                                <span>Username</span>
+                            </div>
+
+                            <div class="sub_text fw-bold" title="{{ request.user.username }}">{{ request.user.username }}</div>
+
+
+                            <div class="main_text mt-4">
+                                <i class="bi bi-envelope-check sub_icons"></i>
+                                <span>Email Address</span>
+                            </div>
+
+                            <div class="sub_text fw-bold" title="{{ request.user.email }}">{{ request.user.email }}</div>
+
+
+                            <div class="main_text mt-4">
+                                <i class="bi bi-shield-exclamation sub_icons"></i>
+                                <span>Role</span>
+                            </div>
+
+                            <div class="sub_text fw-bold">Administrator</div>
+                        </div>
+                        
+                       
+                    </div>
+
+                    <div class="col-lg-4 mt-4">
+                        <div class="main_text main_text_margin">
+                            <i class="bi bi-calendar-check sub_icons"></i>
+                            <span>Date Joined</span>
+                        </div>
+
+                        <div class="sub_text fw-bold" title="{{ request.user.date_joined }}">{{ request.user.date_joined }}</div>
+
+
+                        <div class="main_text mt-4">
+                            <i class="bi bi-clock sub_icons"></i>
+                            <span>Last Login</span>
+                        </div>
+
+                        <div class="sub_text fw-bold" title="{{ request.user.last_login }}">{{ request.user.last_login }}</div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card mt-3 secound_card shadow-sm">
+            <div class="card-body">
+
+                <div class="account_actions">
+                    <i class="bi bi-gear sub_icons"></i>
+                    <span class="fw-bold fs-5">Account Actions</span>
+                </div>
+
+                <div class="row">
+
+                    <div class="d-flex justify-content-between">
+                        
+                        <div class="col m-4">
+                            <a href="{% url 'edit_profile' %}">
+                                <div class="card shadow-sm fists_cards">
+                                    <div class="card-body">
+                                        
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <i class="bi bi-pencil-fill fist_icon"></i>
+                                                <div>
+                                                    <div class="fist_main_headline">Edit Profile</div>
+                                                    <div class="main_head_info mt-1">Update your personal</div>
+                                                    <div class="main_head_info">information</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-chevron-compact-right sub_icons"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+
+                        <div class="col m-4">
+                            <a href="{% url 'change_password' %}">
+                                <div class="card shadow-sm secounds_cards">
+                                    <div class="card-body">
+                                        
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <i class="bi bi-lock-fill secound_icon"></i>
+                                                <div>
+                                                    <div class="secound_main_headline">Change Password</div>
+                                                    <div class="main_head_info mt-1">Update your account</div>
+                                                    <div class="main_head_info">password</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-chevron-compact-right sub_icons"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col m-4">
+                            <a href="{% url 'logout' %}">
+                                <div class="card shadow-sm thirds_cards">
+                                    <div class="card-body">
+                                        
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <i class="bi bi-box-arrow-right third_icon"></i>
+                                                <div>
+                                                    <div class="third_main_headline">Logout</div>
+                                                    <div class="main_head_info mt-1">Sign out from your</div>
+                                                    <div class="main_head_info">account</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-chevron-compact-right sub_icons"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

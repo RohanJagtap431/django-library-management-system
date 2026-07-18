@@ -1,0 +1,168 @@
+.fist_card{
+    border: none;
+}
+
+.image_status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d4d0d0;
+}
+
+
+.upload-box{
+    margin-top: 12px;
+    border: 2px solid #0d6efd;
+    border-radius: 10px;
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.upload-box i{
+    font-size: 18px;
+    line-height: 1;
+}
+
+.upload-box span{
+    line-height: 1;
+    margin: 0;
+}
+
+
+.change_photo_icon{
+    -webkit-text-stroke: 0.5px;
+    color: #0d6efd;
+}
+
+
+.upload-box:hover,
+.upload-box:hover *{
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 4px 12px rgba(13,110,253,.25);
+}
+
+
+
+.png_jpg{
+    color: #878787;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+
+.back_button{
+    font-size: 15px;
+}
+
+
+.left_side{
+    font-size: 30px;
+}
+
+
+.member-image{
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 0 3px blueviolet,
+                0 8px 20px rgba(0,0,0,.15);
+}
+
+
+
+.member_id_section{
+    margin-top: 6px;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(238, 220, 255);
+    color: blueviolet;
+}
+
+
+footer{
+    margin-top: 25px;
+    margin-bottom: 0px;
+    padding-top: 25px;
+    padding-bottom: 3px;
+    font-size: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+}
+
+.member_stu{
+    width: 250px;
+    margin-top: 10px;
+    font-size: 18px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-align: center;
+}
+
+.profile_icon_text{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: blueviolet;
+}
+
+.per_icons{
+    -webkit-text-stroke: 0.8px;
+    color: blueviolet;
+}
+
+.sub_icons{
+    -webkit-text-stroke: 0.5px;
+    color: blueviolet;
+    font-size: 20px;
+}
+
+.main_text{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.sub_text{
+    font-size: 18px;
+    margin-left: 24px;
+    white-space: nowrap;      
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+
+}
+
+.main_text_margin{
+    margin-top: 30px;
+}
+
+.secound_card{
+    border: none;
+    height: 170px;
+}
+
+.account_actions{
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(217, 215, 215);
+    color: blueviolet;
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+}
+
+.secounds_cards{
+    background-color: rgb(252, 249, 255);
+}
+
+.secound_icon{
+    color: blueviolet;
+}
+

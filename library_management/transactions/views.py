@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url="login")
 def transaction_list(request):
     
-    transactions = Transaction.objects.all()
+    transactions = Transaction.objects.all().order_by("-created_at")
     all_members = Member.objects.all()
     all_books = Book.objects.all()
     search = request.GET.get("search", "")

@@ -1,0 +1,246 @@
+.fist_card{
+    border: none;
+}
+
+.image_status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d4d0d0;
+}
+
+.back_button{
+    font-size: 15px;
+}
+
+
+.left_side{
+    font-size: 30px;
+}
+
+
+.member-image{
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 0 3px blueviolet,
+                0 8px 20px rgba(0,0,0,.15);
+}
+
+
+
+.member_id_section{
+    margin-top: 6px;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(238, 220, 255);
+    color: blueviolet;
+}
+
+
+footer{
+    margin-top: 25px;
+    margin-bottom: 0px;
+    padding-top: 25px;
+    padding-bottom: 3px;
+    font-size: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+}
+
+.member_stu{
+    width: 250px;
+    margin-top: 10px;
+    font-size: 18px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-align: center;
+}
+
+.profile_icon_text{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: blueviolet;
+}
+
+.per_icons{
+    -webkit-text-stroke: 0.8px;
+    color: blueviolet;
+}
+
+.sub_icons{
+    -webkit-text-stroke: 0.5px;
+    color: blueviolet;
+    font-size: 20px;
+}
+
+.main_text{
+    font-size: 16px;
+}
+
+.sub_text{
+    font-size: 18px;
+    margin-left: 24px;
+    white-space: nowrap;      
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+
+}
+
+.main_text_margin{
+    margin-top: 30px;
+}
+
+.secound_card{
+    border: none;
+    height: 230px;
+}
+
+.account_actions{
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(217, 215, 215);
+    color: blueviolet;
+}
+
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+a:focus,
+a:focus-visible{
+    outline: none;
+    box-shadow: none;
+}
+
+
+.fist_icon{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: blueviolet;
+    background: #ecdbff;
+    font-size: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 10px;
+    
+}
+
+.fist_main_headline{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: blueviolet;
+}
+
+.main_head_info{
+    font-size: 14px;
+    margin-left: 10px;
+    
+}
+
+.fists_cards{
+    height: 16vh;
+    background-color: rgb(246, 241, 250);
+    border: 1px solid rgb(210, 170, 248);
+}
+
+.fists_cards:hover{
+    background-color: rgb(246, 246, 250);
+}
+
+
+
+
+.secound_icon{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: rgb(43, 43, 226);
+    background: #e9e5ff;
+    font-size: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 10px;
+    
+}
+
+.secound_main_headline{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: rgb(52, 43, 226);
+}
+
+.main_head_info{
+    font-size: 14px;
+    margin-left: 10px;
+    
+}
+
+.secounds_cards{
+    height: 16vh;
+    background-color: rgb(241, 242, 250);
+    border: 1px solid rgb(178, 170, 248);
+}
+
+
+.secounds_cards:hover{
+    background-color: rgb(241, 248, 250);
+}
+
+
+.third_icon{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: rgb(233, 140, 19);
+    background: #fff1db;
+    font-size: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 10px;
+    
+}
+
+.third_main_headline{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: rgb(228, 143, 31);
+}
+
+.main_head_info{
+    font-size: 14px;
+    margin-left: 10px;
+    
+}
+
+.thirds_cards{
+    height: 16vh;
+    background-color: rgb(250, 246, 241);
+    border: 1px solid rgb(248, 222, 170);
+}
+
+
+.thirds_cards:hover{
+    background-color: rgb(250, 250, 241);
+}
