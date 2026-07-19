@@ -29,6 +29,7 @@ urlpatterns = [
     path("notifications/", include("notifications.urls")),
     path("accounts/", include("accounts.urls")),
     path("forgot-password/", include("password_reset_app.urls")),
+    path('reports/', include('reports_app.urls')),
 ]
 
 if settings.DEBUG:

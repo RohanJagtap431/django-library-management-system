@@ -1,0 +1,385 @@
+
+.left_side{
+    font-size: 30px;
+    margin-left: 15px;
+}
+
+.alert_card{
+    font-size: 18px;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 8px;
+    padding: 10px;
+    width: 100wh;
+
+    background-color: rgb(220, 222, 245);
+    
+    border: 1px solid #93C5FD;
+    border-radius: 5px;
+    color: blue;
+}
+
+
+.fists_cards{
+    height: 120px;
+    background-color: #EEF4FF;
+    border: 1px solid #93C5FD;
+    margin-top: 8px;
+}
+
+
+.fists_cards:hover{
+    background-color: #DBEAFE;
+}
+
+.fist_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.fist_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #2563EB;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+.view_details{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.link-box span,
+.link-box i{
+    
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.link-blue span,
+.link-blue i{
+    color: #0d6efd;
+}
+
+
+.link-blue:hover i{
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+
+
+.secound_cards{
+    height: 120px;
+    background-color: #ECFDF5;
+    border: 1px solid #86EFAC;
+    margin-top: 8px;
+}
+
+.secound_cards:hover{
+    background-color: #D1FAE5;
+}
+
+
+.secound_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.secound_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #16A34A;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+
+
+
+.third_cards{
+    height: 120px;
+    background-color: #FFF7ED;
+    border: 1px solid #FDBA74;
+    margin-top: 8px;
+}
+
+
+.third_cards:hover{
+    background-color: #FED7AA;
+}
+
+.third_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.third_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #F97316;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+
+
+.four_cards{
+    height: 120px;
+    background-color: #F3E8FF;
+    border: 1px solid #C4B5FD;
+    margin-top: 18px;
+}
+
+
+.four_cards:hover{
+    background-color: #E9D5FF;
+}
+
+.four_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.four_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #9333EA;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+
+
+.five_cards{
+    height: 120px;
+    background-color: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    margin-top: 18px;
+}
+
+
+.five_cards:hover{
+    background-color: #FECACA;
+}
+
+.five_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.five_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #DC2626;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+
+.six_cards{
+    height: 120px;
+    background-color: #ECFEFF;
+    border: 1px solid #67E8F9;
+    margin-top: 18px;
+}
+
+
+.six_cards:hover{
+    background-color: #CFFAFE;
+}
+
+.six_div{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.six_icon{
+    height: 60px;
+    width: 60px;
+    padding: 8px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #0891B2;
+
+    display: flex;
+    align-items: center;      
+    justify-content: center;
+}
+
+.sec_heading{
+    font-size: 25px;
+}
+
+.report_text{
+    -webkit-text-stroke: 0.8px;
+}
+
+.dashboard-card{
+    height: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+    margin-right: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.dashboard-card:hover{
+    background: #f8f9fa;
+}
+
+.book_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: #2563EB;
+}
+
+.button_book{
+    width: 130px;
+    height: 40px;
+}
+
+.card-title{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.card-text{
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 4px;
+}
+
+.member_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: green;
+}
+
+.issue_text{
+    font-size: 13.8px;
+}
+
+
+.issue_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: #ffc107;
+}
+
+.ruppes_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: #dc3545;
+}
+
+.overdue_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: #6f42c1;
+}
+
+
+.custom-btn{
+    width: 130px;
+    height: 40px;
+    background-color: #6f42c1;
+    color: white;
+    border-color: #6f42c1;
+}
+
+.custom-btn:hover{
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+    color: white;
+}
+
+
+.custom-btn2{
+    width: 130px;
+    height: 40px;
+    background-color: #42c17b;
+    color: white;
+    border-color: #42c17b;
+}
+
+.custom-btn2:hover{
+    background-color: #42c17b;
+    border-color: #42c17b;
+    color: white;
+}
+
+
+.export_report_icon{
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+
+    background-color: #42c17b;
+}

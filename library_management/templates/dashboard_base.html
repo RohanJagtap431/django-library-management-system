@@ -69,16 +69,17 @@
         </div>
       </a>
 
-
-      <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
-        <div class="left">
-          <i class="bi bi-bar-chart-line ps-3"></i>
-        <span class="ps-1">Reports</span>
+      <a href="{% url 'reports_dashboard' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/reports/' in request.path %}active-menu{% endif %}">
+          <div class="left">
+            <i class="bi bi-bar-chart-line ps-3"></i>
+          <span class="ps-1">Reports</span>
+          </div>
+          <div class="right">
+            <i class="bi bi-arrow-right-short"></i>
+          </div>
         </div>
-        <div class="right">
-          <i class="bi bi-arrow-right-short"></i>
-        </div>
-      </div>
+      </a>
 
 
       <small class="manage mt-2 mb-2">SYSTEM</small>
@@ -201,7 +202,7 @@
               <img src="{% static 'images/profile/defult-user.png' %}" class="rounded-circle logo_profile_image">
 
               <small class="me-2 user_name_admin">
-                {{ request.user.username }}
+                {{ request.user.username|title }}
               </small>
             </div>
           </a>

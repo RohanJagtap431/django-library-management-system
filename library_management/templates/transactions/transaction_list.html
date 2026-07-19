@@ -210,7 +210,7 @@
                         {% if page_obj.has_previous %}
 
                         <li class="page-item">
-                             <a class="page-link px-3 py-2" href="?page={{ page_obj.previous_page_number }}">
+                            <a class="page-link px-3 py-2" href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.previous_page_number }}">
                                 Previous
                             </a>
                         </li>
@@ -232,9 +232,10 @@
                                 </li>
 
                             {% else %}
-                                <li class="page-item">
-                                    <a class="page-link px-3 py-2" href=?page={{num}}>{{ num }}</a>
-                                </li>
+                                <a class="page-link px-3 py-2"
+                                href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ num }}">
+                                    {{ num }}
+                                </a>
                             {% endif %}
                         {% endfor %}
 
@@ -243,7 +244,7 @@
                         {% if page_obj.has_next %}
 
                         <li class="page-item">
-                             <a class="page-link px-3 py-2" href="?page={{ page_obj.next_page_number }}">
+                            <a class="page-link px-3 py-2" href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.next_page_number }}">
                                 Next
                             </a>
                         </li>

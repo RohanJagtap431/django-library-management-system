@@ -30,6 +30,8 @@ def books_list(request):
         elif status == "out_of_stock":
             books = books.filter(available_copies=0)
     
+    query_params = request.GET.copy()
+    query_params.pop("page", None)
         
     paginator = Paginator(books, 6)
     page_number = request.GET.get("page")
@@ -39,7 +41,8 @@ def books_list(request):
         'categories': CATEGORY_CHOICES,
         'search': search,
         'category': category,
-        'status': status
+        'status': status,
+        "query_params": query_params.urlencode(),
     })
 
 @login_required(login_url="login")

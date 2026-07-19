@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'notifications',
     'accounts',
     'password_reset_app',
+    'reports_app',
 ]
 
 MIDDLEWARE = [

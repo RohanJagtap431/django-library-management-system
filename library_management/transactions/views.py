@@ -36,8 +36,7 @@ def transaction_list(request):
     if status:
         if status == "issued":
             transactions = transactions.filter(
-                status="issued",
-                due_date__gte=today
+                status="issued"
             )
 
         elif status == "returned":
@@ -75,7 +74,8 @@ def transaction_list(request):
         else:
             transaction.current_fine = transaction.fine
 
-    
+    query_params = request.GET.copy()
+    query_params.pop("page", None)
         
     paginator = Paginator(transactions, 8)
     page_number = request.GET.get("page")
@@ -90,6 +90,7 @@ def transaction_list(request):
         "all_books": all_books,
         "book": book,
         "today": timezone.localdate(),
+        "query_params": query_params.urlencode(),
     })
 
 @login_required(login_url="login")

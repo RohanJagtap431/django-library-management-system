@@ -30,6 +30,8 @@ def members_list(request):
     if status:
         members = members.filter(status=status)
     
+    query_params = request.GET.copy()
+    query_params.pop("page", None)
         
     paginator = Paginator(members, 6)
     page_number = request.GET.get("page")
@@ -39,7 +41,8 @@ def members_list(request):
         'categories': MEMBER_TYPE_CHOICES,
         'search': search,
         'category': category,
-        'status': status
+        'status': status,
+        "query_params": query_params.urlencode(),
     })
 
 @login_required(login_url="login")

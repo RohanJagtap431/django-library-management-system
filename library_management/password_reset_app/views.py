@@ -6,6 +6,7 @@ from random import randint
 import time
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.views.decorators.cache import never_cache
 
 
 
@@ -19,7 +20,7 @@ def forgot_password(request):
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             return render(request, "auth/forgot_password.html", {
-                "error": "Email not found!"
+                "error": "No account exists with this email."
             })
 
         otp = randint(100000, 999999)
@@ -42,6 +43,7 @@ def forgot_password(request):
     
     return render(request, "auth/forgot_password.html")
 
+@never_cache
 def verify_otp(request):
     if not request.session.get("reset_email"):
         return redirect("forgot_password")
@@ -99,7 +101,7 @@ def verify_otp(request):
         }
     )
 
-
+@never_cache
 def reset_password(request):
     if not request.session.get("otp_verified"):
         return redirect("forgot_password")
@@ -120,6 +122,26 @@ def reset_password(request):
         user.set_password(password1)
         user.save()
         
+        send_mail(
+            subject="Library Management System - Password Changed Successfully",
+            message=f"""Hello,
+
+                Your Library Management System account password has been changed successfully.
+
+                If you made this change, you can safely ignore this email.
+
+                If you did not change your password, please contact the administrator immediately to secure your account.
+
+                Regards,
+                Library Management System Team
+            """,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=False,
+        )
+        
+
+        
         request.session["password_changed"] = True
             
         request.session.pop("reset_email", None)
@@ -132,6 +154,7 @@ def reset_password(request):
     
     return render(request, "auth/reset_password.html")
 
+@never_cache
 def password_success(request):
     if not request.session.get("password_changed"):
         return redirect("login")

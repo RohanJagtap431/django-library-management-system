@@ -44,7 +44,7 @@
 
 
                             <div class="member_stu mt-4" title="{{ request.user.username }}">
-                                {{ request.user.username }}
+                                {{ request.user.username|title }}
                             </div>
                             <div class="member_id_section fw-bold mb-2 mt-2">
                                 Administrator
@@ -64,7 +64,7 @@
                                 <span>Username</span>
                             </div>
 
-                            <div class="sub_text fw-bold" title="{{ request.user.username }}">{{ request.user.username }}</div>
+                            <div class="sub_text fw-bold" title="{{ request.user.username }}">{{ request.user.username|title }}</div>
 
 
                             <div class="main_text mt-4">
