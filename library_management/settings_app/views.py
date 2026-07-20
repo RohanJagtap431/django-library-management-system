@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import IssueSettings, BookSettings, NotificationSettings
+from .models import IssueSettings, BookSettings, NotificationSettings, EmailSettings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -11,6 +11,10 @@ def settings_page(request):
     
     book_settings = BookSettings.objects.first()
     notification_settings = NotificationSettings.objects.first()
+    email_settings = EmailSettings.objects.first()
+    
+    if not email_settings:
+        email_settings = EmailSettings.objects.create()
     
     if request.method == "POST":
         student_max_books = int(
@@ -147,9 +151,23 @@ def settings_page(request):
         new_book_alert = "new_book_alert" in request.POST
         notification_settings.new_book_alert = new_book_alert
         
+        welcome_email = "welcome_email" in request.POST
+        email_settings.welcome_email = welcome_email
+
+        book_issue_email = "book_issue_email" in request.POST
+        email_settings.book_issue_email = book_issue_email
+
+        book_return_email = "book_return_email" in request.POST
+        email_settings.book_return_email = book_return_email
+
+        overdue_reminder = "overdue_reminder" in request.POST
+        email_settings.overdue_reminder = overdue_reminder
+        
         notification_settings.save()
 
         book_settings.save()
+        
+        email_settings.save()
         
         student_settings.save()
         teacher_settings.save()
@@ -168,6 +186,7 @@ def settings_page(request):
         "staff_settings": staff_settings,
         "book_settings": book_settings,
         "notification_settings": notification_settings,
+        "email_settings": email_settings,
     }
     
     

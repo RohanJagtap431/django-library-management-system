@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'accounts',
     'password_reset_app',
     'reports_app',
+    'email_management',
+    "django_apscheduler",
 ]
 
 MIDDLEWARE = [

@@ -35,5 +35,13 @@ class NotificationSettings(models.Model):
     def __str__(self):
         return "Notification Settings"
     
+class EmailSettings(models.Model):
+    welcome_email = models.BooleanField(default=True)
+    book_issue_email = models.BooleanField(default=True)
+    book_return_email = models.BooleanField(default=True)
+    overdue_reminder = models.BooleanField(default=True)
     
+    def __str__(self):
+        return "Email Settings"
     
+ 

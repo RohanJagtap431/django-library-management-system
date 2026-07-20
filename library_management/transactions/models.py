@@ -20,6 +20,7 @@ class Transaction(models.Model):
     fine = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    last_reminder_sent = models.DateField(null=True, blank=True)
     
     
     def save(self, *args, **kwargs):

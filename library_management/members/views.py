@@ -10,6 +10,10 @@ from django.utils import timezone
 from notifications.models import Notification
 from settings_app.models import NotificationSettings
 from django.contrib.auth.decorators import login_required
+from settings_app.models import EmailSettings
+from email_management.models import EmailTemplate
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 FINE_PER_DAY = 10
@@ -318,7 +322,7 @@ def member_add(request):
                 "state_choices": STATE_CHOICES,
             })
         
-        
+    
         
         if Member.objects.filter(email=email).exists():
             errors["email"] = "Email already exists."
@@ -350,7 +354,7 @@ def member_add(request):
                 "state_choices": STATE_CHOICES,
             })
             
-        Member.objects.create(
+        member = Member.objects.create(
             full_name = full_name,
             email =  email,
             phone = phone,
@@ -365,6 +369,33 @@ def member_add(request):
             profile_photo = profile_photo
         )
         
+        email_settings = EmailSettings.objects.first()
+
+        if email_settings and email_settings.welcome_email:
+
+            welcome_template = EmailTemplate.objects.get(
+                email_type="welcome"
+            )
+
+            subject = welcome_template.subject
+
+            
+            message = welcome_template.message
+            message = message.replace("{{ full_name }}", member.full_name)
+            message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y"))
+
+            try:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[member.email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                messages.warning(request, f"Member added successfully, but email could not be sent: {e}")
+            
+            
         message=f'"{full_name}" has been successfully registered as a new library member.'
         
         

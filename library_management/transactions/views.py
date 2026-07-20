@@ -12,6 +12,10 @@ from settings_app.models import IssueSettings
 from notifications.models import Notification
 from settings_app.models import BookSettings, NotificationSettings
 from django.contrib.auth.decorators import login_required
+from settings_app.models import EmailSettings
+from email_management.models import EmailTemplate
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 @login_required(login_url="login")
@@ -179,7 +183,7 @@ def issue_book(request):
 
         due_date = date.today() + timedelta(days=loan_period)
 
-        Transaction.objects.create(
+        transaction = Transaction.objects.create(
             member=member,
             book=book,
             due_date=due_date,
@@ -188,6 +192,36 @@ def issue_book(request):
         book.available_copies -= 1
         book.save()
         
+        
+        email_settings = EmailSettings.objects.first()
+
+        if email_settings and email_settings.book_issue_email:
+
+            issue_template = EmailTemplate.objects.get(
+                email_type="book_issue"
+            )
+
+            subject = issue_template.subject
+
+            message = issue_template.message
+            message = message.replace("{{ full_name }}", member.full_name)
+            message = message.replace("{{ title }}", book.title)
+            message = message.replace("{{ issue_date }}", transaction.issue_date.strftime("%d-%m-%Y"))
+            message = message.replace("{{ due_date }}", transaction.due_date.strftime("%d-%m-%Y"))
+
+            try:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[member.email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                messages.warning(
+                    request,
+                    f"Book issued successfully, but email could not be sent: {e}"
+                )
         
         notification_settings = NotificationSettings.objects.first()
         
@@ -241,6 +275,9 @@ def return_book(request, issue_id):
         issue_id=issue_id
     )
     
+    member = transaction.member
+    book = transaction.book
+    
     
     issue_settings = IssueSettings.objects.get(
         member_type=transaction.member.member_type
@@ -286,6 +323,35 @@ def return_book(request, issue_id):
         
         transaction.book.save()
         transaction.save()
+        
+        email_settings = EmailSettings.objects.first()
+
+        if email_settings and email_settings.book_issue_email:
+
+            issue_template = EmailTemplate.objects.get(
+                email_type="book_return"
+            )
+
+            subject = issue_template.subject
+
+            message = issue_template.message
+            message = message.replace("{{ full_name }}", member.full_name)
+            message = message.replace("{{ title }}", book.title)
+            message = message.replace("{{ return_date }}", transaction.return_date.strftime("%d-%m-%Y"))
+
+            try:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[member.email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                messages.warning(
+                    request,
+                    f"Book issued successfully, but email could not be sent: {e}"
+                )
         
         message=f'{transaction.member.full_name} has successfully returned {transaction.book.title}.'
         
@@ -458,3 +524,59 @@ def transaction_details(request, issue_id):
         
     
     return render(request, "transactions/transaction_details.html", context)
+
+def send_overdue_email(transaction):
+    email_settings = EmailSettings.objects.first()
+    
+    if not email_settings or not email_settings.overdue_reminder:
+        return
+    
+    overdue_template = EmailTemplate.objects.get(
+        email_type="overdue"
+    )
+    
+    subject = overdue_template.subject
+    message = overdue_template.message
+    
+    
+    member = transaction.member
+    book = transaction.book
+
+    message = message.replace(
+        "{{ full_name }}",
+        member.full_name
+    )
+
+    message = message.replace(
+        "{{ title }}",
+        book.title
+    )
+    
+    message = message.replace(
+        "{{ issue_date }}",
+        transaction.issue_date.strftime("%d-%m-%Y")
+    )
+
+    message = message.replace(
+        "{{ due_date }}",
+        transaction.due_date.strftime("%d-%m-%Y")
+    )
+    
+
+    overdue_days = (date.today() - transaction.due_date).days
+
+    message = message.replace(
+        "{{ overdue_days }}",
+        str(overdue_days)
+    )
+    
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[member.email],
+        fail_silently=False,
+    )
+
+    transaction.last_reminder_sent = date.today()
+    transaction.save()

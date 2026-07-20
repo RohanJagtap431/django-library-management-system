@@ -98,8 +98,8 @@
       </a>
 
 
-      <a href="#" class="text-decoration-none">
-        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2">
+      <a href="{% url 'email_dashboard' %}" class="text-decoration-none">
+        <div class="menu-item d-flex align-items-center justify-content-between py-2 pe-2 rounded mt-1 mb-2 nav-link {% if '/email_management/' in request.path %}active-menu{% endif %}">
           <div class="left">
             <i class="bi bi-envelope-fill ps-3"></i>
           <span class="ps-1">Email Management </span>

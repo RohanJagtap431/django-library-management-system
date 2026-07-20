@@ -304,7 +304,7 @@
                                         <td class="align-middle">New Members</td>
                                         <td class="align-middle">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                <input class="form-check-input" type="checkbox" name="welcome_email" role="switch" id="flexSwitchCheckChecked" {% if email_settings.welcome_email %}checked{% endif %}>
                                             </div>
                                         </td>
                                         <td class="align-middle">
@@ -334,7 +334,7 @@
                                         <td class="align-middle">Member</td>
                                         <td class="align-middle">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                <input class="form-check-input" name="book_issue_email" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if email_settings.book_issue_email %}checked{% endif %}>
                                             </div>
                                         </td>
                                         <td class="align-middle">
@@ -364,7 +364,7 @@
                                         <td class="align-middle">Member</td>
                                         <td class="align-middle">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                <input class="form-check-input" name="book_return_email" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if email_settings.book_return_email %}checked{% endif %}>
                                             </div>
                                         </td>
                                         <td class="align-middle">
@@ -395,7 +395,7 @@
                                         <td class="align-middle">Member</td>
                                         <td class="align-middle">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                                <input class="form-check-input" name="overdue_reminder" type="checkbox" role="switch" id="flexSwitchCheckChecked" {% if email_settings.overdue_reminder %}checked{% endif %}>
                                             </div>
                                         </td>
                                         <td class="align-middle">

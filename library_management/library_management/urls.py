@@ -30,6 +30,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("forgot-password/", include("password_reset_app.urls")),
     path('reports/', include('reports_app.urls')),
+    path('email_management/', include('email_management.urls')),
 ]
 
 if settings.DEBUG:

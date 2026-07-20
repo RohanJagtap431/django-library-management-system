@@ -1,0 +1,311 @@
+.settings_text{
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+.note{
+    font-size: 13px;
+}
+
+.card-head-text{
+    font-weight: 600;
+}
+
+.card_real_num1{
+    color: blue;
+}
+
+.link-box{
+    font-size: 14px;
+    color: rgb(97, 97, 97);
+}
+
+.card-link{
+    text-decoration: none;
+    color: initial;
+}
+
+.dashboard-card{
+    height: 130px;
+    border-radius: 10px;
+    border: none;
+}
+
+.dashboard-card:hover{
+    background-color: #fcfcfd;
+}
+
+.icon-box{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.icon-blue{
+    background-color: blue;
+}
+
+.card-icon{
+    font-size: 35px;
+    
+}
+
+.icon-green{
+    background-color: green;
+}
+
+.card-icon2{
+    font-size: 30px;
+    flex-shrink: 0;
+    transform: translateY(3px);
+}
+
+.card_real_num2{
+    color: green;
+}
+
+
+
+.icon-red{
+    background-color: red;
+}
+
+.card-icon3{
+    font-size: 35px;
+    
+}
+
+
+.card_real_num3{
+    color: red;
+}
+
+
+.icon-blueviolet{
+    background-color: blueviolet;
+}
+
+.card-icon4{
+    font-size: 35px;
+    
+}
+
+
+.card_real_num4{
+    color: blueviolet;
+}
+
+
+.dashboard-card2{
+    height: 160px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 16px;
+}
+
+.sub_cards{
+    height: 85px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease;
+    cursor: pointer;
+    background: #fff;
+}
+
+.sub_cards::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: #0d6efd;
+    transition: .3s;
+}
+
+.sub_cards:hover::before{
+    height: 100%;
+}
+
+.sub_cards:hover{
+    background: #f8fbff;   
+    border-color: #0d6efd;
+    box-shadow: 0 8px 20px rgba(13,110,253,.12);
+}
+
+
+.icon-box2{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card-head-text1{
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+
+.icon-blue2{
+    background-color: blue;
+}
+
+.card-icons1{
+    font-size: 32px;
+    
+}
+
+
+
+.sub_cards2{
+    height: 85px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease;
+    cursor: pointer;
+    background: #fff;
+}
+
+.sub_cards2::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: #198754;  
+    transition: .3s;
+}
+
+.sub_cards2:hover::before{
+    height: 100%;
+}
+
+.sub_cards2:hover{
+    background: #f3fff7;  
+    border-color: #198754;
+    box-shadow: 0 8px 20px rgba(25,135,84,.12);
+}
+
+
+.icon-green2{
+    background-color: green;
+}
+
+.sub_cards3{
+    height: 85px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease;
+    cursor: pointer;
+    background: #fff;
+}
+
+.sub_cards3::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: blueviolet;
+    transition: .3s;
+}
+
+.sub_cards3:hover::before{
+    height: 100%;
+}
+
+.sub_cards3:hover{
+    background: #f8f3ff;  
+    border-color: blueviolet;
+    box-shadow: 0 8px 20px rgba(138, 43, 226, .12);
+}
+
+.icon-blueviolet2{
+    background-color: blueviolet;
+}
+
+
+.dashboard-table-card{
+    height: 270px;
+}
+
+.dashboard-table-header{
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 5px;
+}
+
+.dashboard-table-card .dashboard-table-head th{
+    background-color: #F8FAFC;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+
+
+.dashboard-table-card tbody tr {
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.dashboard-table-card .table tbody tr:hover td {
+    background-color: #F8FAFC;
+}
+
+.dashboard-table-card .table tbody td {
+    font-size: 14px;
+}
+
+.to{
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.subject{
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.email_type{
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.sent_date{
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.status{
+    max-width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
