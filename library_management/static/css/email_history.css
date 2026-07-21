@@ -1,0 +1,102 @@
+.page-icon{
+    font-size: 30px;
+}
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.book-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.book-breadcrumb a:hover{
+    color: #0d6efd;
+}
+.breadcrumb .active{
+    font-weight:bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.filter-select{
+    width: 180px;
+}
+
+.table-responsive{
+    min-height: 410px;
+}
+
+
+
+
+
+.Categories:focus{
+    box-shadow: none;
+}
+
+.status:focus{
+    box-shadow: none;
+}
+
+
+.table thead th{
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.table tbody td{
+    font-size: 0.92rem;
+}
+
+.table > :not(caption) > * > *{
+    border-color:#edf2f7;
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.book-title {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.book-author{
+    max-width:180px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+
+
+.book-isbn{
+    max-width:110px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+.book-category{
+    max-width:150px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}

@@ -14,7 +14,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
   <div class="px-0">
     <div class="row mt-3">
         <div class="col-lg-3">
-            <a href="#" class="card-link">
+            <a href="{% url 'email_history' %}?status=Sent" class="card-link">
                 <div class="card dashboard-card shadow-sm w-100">
                     <div class="card-body p-3">
                         <div class="info-box d-flex align-items-start">
@@ -24,7 +24,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                             <div class="text-box d-flex flex-column ms-4 mt-1">
                                 <h6 class="card-head-text">Total Emails Sent</h6>
-                                <h2 class="fw-bold mb-0 card_real_num1">152</h2>
+                                <h2 class="fw-bold mb-0 card_real_num1">{{ total_emails }}</h2>
 
                                 <div class="link-box d-flex align-items-center mt-2">
                                     <span>All time</span>
@@ -37,7 +37,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
         </div>
 
         <div class="col-lg-3">
-            <a href="#" class="card-link">
+            <a href="{% url 'email_history' %}?today=1" class="card-link">
                 <div class="card dashboard-card shadow-sm w-100">
                     <div class="card-body p-3">
                         <div class="info-box d-flex align-items-start">
@@ -47,8 +47,8 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                             <div class="text-box d-flex flex-column ms-4 mt-1">
                                 <h6 class="card-head-text">Emails Sent Today</h6>
-                                <h2 class="fw-bold mb-0 card_real_num2">12</h2>
-
+                                <h2 class="fw-bold mb-0 card_real_num2">{{ emails_today }}</h2>
+                                
                                 <div class="link-box d-flex align-items-center mt-2">
                                     <span>Today</span>
                                 </div>
@@ -60,7 +60,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
         </div>
 
         <div class="col-lg-3">
-            <a href="#" class="card-link">
+            <a href="{% url 'email_history' %}?status=Failed" class="card-link">
                 <div class="card dashboard-card shadow-sm w-100">
                     <div class="card-body p-3">
                         <div class="info-box d-flex align-items-start">
@@ -70,7 +70,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                             <div class="text-box d-flex flex-column ms-4 mt-1">
                                 <h6 class="card-head-text">Failed Emails</h6>
-                                <h2 class="fw-bold mb-0 card_real_num3">3</h2>
+                                <h2 class="fw-bold mb-0 card_real_num3">{{ failed_emails }}</h2>
 
                                 <div class="link-box d-flex align-items-center mt-2">
                                     <span>All time</span>
@@ -115,8 +115,8 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                 <div class="col">
 
-                    <a href="#" class="card-link">
-                        <div class="card shadow-sm sub_cards mt-3">
+                    <a href="{% url 'compose_email' %}" class="card-link">
+                        <div class="card shadow-sm sub_cards mt-3 nav-link {% if '/email_management/' in request.path %}active-menu{% endif %}">
                             <div class="card-body p-3">
                                 <div class="info-box d-flex align-items-start">
                                     <div class="icon-box2 icon-blue2 d-flex align-items-center justify-content-center">
@@ -139,7 +139,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                 <div class="col">
 
-                    <a href="#" class="card-link">
+                    <a href="{% url 'compose_email' %}" class="card-link">
                         <div class="card shadow-sm sub_cards2 mt-3">
                             <div class="card-body p-3">
                                 <div class="info-box d-flex align-items-start">
@@ -163,7 +163,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
 
                 <div class="col">
 
-                    <a href="#" class="card-link">
+                    <a href="{% url 'email_history' %}" class="card-link">
                         <div class="card shadow-sm sub_cards3 mt-3">
                             <div class="card-body p-3">
                                 <div class="info-box d-flex align-items-start">
@@ -203,7 +203,7 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
                         </div>
 
                         <div class="right">
-                            <a href="#" class="btn btn-outline-secondary btn-sm">View All</a>
+                            <a href="{% url 'email_history' %}" class="btn btn-outline-secondary btn-sm">View All</a>
                         </div>
                     </div>
 
@@ -221,121 +221,40 @@ Dashboard {% endblock %} {% block css %} {{ block.super }}
                             </thead>
                             <tbody>
 
-                                <!--loop start-->
+                                {% for email in recent_emails %}
                                 <tr>
                                     <td>
-                                        <span class="to" title="#">
-                                            rohanjagatap998@gmail.com
+                                        <span class="to" title="{{ email.recipient }}">
+                                            {{ email.recipient }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="subject" title="#">
-                                            Book Issue Confirmation
+                                        <span class="subject" title="{{ email.subject }}">
+                                            {{ email.subject }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="email_type" title="#">
-                                            Book Return
+                                        <span class="email_type" title="{{ email.email_type }}">
+                                            {{ email.email_type }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="sent_date" title="#">
-                                            20 Jul 2026
+                                        <span class="sent_date" title="{{ email.sent_at|date:"d M Y" }}">
+                                            {{ email.sent_at|date:"d M Y" }}
                                         </span> 
                                     </td>
                                     <td>
-                                        <span class="status" title="#">
-                                            Failed
+                                        <span class="status" title="{{ email.status }}">
+                                            {{ email.status }}
                                         </span>
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <span class="to" title="#">
-                                            rohanjagatap998@gmail.com
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="subject" title="#">
-                                            Book Issue Confirmation
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="email_type" title="#">
-                                            Book Return
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="sent_date" title="#">
-                                            20 Jul 2026
-                                        </span> 
-                                    </td>
-                                    <td>
-                                        <span class="status" title="#">
-                                            Failed
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <span class="to" title="#">
-                                            rohanjagatap998@gmail.com
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="subject" title="#">
-                                            Book Issue Confirmation
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="email_type" title="#">
-                                            Book Return
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="sent_date" title="#">
-                                            20 Jul 2026
-                                        </span> 
-                                    </td>
-                                    <td>
-                                        <span class="status" title="#">
-                                            Failed
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <span class="to" title="#">
-                                            rohanjagatap998@gmail.com
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="subject" title="#">
-                                            Book Issue Confirmation
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="email_type" title="#">
-                                            Book Return
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="sent_date" title="#">
-                                            20 Jul 2026
-                                        </span> 
-                                    </td>
-                                    <td>
-                                        <span class="status" title="#">
-                                            Failed
-                                        </span>
-                                    </td>
-                                </tr>
-
                                 
-                                <!-- loop end -->
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No email history found.</td>
+                                </tr>
+                                {% endfor %}
 
                             </tbody>
                         </table>

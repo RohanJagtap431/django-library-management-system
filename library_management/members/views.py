@@ -14,6 +14,7 @@ from settings_app.models import EmailSettings
 from email_management.models import EmailTemplate
 from django.core.mail import send_mail
 from django.conf import settings
+from email_management.models import EmailHistory
 
 
 FINE_PER_DAY = 10
@@ -392,8 +393,31 @@ def member_add(request):
                     recipient_list=[member.email],
                     fail_silently=False,
                 )
+
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Welcome",
+                    status="Sent",
+                )
+
             except Exception as e:
-                messages.warning(request, f"Member added successfully, but email could not be sent: {e}")
+
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Welcome",
+                    status="Failed",
+                )
+
+                messages.warning(
+                    request,
+                    f"Member added successfully, but email could not be sent: {e}"
+                )
             
             
         message=f'"{full_name}" has been successfully registered as a new library member.'

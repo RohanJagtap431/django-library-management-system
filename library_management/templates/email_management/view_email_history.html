@@ -1,0 +1,29 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    View Email
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_email_history.css' %}">
+{% endblock %}
+
+{% load static %}
+
+
+{% block dashboard_content %}
+    {{ email.recipient }}
+
+    {{ email.member }}
+
+    {{ email.subject }}
+
+    {{ email.email_type }}
+
+    {{ email.status }}
+
+    {{ email.message }}
+{% endblock %}

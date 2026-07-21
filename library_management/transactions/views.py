@@ -16,6 +16,7 @@ from settings_app.models import EmailSettings
 from email_management.models import EmailTemplate
 from django.core.mail import send_mail
 from django.conf import settings
+from email_management.models import EmailHistory
 
 
 @login_required(login_url="login")
@@ -217,7 +218,27 @@ def issue_book(request):
                     recipient_list=[member.email],
                     fail_silently=False,
                 )
+                
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Book Issue",
+                    status="Sent",
+                )
+                
             except Exception as e:
+                
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Book Issue",
+                    status="Failed",
+                )
+                
                 messages.warning(
                     request,
                     f"Book issued successfully, but email could not be sent: {e}"
@@ -347,7 +368,27 @@ def return_book(request, issue_id):
                     recipient_list=[member.email],
                     fail_silently=False,
                 )
+                
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Book Return",
+                    status="Sent",
+                )
+                
             except Exception as e:
+                
+                EmailHistory.objects.create(
+                    member=member,
+                    recipient=member.email,
+                    subject=subject,
+                    message=message,
+                    email_type="Book Return",
+                    status="Failed",
+                )
+                
                 messages.warning(
                     request,
                     f"Book issued successfully, but email could not be sent: {e}"
@@ -570,13 +611,40 @@ def send_overdue_email(transaction):
         str(overdue_days)
     )
     
-    send_mail(
-        subject=subject,
-        message=message,
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[member.email],
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[member.email],
+            fail_silently=False,
+        )
+
+        EmailHistory.objects.create(
+            member=member,
+            recipient=member.email,
+            subject=subject,
+            message=message,
+            email_type="Overdue Reminder",
+            status="Sent",
+        )
+
+    except Exception as e:
+
+        EmailHistory.objects.create(
+            member=member,
+            recipient=member.email,
+            subject=subject,
+            message=message,
+            email_type="Overdue Reminder",
+            status="Failed",
+        )
+
+        raise
 
     transaction.last_reminder_sent = date.today()
     transaction.save()
+
+
+    
+    
