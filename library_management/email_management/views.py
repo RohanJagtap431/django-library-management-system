@@ -6,11 +6,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
 from datetime import date
-from .models import EmailHistory
+from .models import EmailHistory, EmailTemplate
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .forms import EmailTemplateForm
 EMAIL_TYPES = EmailHistory.EMAIL_TYPES
 
 @login_required(login_url="login")
@@ -64,9 +65,10 @@ def compose_email(request):
             member = Member.objects.get(member_id=member_id)
 
             placeholders = {
-                "{{ full_name }}": member.full_name,
+                "{{ full_name }}": member.full_name if member else "",
                 "{{ member_id }}": str(member.member_id),
-                "{{ email }}": member.email,
+                "{{ member_email }}": member.email if member else "",
+                "{{ join_date }}": member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "",
                 "{{ phone }}": member.phone,
                 "{{ status }}": member.status,
                 "{{ today }}": date.today().strftime("%d-%m-%Y"),
@@ -124,10 +126,12 @@ def compose_email(request):
                 placeholders = {
                     "{{ full_name }}": member.full_name,
                     "{{ member_id }}": str(member.member_id),
-                    "{{ email }}": member.email,
+                    "{{ member_email }}": member.email,
                     "{{ phone }}": member.phone,
                     "{{ status }}": member.status,
                     "{{ today }}": date.today().strftime("%d-%m-%Y"),
+                    "{{ join_date }}": member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "",
+                    
                 }
 
                 email_message = message
@@ -306,5 +310,91 @@ def view_email_history(request, id):
     return render(
         request,
         "email_management/view_email_history.html",
+        context,
+    )
+    
+@login_required(login_url="login")
+def email_templates(request):
+    templates = EmailTemplate.objects.all().order_by("id")
+    
+    
+    context = {
+        "templates": templates,
+    }
+    
+    return render(request, "email_management/email_templates.html", context)
+
+@login_required(login_url="login")
+def preview_email(request, email_type):
+
+    template = get_object_or_404(
+        EmailTemplate,
+        email_type=email_type
+    )
+
+    subject = template.subject
+    message = template.message
+
+    placeholders = {
+        "{{ full_name }}": "Rohan Jagtap",
+        "{{ member_email }}": "rohanjagtap@example.com",
+        "{{ join_date }}": "22-07-2026",
+        "{{ title }}": "Python Programming",
+        "{{ issue_date }}": "20-07-2026",
+        "{{ due_date }}": "27-07-2026",
+        "{{ return_date }}": "25-07-2026",
+        "{{ overdue_days }}": "3",
+        "{{ fine }}": "30",
+    }
+
+    for key, value in placeholders.items():
+        subject = subject.replace(key, value)
+        message = message.replace(key, value)
+
+    return render(
+        request,
+        "email_management/preview_email.html",
+        {
+            "template": template,
+            "subject": subject,
+            "message": message,
+        }
+    )
+
+@login_required(login_url="login")
+def edit_email_template(request, id):
+
+    template = get_object_or_404(
+        EmailTemplate,
+        id=id
+    )
+
+    if request.method == "POST":
+        form = EmailTemplateForm(
+            request.POST,
+            instance=template
+        )
+
+        if form.is_valid():
+            form.save()
+
+            messages.success(
+                request,
+                "Email template updated successfully."
+            )
+
+            return redirect("email_templates")
+
+    else:
+        form = EmailTemplateForm(instance=template)
+
+    context = {
+        "form": form,
+        "template": template,
+    }
+
+    return render(
+        request,
+        "email_management/edit_email_template.html",
         context,
     )

@@ -1,0 +1,182 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Edit Email
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/edit_email_template.css' %}">
+{% endblock %}
+
+{% load static %}
+
+
+{% block dashboard_content %}
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+            <nav aria-label="breadcrumb" class="member-breadcrumb m-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'email_dashboard' %}">Email Dashboard</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'email_templates' %}">Email Templates</a>
+                    </li>
+                        
+                    <li class="breadcrumb-item active text-primary" aria-current="page">
+                        Edit Template
+                    </li>
+                </ol>
+            </nav>
+
+            <div class="right_side mt-2 d-flex align-item-center">
+                    
+                <a href="{% url 'email_templates' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Email Templates</a>
+
+            </div>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row g-3">
+
+            
+                <div class="col-lg-8">
+                    <div class="card shadow-sm card-hight p-2">
+                        <h4 class="fw-bold">Edit Email Templates</h4>
+
+                        <p class="sub_text">Update the subject and message content of the email template.</p>
+
+                        <div class="fw-bold">Template Name</div>
+
+                        <div class="template-name d-flex align-items-center">
+                            {% if template.email_type == "welcome" %}
+                                <i class="bi bi-person icon_left px-2"></i>
+                            {% elif template.email_type == "book_issue" %}
+                                <i class="bi bi-book icon_left px-2"></i>
+                            {% elif template.email_type == "book_return" %}
+                                <i class="bi bi-book-half icon_left px-2"></i>
+                            {% else %}
+                                <i class="bi bi-bell icon_left px-2"></i>
+                            {% endif %}
+                            
+                            <span class="px-2">{{ template.get_email_type_display }}</span>
+                        </div>
+                        <p class="sub_text1">Template name cannot be changed.</p>
+
+                        
+                        <label class="form-label fw-bold">
+                            Subject <span class="text-danger">*</span>
+                        </label>
+
+                        <input type="text" name="subject" class="form-control" value="{{ template.subject }}">
+                        <p class="sub_text1">This subject will be used when sending emails.</p>
+
+
+                        <label class="form-label fw-bold">
+                            Message <span class="text-danger">*</span>
+                        </label>
+
+                        <textarea
+                            id="editor"
+                            name="message"
+                            class="form-control"
+                            rows="7"
+                        >{{ template.message }}</textarea>
+
+                        <div class="d-flex justify-content-between mt-3">
+
+                            <a href="{% url 'email_templates' %}"
+                            class="btn btn-secondary">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="btn btn-primary">
+                                Save Changes
+                            </button>
+
+                            
+                        </div>
+                    </div>
+                </div>
+
+            
+                <div class="col-lg-4">
+                    <div class="card shadow-sm card-hight p-2">
+                        <div class="fw-bold">Available Placeholders</div>
+                        <p class="sub_text">You can use these placeholders in the subject and message.</p>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} full_name {% templatetag closevariable %}</td>
+                                    <td>Member Name</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} member_email {% templatetag closevariable %}</td>
+                                    <td>Member Email</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} join_date {% templatetag closevariable %}</td>
+                                    <td>Member Join Date</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} title {% templatetag closevariable %}</td>
+                                    <td>Book Title</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} issue_date {% templatetag closevariable %}</td>
+                                    <td>Book Issue Date</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} due_date {% templatetag closevariable %}</td>
+                                    <td>Book Due Date</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} return_date {% templatetag closevariable %}</td>
+                                    <td>Book Return Date</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} overdue_days {% templatetag closevariable %}</td>
+                                    <td>Total Overdue Days</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-primary">{% templatetag openvariable %} fine {% templatetag closevariable %}</td>
+                                    <td>Fine Amount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="fw-bold mt-4 ms-2">Last Updated</div>
+                        <div class="ms-2">
+                            <i class="bi bi-calendar"></i>
+                            <span>{{ template.updated_at|date:"d M Y, h:i A" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/edit_email_template.js' %}"></script>
+{% endblock %}

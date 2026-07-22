@@ -1,0 +1,62 @@
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.breadcrumb-item a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.right_side{
+    height: 36px;
+}
+
+.card-hight{
+    height: 610px;
+}
+
+.sub_text{
+    font-size: 14px;
+}
+
+.sub_text1{
+    font-size: 12px;
+}
+
+.template-name{
+    background-color: #ebeaea;
+    border-radius: 5px;
+    border: 1px solid rgb(183, 182, 182);
+    height: 34px;
+}
+
+.icon_left{
+    border-right: 1px solid rgb(183, 182, 182);
+    font-size: 18px;
+}
+
+
+.ck.ck-editor__main > .ck-editor__editable:focus {
+    border-color: #ced4da !important;
+    box-shadow: none !important;
+}
+
+.ck-editor__editable {
+    height: 200px;
+    overflow-y: auto;
+}

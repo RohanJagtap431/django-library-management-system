@@ -1,0 +1,22 @@
+.email-preview{
+    max-height: 350px;
+    overflow-y: auto;
+
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.email-preview h1,
+.email-preview h2,
+.email-preview h3{
+    margin-bottom:20px;
+}
+
+.email-preview ul{
+    padding-left:25px;
+}
+
+.email-preview p{
+    margin-bottom:15px;
+}

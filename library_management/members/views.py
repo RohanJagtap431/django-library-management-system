@@ -16,7 +16,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 from email_management.models import EmailHistory
 
-
 FINE_PER_DAY = 10
 @login_required(login_url="login")
 def members_list(request):
@@ -379,18 +378,23 @@ def member_add(request):
             )
 
             subject = welcome_template.subject
-
+            
+   
             
             message = welcome_template.message
-            message = message.replace("{{ full_name }}", member.full_name)
-            message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y"))
+            message = message.replace("{{ full_name }}", member.full_name if member else "")
+            message = message.replace("{{ member_email }}", member.email if member else "")
+            message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "")
+
+
 
             try:
                 send_mail(
                     subject=subject,
-                    message=message,
+                    message="",
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[member.email],
+                    html_message=message,
                     fail_silently=False,
                 )
 

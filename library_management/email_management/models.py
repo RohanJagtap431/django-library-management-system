@@ -13,6 +13,7 @@ class EmailTemplate(models.Model):
     email_type = models.CharField(max_length=20, choices=EMAIL_TYPES, unique=True)
     subject = models.CharField(max_length=255)
     message = models.TextField()
+    updated_at = models.DateTimeField(auto_now=True)
     
     
     def __str__(self):

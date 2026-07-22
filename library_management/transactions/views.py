@@ -205,17 +205,36 @@ def issue_book(request):
             subject = issue_template.subject
 
             message = issue_template.message
-            message = message.replace("{{ full_name }}", member.full_name)
-            message = message.replace("{{ title }}", book.title)
-            message = message.replace("{{ issue_date }}", transaction.issue_date.strftime("%d-%m-%Y"))
-            message = message.replace("{{ due_date }}", transaction.due_date.strftime("%d-%m-%Y"))
+            message = message.replace("{{ full_name }}", member.full_name if member else "")
+            message = message.replace("{{ member_email }}", member.email if member else "")
+            message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "")
+
+            message = message.replace("{{ title }}", book.title if book else "")
+
+            message = message.replace("{{ issue_date }}", transaction.issue_date.strftime("%d-%m-%Y") if transaction and transaction.issue_date else "")
+            message = message.replace("{{ due_date }}", transaction.due_date.strftime("%d-%m-%Y") if transaction and transaction.due_date else "")
+            message = message.replace("{{ return_date }}", transaction.return_date.strftime("%d-%m-%Y") if transaction and transaction.return_date else "")
+            
+            overdue_days = max(0, (date.today() - transaction.due_date).days)
+            
+            message = message.replace(
+                "{{ overdue_days }}",
+                str(overdue_days)
+            )
+            
+            message = message.replace(
+                "{{ fine }}",
+                str(transaction.fine if transaction.fine else 0)
+            )
+
 
             try:
                 send_mail(
                     subject=subject,
-                    message=message,
+                    message="",
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[member.email],
+                    html_message=message,
                     fail_silently=False,
                 )
                 
@@ -347,7 +366,7 @@ def return_book(request, issue_id):
         
         email_settings = EmailSettings.objects.first()
 
-        if email_settings and email_settings.book_issue_email:
+        if email_settings and email_settings.book_return_email:
 
             issue_template = EmailTemplate.objects.get(
                 email_type="book_return"
@@ -356,16 +375,37 @@ def return_book(request, issue_id):
             subject = issue_template.subject
 
             message = issue_template.message
-            message = message.replace("{{ full_name }}", member.full_name)
-            message = message.replace("{{ title }}", book.title)
-            message = message.replace("{{ return_date }}", transaction.return_date.strftime("%d-%m-%Y"))
+            
+            message = message.replace("{{ full_name }}", member.full_name if member else "")
+            message = message.replace("{{ member_email }}", member.email if member else "")
+            message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "")
+
+            message = message.replace("{{ title }}", book.title if book else "")
+
+            message = message.replace("{{ issue_date }}", transaction.issue_date.strftime("%d-%m-%Y") if transaction and transaction.issue_date else "")
+            message = message.replace("{{ due_date }}", transaction.due_date.strftime("%d-%m-%Y") if transaction and transaction.due_date else "")
+            message = message.replace("{{ return_date }}", transaction.return_date.strftime("%d-%m-%Y") if transaction and transaction.return_date else "")
+
+            
+            overdue_days = max(0, (date.today() - transaction.due_date).days)
+                        
+            message = message.replace(
+                "{{ overdue_days }}",
+                str(overdue_days)
+            )
+            
+            message = message.replace(
+                "{{ fine }}",
+                str(transaction.fine if transaction.fine else 0)
+            )
 
             try:
                 send_mail(
                     subject=subject,
-                    message=message,
+                    message="",
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[member.email],
+                    html_message=message,
                     fail_silently=False,
                 )
                 
@@ -391,7 +431,7 @@ def return_book(request, issue_id):
                 
                 messages.warning(
                     request,
-                    f"Book issued successfully, but email could not be sent: {e}"
+                    f"Book returned successfully, but email could not be sent: {e}"
                 )
         
         message=f'{transaction.member.full_name} has successfully returned {transaction.book.title}.'
@@ -576,6 +616,8 @@ def send_overdue_email(transaction):
         email_type="overdue"
     )
     
+    
+    
     subject = overdue_template.subject
     message = overdue_template.message
     
@@ -583,40 +625,42 @@ def send_overdue_email(transaction):
     member = transaction.member
     book = transaction.book
 
-    message = message.replace(
-        "{{ full_name }}",
-        member.full_name
-    )
+    message = message.replace("{{ full_name }}", member.full_name if member else "")
+    message = message.replace("{{ member_email }}", member.email if member else "")
+    message = message.replace("{{ join_date }}", member.join_date.strftime("%d-%m-%Y") if member and member.join_date else "")
 
-    message = message.replace(
-        "{{ title }}",
-        book.title
+    message = message.replace("{{ title }}", book.title if book else "")
+
+    message = message.replace("{{ issue_date }}", transaction.issue_date.strftime("%d-%m-%Y") if transaction and transaction.issue_date else "")
+    message = message.replace("{{ due_date }}", transaction.due_date.strftime("%d-%m-%Y") if transaction and transaction.due_date else "")
+    message = message.replace("{{ return_date }}", transaction.return_date.strftime("%d-%m-%Y") if transaction and transaction.return_date else "")
+
+    overdue_days = max(0, (date.today() - transaction.due_date).days)
+    
+    issue_settings = IssueSettings.objects.get(
+        member_type=transaction.member.member_type
     )
     
-    message = message.replace(
-        "{{ issue_date }}",
-        transaction.issue_date.strftime("%d-%m-%Y")
-    )
-
-    message = message.replace(
-        "{{ due_date }}",
-        transaction.due_date.strftime("%d-%m-%Y")
-    )
-    
-
-    overdue_days = (date.today() - transaction.due_date).days
+    current_fine = overdue_days * issue_settings.fine_per_day
+        
 
     message = message.replace(
         "{{ overdue_days }}",
         str(overdue_days)
     )
     
+    message = message.replace(
+        "{{ fine }}",
+        str(current_fine)
+    )
+    
     try:
         send_mail(
             subject=subject,
-            message=message,
+            message="",
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[member.email],
+            html_message=message,
             fail_silently=False,
         )
 

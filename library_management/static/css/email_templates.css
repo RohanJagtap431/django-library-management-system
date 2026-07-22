@@ -1,0 +1,110 @@
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.breadcrumb-item a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.right_side{
+    height: 36px;
+}
+
+.main_card{
+    height: 600px;
+}
+
+.view_email_text{
+    font-size: 18px;
+}
+
+.erd_text{
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+.student_icon{
+    background-color: #e9ecef;
+    color: blue;
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.sub_text{
+    font-size: 10px;
+}
+
+.book_icon{
+    background-color: #d8ffdf;
+    color: rgb(18, 136, 2);
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.book_icon2{
+    background-color: #fff6d8;
+    color: rgb(136, 98, 2);
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.noti_icon{
+    background-color: #ffd8d8;
+    color: rgb(214, 0, 0);
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    border-radius: 5px;
+}
+
+.main_card2{
+    height: 150px;
+    background-color: rgb(241, 241, 255);
+}

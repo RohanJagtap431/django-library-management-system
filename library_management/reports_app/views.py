@@ -41,3 +41,23 @@ def reports_dashboard(request):
     }
     return render(request, "reports/reports_dashboard.html", context)
 
+
+@login_required(login_url="login")
+def fine_report(request):
+
+    transactions = Transaction.objects.filter(fine__gt=0)
+
+    total_fine = transactions.aggregate(
+        total=Sum("fine")
+    )["total"] or 0
+
+    context = {
+        "transactions": transactions,
+        "total_fine": total_fine,
+    }
+
+    return render(
+        request,
+        "reports/fine_report.html",
+        context,
+    )
