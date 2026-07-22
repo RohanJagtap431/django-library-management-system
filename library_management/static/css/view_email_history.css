@@ -1,0 +1,89 @@
+
+.book-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.breadcrumb-item a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.right_side{
+    height: 36px;
+}
+
+.main_card{
+    height: 600px;
+}
+
+.main-icon{
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.view_email_text{
+    font-size: 18px;
+}
+
+.erd_text{
+    font-size: 14px;
+}
+
+.sub_card1{
+    height: 239px;
+}
+
+.sub_card2{
+    height: 250px;
+    background-color: rgb(228, 252, 232);
+}
+
+.fist_card_head{
+    padding: 5px;
+    background-color: rgb(242, 242, 244);
+}
+
+.sec_icon{
+    -webkit-text-stroke: 0.6px;
+}
+
+.sec_card_head{
+    padding: 5px;
+    color: green;
+}
+
+.sub_card_body3{
+    height: 190px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background: #fff;
+}

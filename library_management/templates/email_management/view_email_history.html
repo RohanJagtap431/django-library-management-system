@@ -15,15 +15,105 @@
 
 
 {% block dashboard_content %}
-    {{ email.recipient }}
+    
+    <div class="d-flex justify-content-between">
+        <nav aria-label="breadcrumb" class="member-breadcrumb m-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
 
-    {{ email.member }}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'email_dashboard' %}">Email Dashboard</a>
+                </li>
 
-    {{ email.subject }}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'email_history' %}">Email History</a>
+                </li>
+                    
+                <li class="breadcrumb-item active text-danger" aria-current="page">
+                    View Email
+                </li>
+            </ol>
+        </nav>
 
-    {{ email.email_type }}
+        <div class="right_side mt-2 d-flex align-item-center">
+                
+            <a href="{% url 'email_history' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Email History</a>
 
-    {{ email.status }}
+        </div>
+    </div>
 
-    {{ email.message }}
+    <div class="card m-2 main_card">
+        <div class="card-body p-2">
+
+            <div class="d-flex">
+                <i class="bi bi-envelope main-icon"></i>
+
+                <div>
+                    <div class="fw-bold view_email_text">View Email</div>
+                    <div class='erd_text'>Email record details</div>
+                </div>
+            </div>
+
+            <div class="card mx-2 mt-3 sub_card1">
+                <div class="card-body p-0">
+
+                    <div class="text-primary fw-bold fist_card_head rounded-top">
+                        <i class="bi bi-envelope sec_icon"></i>
+                        <span>Email Details</span>
+                    </div>
+
+                    <table class="table">
+
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">recipient</td>
+                                <td>{{ email.recipient }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fw-bold">Member Name</td>
+                                <td>{{ email.member.full_name }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fw-bold">Subject</td>
+                                <td>{{ email.subject }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fw-bold">Email Type</td>
+                                <td>{{ email.email_type }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fw-bold">Status</td>
+                                <td>{{ email.status }}</td>
+                            </tr>
+                        </table>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="card mx-2 mt-3 sub_card2">
+                <div class="card-body p-0">
+
+                    <div class="fw-bold sec_card_head rounded-top">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Message</span>
+                    </div>
+
+                    <div class="card mx-2 mt-2">
+                        <div class="card-body sub_card_body3">
+                            {{ email.message|safe }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
