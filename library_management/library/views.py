@@ -66,7 +66,6 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.html", context)
 
 
-
 def global_search(request):
     q = request.GET.get("q", "").strip().lower()
 
@@ -90,6 +89,27 @@ def global_search(request):
     
     elif q in ["issue book", "issues book", "issue books", "issues books"]:
         return redirect("issue_book")
+    
+    elif q in ["reports", "report", "reports dashbord", "report dashbord", "report page", "reports page"]:
+        return redirect("reports_dashboard")
+        
+    elif q in ["settings", "setting", "setting dashbord", "settings dashbord", "settings page", "setting page"]:
+        return redirect("settings_page")
+            
+    elif q in ["emails dashboard", "email dashboard", "emails", "email", "email page", "emails page"]:
+        return redirect("email_dashboard")
+                
+    elif q in ["notifications dashboard", "notification dashboard", "notification list", "notification lists", "notification page", "notifications page", "noti", "notifications", "notification"]:
+        return redirect("notification_list")
+                    
+    elif q in ["profiles dashboard", "profile dashboard", "profile", "profiles", "profiles page", "profile page"]:
+        return redirect("profile")
+                        
+    elif q in ["edit profiles dashboard", "edit profile dashboard", "edit profile", "edit profiles", "edit profiles page", "edit profile page"]:
+        return redirect("edit_profile")
+    
+    elif q in ["change passwords dashboard", "change password dashboard", "change password", "change passwords", "change password page", "change passwords page", "change pass"]:
+        return redirect("change_password")
     
     else:
         return redirect("dashboard")

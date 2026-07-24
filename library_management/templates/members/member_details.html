@@ -176,7 +176,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center mb-2">
-                                    {{ member.date_of_birth }}
+                                    {{ member.date_of_birth|date:"d M Y" }}
                                 </div>
 
                                 <div class="d-flex align-items-center mb-2">
@@ -269,11 +269,11 @@
                                 </div>
 
                                 <div class="d-flex align-items-center mb-2">
-                                    {{ member.join_date }}
+                                    {{ member.join_date|date:"d M Y, h:i A" }}
                                 </div>
 
                                 <div class="d-flex align-items-center mb-2">
-                                    {{ member.last_updated }}
+                                    {{ member.last_updated|date:"d M Y, h:i A" }}
                                 </div>
                             </div>
                         </div>
@@ -455,7 +455,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center mb-2">
-                                    {{ member.join_date|date:"j F Y" }}
+                                    {{ member.join_date|date:"d M Y" }}
                                 </div>
 
                                 <div class="d-flex align-items-center pt-1 mb-2">
@@ -569,11 +569,11 @@
                                 </div>
 
                                 <div class="d-flex text-danger align-items-center pt-1 mb-2">
-                                    {{ pending_fines }}
+                                    ₹{{ pending_fines }}
                                 </div>
 
                                 <div class="d-flex text-danger align-items-center mb-2">
-                                    {{ total_fine }}
+                                    ₹{{ total_fine }}
                                 </div>
 
                             </div>

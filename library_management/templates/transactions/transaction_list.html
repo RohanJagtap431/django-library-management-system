@@ -146,18 +146,18 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="member-email" title="{{ transactions.issue_date }}">
-                                        {{ transactions.issue_date }}
+                                    <span class="member-email" title="{{ transactions.issue_date|date:"d M Y" }}">
+                                        {{ transactions.issue_date|date:"d M Y" }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="member-phone" title="{{ transactions.due_date }}">
-                                        {{ transactions.due_date }}
+                                    <span class="member-phone" title="{{ transactions.due_date|date:"d M Y" }}">
+                                        {{ transactions.due_date|date:"d M Y" }}
                                     </span>
                                 </td>
-                                <td class="text-center" title="{{ transactions.return_date }}">
+                                <td class="text-center" title="{{ transactions.return_date|date:"d M Y" }}">
                                     {% if transactions.return_date %}
-                                        {{ transactions.return_date }}
+                                        {{ transactions.return_date|date:"d M Y" }}
                                     {% else %}
                                         -
                                     {% endif %}
@@ -205,59 +205,7 @@
                     </table>
 
                 </div>
-                <nav class="paginatiom_margin">
-                    <ul class="pagination justify-content-end gap-2">
-                        {% if page_obj.has_previous %}
-
-                        <li class="page-item">
-                            <a class="page-link px-3 py-2" href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.previous_page_number }}">
-                                Previous
-                            </a>
-                        </li>
-
-                        {% else %}
-
-                        <li class="page-item disabled">
-                            <span class="page-link px-3 py-2">Previous</span>
-                        </li>
-
-                        {% endif %}
-
-                        
-                        
-                        {% for num in page_obj.paginator.page_range %}
-                            {% if num == page_obj.number %}
-                                <li class="page-item active">
-                                    <span class="page-link px-3 py-2">{{ num }}</span>
-                                </li>
-
-                            {% else %}
-                                <a class="page-link px-3 py-2"
-                                href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ num }}">
-                                    {{ num }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-
-
-
-                        {% if page_obj.has_next %}
-
-                        <li class="page-item">
-                            <a class="page-link px-3 py-2" href="?{% if query_params %}{{ query_params }}&{% endif %}page={{ page_obj.next_page_number }}">
-                                Next
-                            </a>
-                        </li>
-
-                        {% else %}
-
-                        <li class="page-item disabled">
-                            <span class="page-link px-3 py-2">Next</span>
-                        </li>
-
-                        {% endif %}
-                    </ul>
-                </nav>
+                {% include "includes/pagination.html" %}
             </div>
         </div>
 

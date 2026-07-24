@@ -40,8 +40,17 @@ def members_list(request):
     paginator = Paginator(members, 6)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    current_page = page_obj.number
+    total_pages = paginator.num_pages
+
+    start = max(current_page - 2, 1)
+    end = min(current_page + 2, total_pages)
+
+    page_range = range(start, end + 1)
+    
     return render(request, 'members/member_list.html', {
         'page_obj': page_obj,
+         "page_range": page_range,
         'categories': MEMBER_TYPE_CHOICES,
         'search': search,
         'category': category,

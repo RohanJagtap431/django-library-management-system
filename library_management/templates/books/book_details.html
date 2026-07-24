@@ -131,11 +131,11 @@
                                 </tr>
                                 <tr>
                                     <th>Added Date</th>
-                                    <td>{{ book.created_at }}</td>
+                                    <td>{{ book.created_at|date:"d M Y, h:i A" }}</td>
                                 </tr>
                                 <tr>
                                     <th>Last Updated</th>
-                                    <td>{{ book.updated_at }}</td>
+                                    <td>{{ book.updated_at|date:"d M Y, h:i A" }}</td>
                                 </tr>
                                 <tr>
                                     <th>Status</th>

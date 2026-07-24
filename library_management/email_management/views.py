@@ -270,6 +270,13 @@ def email_history(request):
     paginator = Paginator(emails, 7)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    current_page = page_obj.number
+    total_pages = paginator.num_pages
+
+    start = max(current_page - 2, 1)
+    end = min(current_page + 2, total_pages)
+
+    page_range = range(start, end + 1)
 
     
     query_params = request.GET.copy()
@@ -277,7 +284,7 @@ def email_history(request):
 
     context = {
         "page_obj": page_obj,
-
+         "page_range": page_range,
         "email_type_choices": EMAIL_TYPES,
         "selected_email_type": selected_email_type,
 

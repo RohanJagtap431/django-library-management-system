@@ -13,8 +13,17 @@ def notification_list(request):
     paginator = Paginator(notifications, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    current_page = page_obj.number
+    total_pages = paginator.num_pages
+
+    start = max(current_page - 2, 1)
+    end = min(current_page + 2, total_pages)
+
+    page_range = range(start, end + 1)
+    
     return render(request, 'notifications/notification_list.html', {
         'page_obj': page_obj,
+        "page_range": page_range,
     })
 
 @login_required(login_url="login")  

@@ -52,7 +52,7 @@
 
                         <div class="d-flex mt-1">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="recipient_type" id="selectedMember" value="member" checked>
+                                <input class="form-check-input" type="radio" name="recipient_type" id="selectedMember" value="member" checked required>
                                 <label class="form-check-label choice" for="inlineRadio1">Selected Member</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -71,7 +71,7 @@
                                         Select Member <span class="text-danger">*</span>
                                     </label>
 
-                                    <select class="form-select" name="member">
+                                    <select class="form-select" name="member" required>
                                         <option selected disabled>-- Select Member --</option>
 
                                         {% for member in members %}
@@ -98,7 +98,7 @@
                                     </label>
                                 </div>
 
-                                <input type="text" name="subject" id="" class="sub_input" placeholder="Enter email subject">
+                                <input type="text" name="subject" id="" class="sub_input" placeholder="Enter email subject" required>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
 
                     <div class="d-flex justify-content-between align-items-center mt-4">
 
-                        <button type="reset" class="btn btn-outline-secondary px-4">
+                        <button type="reset" class="btn btn-outline-secondary px-4" onclick="location.reload()">
                             <i class="bi bi-arrow-clockwise me-2"></i>
                             Reset
                         </button>

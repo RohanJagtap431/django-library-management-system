@@ -36,8 +36,17 @@ def books_list(request):
     paginator = Paginator(books, 6)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    current_page = page_obj.number
+    total_pages = paginator.num_pages
+
+    start = max(current_page - 2, 1)
+    end = min(current_page + 2, total_pages)
+
+    page_range = range(start, end + 1)
+    
     return render(request, 'books/book_list.html', {
         'page_obj': page_obj,
+        "page_range": page_range,
         'categories': CATEGORY_CHOICES,
         'search': search,
         'category': category,

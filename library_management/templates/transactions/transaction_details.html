@@ -85,7 +85,7 @@
 
                         <div class="sizing_value">
                             <i class="bi bi-calendar-week"></i>
-                            <span>{{ transaction.issue_date }}</span>
+                            <span>{{ transaction.issue_date|date:"d M Y" }}</span>
 
                         </div>
                     </div>
@@ -95,7 +95,7 @@
 
                         <div class="sizing_value">
                             <i class="bi bi-calendar-week"></i>
-                            <span>{{ transaction.due_date }}</span>
+                            <span>{{ transaction.due_date|date:"d M Y" }}</span>
 
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                             <i class="bi bi-calendar-week"></i>
                             <span>
                                 {% if transaction.return_date %}
-                                    {{ transaction.return_date }}
+                                    {{ transaction.return_date|date:"d M Y" }}
                                 {% else %}
                                     <span>Not Returned</span>
                                 {% endif %}
@@ -314,7 +314,7 @@
                                         <i class="bi bi-calendar-week"></i>
                                         Issue Date
                                     </th>
-                                    <td>{{ transaction.issue_date }}</td>
+                                    <td>{{ transaction.issue_date|date:"d M Y" }}</td>
                                 </tr>
 
                                 <tr>
@@ -322,7 +322,7 @@
                                         <i class="bi bi-calendar-week"></i>
                                         Due Date
                                     </th>
-                                    <td>{{ transaction.due_date }}</td>
+                                    <td>{{ transaction.due_date|date:"d M Y" }}</td>
                                 </tr>
 
                                 <tr>
@@ -332,7 +332,7 @@
                                     </th>
                                     <td>
                                         {% if transaction.return_date %}
-                                            {{ transaction.return_date }}
+                                            {{ transaction.return_date|date:"d M Y" }}
                                         {% else %}
                                             <span>Not Returned</span>
                                         {% endif %}

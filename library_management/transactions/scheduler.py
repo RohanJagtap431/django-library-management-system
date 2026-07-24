@@ -2,7 +2,7 @@ from datetime import date
 from apscheduler.schedulers.background import BackgroundScheduler
 from .models import Transaction
 from .views import send_overdue_email
-
+from datetime import datetime, timedelta
 
 def check_overdue_books():
 
@@ -31,9 +31,10 @@ def start_scheduler():
             hours=1,
             id="overdue_reminder_job",
             replace_existing=True,
+            next_run_time = datetime.now() + timedelta(seconds=5)
         )
 
         scheduler.start()
-        check_overdue_books()
 
         print("Overdue Scheduler Started")
+        
