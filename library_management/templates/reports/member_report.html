@@ -1,0 +1,272 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Member Report
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/member_report.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center mt-2">
+                <i class="bi bi-person report_icon"></i>
+                <h2 class="mb-0 fw-bold left_side">Member Report</h2>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'reports_dashboard' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Reports Dashboard</a>
+
+            </div>
+
+        
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'reports_dashboard' %}">Reports</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Member Report
+                </li>
+            </ol>
+        </nav>
+
+        <div class="px-0">
+            <div class="row mt-3">
+
+
+                <div class="col">
+                    <a href="{% url 'member_report' %}" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-blue d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-people-fill text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Total Members</h6>
+                                    <h2 class="fw-bold mb-0">{{ total_members }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Total registered members</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col">
+                    <a href="{% url 'member_report' %}?status=active" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-green d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-person-fill-check text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Active Members</h6>
+                                    <h2 class="fw-bold mb-0">{{ active_members }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Currently active members</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div class="col">
+                    <a href="{% url 'member_report' %}?status=inactive" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-orange d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-person-fill-x text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Inactive Members</h6>
+                                    <h2 class="fw-bold mb-0">{{ inactive_members }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Currently inactive members</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body p-2">
+
+                <form method="GET">
+                    <div class="row gx-4">
+                        <div class="col-5">
+                            
+                            
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text" name="search" value="{{ search }}" placeholder="Search by name, email, phone, member ID...">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <div class="d-flex justify-content-end gap-3">
+
+                                <select class="form-select form-select-sm filter-select Categories" name="category">
+                                    <option value="">All Membership Types</option>
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.0 }}" {% if cat.0 == category %}selected{% endif %}>{{ cat.1 }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select status" name="status">
+                                    <option value="" {% if not status %}selected{% endif %}>All Status</option>
+                                    <option value="active" {% if status == "active" %}selected{% endif %}>Active</option>
+                                    <option value="inactive" {% if status == "inactive" %}selected{% endif %}>Inactive</option>
+                                </select>
+
+                                <a href="{% url 'member_report' %}" class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat me-2"></i>
+                                    Reset
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Member ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Membership Type</th>
+                                <th>Status</th>
+                                <th>Join Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for member in page_obj %}
+                            <tr>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                               
+                                <td>
+                                    <span class="book-title" title="{{ member.member_id }}">
+                                        {{ member.member_id }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-author" title="{{ member.full_name }}">
+                                        {{ member.full_name }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-category" title="{{ member.email }}">
+                                        {{ member.email }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ member.phone }}">
+                                        {{ member.phone }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ member.member_type }}">
+                                        {{ member.member_type }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {% if member.status == "active" %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Inactive</span>
+                                    {% endif %}
+                                    
+                                </td>
+
+                                <td>
+                                    <span class="book-isbn" title="{{ member.join_date|date:"d-m-Y" }}">
+                                        {{ member.join_date|date:"d-m-Y" }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                {% include "includes/pagination.html" %}
+            </div>
+            
+        </div>
+        
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'export_member_csv' %}" class="btn btn-success me-3">
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                Export CSV
+            </a>
+            <a href="{% url 'export_member_pdf' %}" class="btn btn-primary">
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+                Save PDF
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

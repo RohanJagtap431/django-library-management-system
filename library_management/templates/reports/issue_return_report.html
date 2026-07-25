@@ -1,0 +1,313 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Issue/Return Report
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/issue_return_report.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center mt-2">
+                <i class="bi bi-arrow-left-right report_icon"></i>
+                <h2 class="mb-0 fw-bold left_side">Issue / Return Report</h2>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'reports_dashboard' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Reports Dashboard</a>
+
+            </div>
+
+        
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'reports_dashboard' %}">Reports</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Issue / Return Report
+                </li>
+            </ol>
+        </nav>
+
+        <div class="px-0">
+            <div class="row mt-3">
+
+
+                <div class="col">
+                    <a href="{% url 'issue_return_report' %}?status=issued" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-blue d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-stack text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Total Issued</h6>
+                                    <h2 class="fw-bold mb-0">{{ total_issued }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>In Selected Period</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col">
+                    <a href="{% url 'issue_return_report' %}?status=returned" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-green d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-check-circle text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Total Returned</h6>
+                                    <h2 class="fw-bold mb-0">{{ total_returned }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>In Selected Period</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div class="col">
+                    <a href="{% url 'issue_return_report' %}?status=overdue" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-orange d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-clock text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Overdue Books</h6>
+                                    <h2 class="fw-bold mb-0">{{ overdue_books }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Not yet returned</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body p-2">
+
+                <form method="GET">
+                    <div class="row gx-4">
+                        <div class="col-5">
+                            
+                            
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text" name="search" value="{{ search }}" placeholder="Search by Issue ID, Book Title, Member Name...">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        <div class="col">
+                            <div class="d-flex justify-content-end gap-3">
+
+                                <select class="form-select form-select-sm filter-select status" name="status">
+                                    <option value="" {% if not status %}selected{% endif %}>All Status</option>
+                                    <option value="issued" {% if status == "issued" %}selected{% endif %}>Issued</option>
+                                    <option value="returned" {% if status == "returned" %}selected{% endif %}>Returned</option>
+                                    <option value="overdue" {% if status == "overdue" %}selected{% endif %}>Overdue</option>
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select Categories" name="member">
+                                    <option value="">All Members</option>
+                                    {% for mem in all_members %}
+                                        <option value="{{ mem.id }}" {% if member == mem.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ mem.full_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select Categories" name="book">
+                                    <option value="">All Books</option>
+                                    {% for boo in all_books %}
+                                        <option value="{{ boo.id }}" {% if book == boo.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ boo.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                                <a href="{% url 'issue_return_report' %}" class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat me-2"></i>
+                                    Reset
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Issue ID</th>
+                                <th>Member ID</th>
+                                <th>Member Name</th>
+                                <th>Book Title</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                                <th>Fine(₹)</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for issue in page_obj %}
+                            <tr>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                               
+                                <td>
+                                    <span class="book-title" title="{{ issue.issue_id }}">
+                                        {{ issue.issue_id }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-author" title="{{ issue.member.member_id }}">
+                                        {{ issue.member.member_id }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-category" title="{{ issue.member.full_name }}">
+                                        {{ issue.member.full_name }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-category" title="{{ issue.book.title }}">
+                                        {{ issue.book.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ issue.issue_date|date:"d-m-Y" }}">
+                                        {{ issue.issue_date|date:"d-m-Y" }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ issue.due_date|date:"d-m-Y" }}">
+                                        {{ issue.due_date|date:"d-m-Y" }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if issue.return_date %}
+                                        <span class="book-isbn" title="{{ issue.return_date|date:"d-m-Y" }}">
+                                            {{ issue.return_date|date:"d-m-Y" }}
+                                        </span>
+                                    {% else %}
+                                        <span class="ps-4">-</span>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <span class="member-join_date" title="{{ issue.status }}">
+                                        {% if issue.status == "returned" %}
+
+                                            <span class="status-badge returned-badge">Returned</span>
+
+                                        {% elif issue.status == "issued" and issue.due_date < today %}
+
+                                            <span class="status-badge overdue-badge">Overdue</span>
+
+                                        {% else %}
+
+                                            <span class="status-badge issued-badge">Issued</span>
+
+                                        {% endif %}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="member-join_date" title="Fine">
+                                        {% if issue.current_fine > 0 %}
+                                            <span class="text-danger">₹{{ issue.current_fine }}</span>
+                                        {% else %}
+                                            <span class="text-success">₹0</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                {% include "includes/pagination.html" %}
+            </div>
+            
+        </div>
+        
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'export_issue_return_csv' %}" class="btn btn-success me-3">
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                Export CSV
+            </a>
+            <a href="{% url 'export_issue_return_pdf' %}" class="btn btn-primary">
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+                Save PDF
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

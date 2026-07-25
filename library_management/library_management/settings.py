@@ -91,7 +91,7 @@ DATABASES = {
         'PORT': '3306',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'R21@S06062007!',
+        'PASSWORD': 'USER_PASSWORD',
     }
 }
 
@@ -151,6 +151,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "rohanjagatap998@gmail.com"
-EMAIL_HOST_PASSWORD = "sefbxdwvfkusdzad"
+EMAIL_HOST_PASSWORD = "EMAIL_HOST_PASSWORD"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

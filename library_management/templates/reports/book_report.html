@@ -1,0 +1,271 @@
+{% extends "dashboard_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Book Report
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/book_report.css' %}">
+{% endblock %}
+
+{% block dashboard_content %}
+    <div class="container-fluid px-4 py-1">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center mt-2">
+                <i class="bi bi-book report_icon"></i>
+                <h2 class="mb-0 fw-bold left_side">Book Report</h2>
+            </div>
+
+            <div class="right_side mt-3 d-flex align-item-center">
+                
+                <a href="{% url 'reports_dashboard' %}" class="btn btn-outline-secondary me-2 back_button"> ← Back to Reports Dashboard</a>
+
+            </div>
+
+        
+        </div>
+
+        <nav aria-label="breadcrumb" class="member-breadcrumb mt-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                     <a href="{% url 'reports_dashboard' %}">Reports</a>
+                </li>
+                    
+                <li class="breadcrumb-item active" aria-current="page">
+                    Book Report
+                </li>
+            </ol>
+        </nav>
+
+        <div class="px-0">
+            <div class="row mt-3">
+
+
+                <div class="col">
+                    <a href="{% url 'book_report' %}" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-blue d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-book text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Book Titles</h6>
+                                    <h2 class="fw-bold mb-0">{{ total_book }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Total unique book titles</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col">
+                    <a href="{% url 'book_report' %}" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-green d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-stack text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Total Books</h6>
+                                    <h2 class="fw-bold mb-0">{{ total_books }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Total copies in library</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div class="col">
+                    <a href="{% url 'book_report' %}?status=available" class="text-decoration-none text-dark">
+                        <div class="card dashboard-card shadow-sm w-100">
+                            <div class="card-body p-3">
+                                <div class="info-box d-flex align-items-start">
+
+                                <div class="icon-box icon-orange d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-check-circle text-white card-icon"></i>
+                                </div>
+                                
+                                <div class="text-box d-flex flex-column ms-4 mt-1">
+                                    <h6 class="heading">Available Books</h6>
+                                    <h2 class="fw-bold mb-0">{{ available_books }}</h2>
+
+                                    <div class="link-box link-blue d-flex align-items-center mt-1">
+                                        <span>Currently available copies</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body p-2">
+
+                <form method="GET">
+                    <div class="row gx-4">
+                        <div class="col-5">
+                            
+                            
+                            <div class="input-group">
+                                <input class="form-control form-control-sm" type="text" name="search" value="{{ search }}" placeholder="Search by Book ID, Title, Author...">
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+
+                        <div class="col">
+                            <div class="d-flex justify-content-end gap-3">
+
+                                <select class="form-select form-select-sm filter-select Categories" name="category">
+                                    <option value="">All Categories</option>
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.0 }}" {% if cat.0 == category %}selected{% endif %}>{{ cat.1 }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <select class="form-select form-select-sm filter-select status" name="status">
+                                    <option value="" {% if not status %}selected{% endif %}>All Status</option>
+                                    <option value="available" {% if status == "available" %}selected{% endif %}>Available</option>
+                                    <option value="out_of_stock" {% if status == "out_of_stock" %}selected{% endif %}>Out of Stock</option>
+                                </select>
+
+                                <a href="{% url 'book_report' %}" class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat me-2"></i>
+                                    Reset
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card mt-2">
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>ISBN</th>
+                                <th>Total Copies</th>
+                                <th>Available Copies</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for book in page_obj %}
+                            <tr>
+                                <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                               
+                                <td>
+                                    <span class="book-title" title="{{ book.title }}">
+                                        {{ book.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-author" title="{{ book.author }}">
+                                        {{ book.author }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-category" title="{{ book.category }}">
+                                        {{ book.category }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ book.isbn }}">
+                                        {{ book.isbn }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="book-isbn" title="{{ book.total_copies }}">
+                                        {{ book.total_copies }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="book-isbn" title="{{ book.available_copies }}">
+                                        {{ book.available_copies }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {% if book.available_copies > 0 %}
+                                        <span class="badge bg-success">Available</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Out of Stock</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+
+                </div>
+                {% include "includes/pagination.html" %}
+            </div>
+            
+        </div>
+        
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{% url 'export_book_csv' %}" class="btn btn-success me-3">
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                Export CSV
+            </a>
+            <a href="{% url 'export_book_pdf' %}" class="btn btn-primary">
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+                Save PDF
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

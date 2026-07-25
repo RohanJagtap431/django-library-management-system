@@ -1,0 +1,190 @@
+.report_icon{
+    font-size: 30px;
+    margin-right: 12px;
+}
+
+.member-breadcrumb{
+    font-size: 14px;
+    
+}
+
+.member-breadcrumb a{
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.member-breadcrumb a:hover{
+    color: #0d6efd;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.active:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+
+.dashboard-card{
+    height: 120px;
+    border-radius: 10px;
+    border: none;
+}
+
+.dashboard-card:hover{
+    background-color: #fcfcfd;
+}
+
+.icon-box{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.icon-blue{
+    background-color: blue;
+}
+
+.icon-green{
+    background-color: rgb(62, 137, 0);
+}
+
+.icon-orange{
+    background-color: rgb(199, 169, 0);
+}
+
+
+.card-icon{
+    font-size: 28px;
+}
+
+.heading{
+    font-size: 14px;
+}
+.link-blue{
+    font-size: 12px;
+}
+
+
+.table thead th{
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.table tbody td{
+    font-size: 0.92rem;
+}
+
+.table > :not(caption) > * > *{
+    border-color:#edf2f7;
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+
+.pagination {
+    margin-bottom: 0;
+}
+
+.pagination .page-item {
+    margin: 0 2px;
+}
+
+.pagination .page-link {
+    color: #0d6efd;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px !important;
+    transition: all 0.25s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #adb5bd;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
+
+
+.pagination-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.table-responsive{
+    height: 240px;
+    overflow-y: auto;
+}
+
+
+
+.Categories:focus{
+    box-shadow: none;
+}
+
+.status:focus{
+    box-shadow: none;
+}
+
+
+.book-title {
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.book-author{
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+
+.book-isbn{
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
+
+.book-category{
+    max-width:80px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:inline-block;
+}
