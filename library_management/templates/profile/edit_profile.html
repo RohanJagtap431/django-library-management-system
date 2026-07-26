@@ -39,17 +39,29 @@
                         <div class="col-lg-4 fist_col">
                             <div class="image_status">
                                 <div class="profile_photo mt-4">
-                                    <img src="{% static 'images/profile/defult-user.png' %}" class="member-image">
+                                    <img
+                                        src="{% if request.user.userprofile.profile_image %}{{ request.user.userprofile.profile_image.url }}{% else %}{% static 'images/profile/defult-user.png' %}{% endif %}"
+                                        class="member-image"
+                                        id="previewImage">
                                 </div>
 
-                                <!-- <input type="file" id="id_profile_photo" name="profile_photo" accept="image/*" hidden> -->
-                                <label for="id_profile_photo" class="upload-box d-flex align-items-center justify-content-center gap-2 px-3 py-2 mt-4">
-                                    <i class="bi bi-camera change_photo_icon"></i>
-                                    <h6 class="m-0 fw-bold">Change Photo</h6>
-                                </label>
+                                <input type="file" id="id_profile_photo" name="profile_image" accept="image/*" hidden>
+                                
+                                <div class="d-flex">
+                                    <label for="id_profile_photo" class="upload-box d-flex align-items-center justify-content-center gap-2 px-3 py-2 mt-4">
+                                        <i class="bi bi-camera change_photo_icon"></i>
+                                        <h6 class="m-0 fw-bold">Change Photo</h6>
+                                    </label>
+
+
+                                    <a href="{% url 'remove_profile_photo' %}"
+                                        class="btn btn-outline-danger upload-box2 gap-2 px-3 py-2 ms-2 mt-4"
+                                        onclick="return confirm('Are you sure you want to remove your profile photo?')">
+                                            <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
                                 <small class="png_jpg">
-                                <!-- JPG, PNG(Max. 2MB) --> 
-                                    (photo upload coming soon)
+                                    JPG, PNG(Max. 2MB)
                                 </small>
                             </div>
                         </div>
@@ -202,4 +214,9 @@
         </form>
 
     </div>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/edit_profile.js' %}"></script>
 {% endblock %}

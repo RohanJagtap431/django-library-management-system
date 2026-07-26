@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import UserProfile
+
 
 
 
@@ -62,7 +64,7 @@ def change_password(request):
 def profile(request):
     return render(request, "profile/admin_profile.html")
 
-@login_required
+@login_required(login_url="login")
 def edit_profile(request):
     user = request.user
 
@@ -70,12 +72,10 @@ def edit_profile(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
 
-        
         if username != user.username and User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
             return redirect("edit_profile")
 
-        
         if email != user.email and User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists.")
             return redirect("edit_profile")
@@ -84,7 +84,27 @@ def edit_profile(request):
         user.email = email
         user.save()
 
+        
+        profile, created = UserProfile.objects.get_or_create(user=user)
+
+        if request.FILES.get("profile_image"):
+            profile.profile_image = request.FILES["profile_image"]
+            profile.save()
+
         messages.success(request, "Profile updated successfully.")
         return redirect("profile")
 
     return render(request, "profile/edit_profile.html")
+
+
+
+@login_required(login_url="login")
+def remove_profile_photo(request):
+    profile, created = UserProfile.objects.get_or_create(
+        user=request.user
+    )
+
+    if profile.profile_image:
+        profile.profile_image.delete(save=True)
+
+    return redirect("edit_profile")

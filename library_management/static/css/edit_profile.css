@@ -166,3 +166,22 @@ input{
     color: blueviolet;
 }
 
+
+
+.upload-box2{
+    margin-top: 12px;
+    border: 2px solid red;
+    border-radius: 10px;
+    color: red;
+    cursor: pointer;
+}
+
+.upload-box2 i{
+    font-size: 18px;
+    line-height: 1;
+}
+
+.upload-box2 span{
+    line-height: 1;
+    margin: 0;
+}

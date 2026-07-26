@@ -39,7 +39,7 @@
                     <div class="col-lg-4 fist_col">
                         <div class="image_status">
                             <div class="profile_photo mt-4">
-                                <img src="{% static 'images/profile/defult-user.png' %}" class="member-image">
+                                <img src="{% if request.user.userprofile.profile_image %}{{ request.user.userprofile.profile_image.url }}{% else %}{% static 'images/profile/defult-user.png' %}{% endif %}" class="member-image">
                             </div>
 
 

@@ -199,7 +199,7 @@
 
           <a href="{% url 'profile' %}" class="a_tag_admin_name">
             <div class="Profile_Section d-flex align-items-center ms-3 me-3">
-              <img src="{% static 'images/profile/defult-user.png' %}" class="rounded-circle logo_profile_image">
+              <img src="{% if request.user.userprofile.profile_image %}{{ request.user.userprofile.profile_image.url }}{% else %}{% static 'images/profile/defult-user.png' %}{% endif %}" class="rounded-circle logo_profile_image">
 
               <small class="me-2 user_name_admin">
                 {{ request.user.username|title }}

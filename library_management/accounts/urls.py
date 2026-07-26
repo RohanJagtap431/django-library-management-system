@@ -7,4 +7,5 @@ urlpatterns = [
     path("change-password/", views.change_password, name="change_password"),
     path('profile/', views.profile, name="profile"),
     path('edit-profile/', views.edit_profile, name="edit_profile"),
+    path("remove-profile-photo/", views.remove_profile_photo, name="remove_profile_photo"),
 ]
