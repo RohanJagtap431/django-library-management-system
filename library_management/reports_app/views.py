@@ -220,7 +220,7 @@ def export_fine_pdf(request):
 
     elements = []
 
-    # ------------------ Logo ------------------
+    
 
     logo_path = os.path.join(
         settings.BASE_DIR,
@@ -234,7 +234,7 @@ def export_fine_pdf(request):
         logo.hAlign = "CENTER"
         elements.append(logo)
 
-    # ------------------ Heading ------------------
+    
 
     elements.append(
         Paragraph(
@@ -261,7 +261,7 @@ def export_fine_pdf(request):
 
     elements.append(Spacer(1, 15))
 
-    # ------------------ Table ------------------
+    
 
     data = [[
         "Transaction ID",
@@ -335,7 +335,7 @@ def export_fine_pdf(request):
 
     elements.append(Spacer(1, 20))
 
-    # ------------------ Summary ------------------
+    
 
     elements.append(
         Paragraph(
@@ -353,7 +353,7 @@ def export_fine_pdf(request):
 
     elements.append(Spacer(1, 20))
 
-    # ------------------ Footer ------------------
+    
 
     elements.append(
         Paragraph(
@@ -503,7 +503,7 @@ def export_book_pdf(request):
 
     elements = []
 
-    # ---------------- Logo ----------------
+    
 
     logo_path = os.path.join(
         settings.BASE_DIR,
@@ -517,7 +517,7 @@ def export_book_pdf(request):
         logo.hAlign = "CENTER"
         elements.append(logo)
 
-    # ---------------- Heading ----------------
+    
 
     elements.append(
         Paragraph(
@@ -585,14 +585,14 @@ def export_book_pdf(request):
         table = Table(
         data,
         colWidths=[
-            1.0 * inch,   # Book ID
-            2.8 * inch,   # Title
-            2.0 * inch,   # Author
-            1.3 * inch,   # Category
-            0.8 * inch,   # Year
-            0.8 * inch,   # Total
-            1.0 * inch,   # Available
-            1.1 * inch,   # Status
+            1.0 * inch,   
+            2.8 * inch,   
+            2.0 * inch,   
+            1.3 * inch,   
+            0.8 * inch,   
+            0.8 * inch,   
+            1.0 * inch,   
+            1.1 * inch,   
         ],
         repeatRows=1,
     )
@@ -635,8 +635,7 @@ def export_book_pdf(request):
 
     elements.append(Spacer(1, 18))
 
-    # ---------------- Summary ----------------
-
+    
     elements.append(
         Paragraph(
             f"<b>Total Book Titles :</b> {books.count()}",
@@ -660,7 +659,7 @@ def export_book_pdf(request):
 
     elements.append(Spacer(1, 20))
 
-    # ---------------- Footer ----------------
+    
 
     elements.append(
         Paragraph(
@@ -798,7 +797,7 @@ def export_member_pdf(request):
 
     elements = []
 
-    # ---------------- Logo ----------------
+    
 
     logo_path = os.path.join(
         settings.BASE_DIR,
@@ -812,7 +811,7 @@ def export_member_pdf(request):
         logo.hAlign = "CENTER"
         elements.append(logo)
 
-    # ---------------- Heading ----------------
+    
 
     elements.append(
         Paragraph(
@@ -926,7 +925,7 @@ def export_member_pdf(request):
 
     elements.append(Spacer(1, 18))
 
-    # ---------------- Summary ----------------
+    
 
     elements.append(
         Paragraph(
@@ -951,7 +950,7 @@ def export_member_pdf(request):
 
     elements.append(Spacer(1, 20))
 
-    # ---------------- Footer ----------------
+    
 
     elements.append(
         Paragraph(
@@ -1132,7 +1131,7 @@ def export_issue_return_pdf(request):
 
     elements = []
 
-    # ---------------- Logo ----------------
+    
 
     logo_path = os.path.join(
         settings.BASE_DIR,
@@ -1146,7 +1145,7 @@ def export_issue_return_pdf(request):
         logo.hAlign = "CENTER"
         elements.append(logo)
 
-    # ---------------- Heading ----------------
+    
 
     elements.append(
         Paragraph(
@@ -1263,7 +1262,7 @@ def export_issue_return_pdf(request):
 
     elements.append(Spacer(1, 18))
 
-    # ---------------- Summary ----------------
+    
 
     elements.append(
         Paragraph(
@@ -1295,7 +1294,7 @@ def export_issue_return_pdf(request):
 
     elements.append(Spacer(1, 20))
 
-    # ---------------- Footer ----------------
+    
 
     elements.append(
         Paragraph(

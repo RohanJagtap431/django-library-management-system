@@ -92,6 +92,18 @@ def global_search(request):
     
     elif q in ["reports", "report", "reports dashbord", "report dashbord", "report page", "reports page"]:
         return redirect("reports_dashboard")
+    
+    elif q in ["fine reports", "fine report", "fine reports dashbord", "fine report dashbord", "fine report page", "fine reports page"]:
+        return redirect("fine_report")
+    
+    elif q in ["book reports", "book report", "book reports dashbord", "book report dashbord", "book report page", "book reports page"]:
+        return redirect("book_report")
+    
+    elif q in ["member reports", "member report", "member reports dashbord", "member report dashbord", "member report page", "member reports page"]:
+        return redirect("member_report")
+    
+    elif q in ["issue reports", "issue report", "issue reports dashbord", "issue report dashbord", "issue report page", "issue reports page", "return reports", "return report", "return reports dashbord", "return report dashbord", "return report page", "return reports page", "issue return reports", "issue return report", "issue return reports dashbord", "issue return report dashbord", "issue return report page", "issue return reports page"]:
+        return redirect("issue_return_report")
         
     elif q in ["settings", "setting", "setting dashbord", "settings dashbord", "settings page", "setting page"]:
         return redirect("settings_page")
