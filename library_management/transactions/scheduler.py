@@ -14,7 +14,9 @@ def check_overdue_books():
     for transaction in overdue_transactions:
         if transaction.last_reminder_sent == date.today():
             continue
-
+        
+        print(transaction.member.email)
+        print("Sending mail...")
         send_overdue_email(transaction)
         
 
@@ -27,11 +29,11 @@ def start_scheduler():
 
         scheduler.add_job(
             check_overdue_books,
-            "interval",
-            hours=1,
+            "cron",
+            hour=9,
+            minute=0,
             id="overdue_reminder_job",
             replace_existing=True,
-            next_run_time = datetime.now() + timedelta(seconds=5)
         )
 
         scheduler.start()
