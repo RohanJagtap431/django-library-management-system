@@ -29,11 +29,11 @@ def start_scheduler():
 
         scheduler.add_job(
             check_overdue_books,
-            "cron",
-            hour=9,
-            minute=0,
+            "interval",
+            hours=1,
             id="overdue_reminder_job",
             replace_existing=True,
+            next_run_time= datetime.now() + timedelta(seconds=5)
         )
 
         scheduler.start()

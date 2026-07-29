@@ -12,8 +12,8 @@ class TransactionsConfig(AppConfig):
         if settings.DEBUG and os.environ.get("RUN_MAIN") != "true":
             return
 
-        #from .scheduler import start_scheduler
+        from .scheduler import start_scheduler
 
-        #start_scheduler()
+        start_scheduler()
 
         print("Transactions App Ready")
