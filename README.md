@@ -175,18 +175,37 @@ python manage.py runserver
 
 ---
 
-# 📷 Screenshots
+## 📸 Screenshots
 
-> Add screenshots here.
+### Login Page
+![Login](screenshots/login.png)
 
-- Login Page
-- Dashboard
-- Book Management
-- Member Management
-- Issue Book
-- Return Book
-- Reports
-- Profile
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Book Management
+![Books](screenshots/books.png)
+
+### Member Management
+![Members](screenshots/members.png)
+
+### Issue Book
+![Issue Book](screenshots/issue-book.png)
+
+### Return Book
+![Return Book](screenshots/return-book.png)
+
+### Reports
+![Reports](screenshots/reports.png)
+
+### Email Management
+![Email Management](screenshots/email-management.png)
+
+### Settings
+![Settings](screenshots/settings.png)
+
+### Profile
+![Profile](screenshots/profile.png)
 
 ---
 
